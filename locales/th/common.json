@@ -1,0 +1,9 @@
+{
+  "Log in": "ลงชื่อเข้าใช้งาน",
+  "Email": "อีเมล",
+  "Password": "รหัสผ่าน",
+
+  "The input is not valid E-mail!": "ท่านกรอกอีเมลไม่ถูกต้อง!",
+  "Please input your email!": "กรุณากรอกอีเมล!",
+  "Please input your password!": "กรุณากรอกรหัสผ่าน"
+}
