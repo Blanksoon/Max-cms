@@ -2,10 +2,10 @@ export const SEARCH = 'ittp-frontend/search/SEARCH'
 const SEARCH_SUCCESS = 'ittp-frontend/search/SEARCH_SUCCESS'
 const SEARCH_FAILURE = 'ittp-frontend/search/SEARCH_FAILURE'
 
-export const searchData = ({data}) => {
+export const searchData = ({ data }) => {
   return {
     type: SEARCH,
-    payload: { data }
+    payload: { data },
   }
 }
 export const searchSuccess = ({ code, pagination, data }) => ({
@@ -24,7 +24,7 @@ const initialState = {
     pageSize: 10,
     defaultCurrent: 1,
   },
-  data: []
+  data: [],
 }
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case SEARCH_SUCCESS: {
-      console.log(action.payload)
+      //console.log(action.payload)
       return {
         error: {},
         code: action.payload.code,
@@ -47,7 +47,7 @@ const reducer = (state = initialState, action = {}) => {
         error: {
           code: action.payload.code,
           message: action.payload.message,
-        }
+        },
       }
     }
     default:

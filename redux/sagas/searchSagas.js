@@ -5,11 +5,11 @@ import { API_SERVER, postJSON } from '../../tools/api'
 
 export function* searchDataSaga(action) {
   if (process.env.NODE_ENV !== 'test') {
-    console.log('action',action)
+    //console.log('action',action)
     fetchMock.restore()
     const { data } = action.payload
     if (data === 'อารยา') {
-      fetchMock.post(`${API_SERVER}/applications/search`,{
+      fetchMock.post(`${API_SERVER}/applications/search`, {
         body: {
           code: 200,
           pagination: {
@@ -26,7 +26,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 57,
@@ -36,14 +36,14 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
-            }
-          ]
-        }
+              code: `MT`,
+            },
+          ],
+        },
       })
-    } else if(data === "test") {
-      console.log('false123445234523452345')
-      fetchMock.post(`${API_SERVER}/applications/search`,{
+    } else if (data === 'test') {
+      //console.log('false123445234523452345')
+      fetchMock.post(`${API_SERVER}/applications/search`, {
         body: {
           code: 200,
           pagination: {
@@ -60,7 +60,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 57,
@@ -70,7 +70,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 58,
@@ -80,7 +80,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 59,
@@ -90,7 +90,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 60,
@@ -100,7 +100,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 61,
@@ -110,7 +110,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 62,
@@ -120,7 +120,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 63,
@@ -130,7 +130,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 64,
@@ -140,7 +140,7 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
+              code: `MT`,
             },
             {
               app_id: 65,
@@ -150,13 +150,13 @@ export function* searchDataSaga(action) {
               moneyLimit: 5000,
               status: `อนุมัติแล้ว`,
               create_date: `26-12-2560`,
-              code: `MT`
-            }
-          ]
-        }
+              code: `MT`,
+            },
+          ],
+        },
       })
     } else {
-      fetchMock.post(`${API_SERVER}/applications/search`,{
+      fetchMock.post(`${API_SERVER}/applications/search`, {
         status: 404,
         body: {
           code: 404,
@@ -165,8 +165,8 @@ export function* searchDataSaga(action) {
             pageSize: 10,
             defaultCurrent: 1,
           },
-          message: 'Data Not Found'
-        }
+          message: 'Data Not Found',
+        },
       })
     }
   }

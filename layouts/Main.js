@@ -1,72 +1,71 @@
-import { Menu, Icon } from 'antd'
-import { Component } from 'react'
-const SubMenu = Menu.SubMenu
-const MenuItemGroup = Menu.ItemGroup
+import { Layout, Menu } from 'antd'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import Component from 'react'
 
-class Main extends Component {
-  handleClick = e => {
-    console.log('click ', e)
+const { Header, Content, Footer } = Layout
+class Main extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      defaultSelectedKeys: 1,
+    }
+    this.changedefaultSelectedKeys = this.changedefaultSelectedKeys.bind(this)
   }
+  changedefaultSelectedKeys = value => {
+    this.setState({
+      defaultSelectedKeys: value,
+    })
+  }
+
   render() {
+    const { children, keyNavbar } = this.props
+    console.log('key: ', keyNavbar)
     return (
-      <Menu
-        onClick={this.handleClick}
-        style={{ width: 256 }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
-      >
-        <SubMenu
-          key="sub1"
-          title={
-            <span>
-              <Icon type="mail" />
-              <span>Navigation One</span>
-            </span>
-          }
-        >
-          <MenuItemGroup key="g1" title="Item 1">
-            <Menu.Item key="1">Option 1</Menu.Item>
-            <Menu.Item key="2">Option 2</Menu.Item>
-          </MenuItemGroup>
-          <MenuItemGroup key="g2" title="Item 2">
-            <Menu.Item key="3">Option 3</Menu.Item>
-            <Menu.Item key="4">Option 4</Menu.Item>
-          </MenuItemGroup>
-        </SubMenu>
-        <SubMenu
-          key="sub2"
-          title={
-            <span>
-              <Icon type="appstore" />
-              <span>Navigation Two</span>
-            </span>
-          }
-        >
-          <Menu.Item key="5">Option 5</Menu.Item>
-          <Menu.Item key="6">Option 6</Menu.Item>
-          <SubMenu key="sub3" title="Submenu">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-        </SubMenu>
-        <SubMenu
-          key="sub4"
-          title={
-            <span>
-              <Icon type="setting" />
-              <span>Navigation Three</span>
-            </span>
-          }
-        >
-          <Menu.Item key="9">Option 9</Menu.Item>
-          <Menu.Item key="10">Option 10</Menu.Item>
-          <Menu.Item key="11">Option 11</Menu.Item>
-          <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu>
-      </Menu>
+      <Layout>
+        <Header style={{ width: '100%' }}>
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={[keyNavbar]}
+            style={{ lineHeight: '64px' }}
+          >
+            <Menu.Item key="1">
+              <Link href="/login">
+                <a>Home</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link href="/maxnews/modify">
+                <a>Maxnews</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link href="/vods/modify">
+                <a>Vods</a>
+              </Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px', marginTop: 64 }}>
+          <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
+            {children}
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2016 Created by Ant UED
+        </Footer>
+      </Layout>
     )
   }
 }
+
+// Main.propTypes = {
+//   children: PropTypes.node,
+// }
+// Main.defaultProps = {
+//   children: null, // render nothing
+// }
 
 export default Main

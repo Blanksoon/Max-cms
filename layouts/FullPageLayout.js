@@ -6,14 +6,15 @@ const FullPageLayout = ({ children }) => {
   return (
     <div
       style={{
-        backgroundColor: `${vars.grey}`,
         display: 'flex',
         height: '100%',
         width: '100%',
       }}
     >
       <style jsx global>{`
-        body,
+        body {
+          background-color: ${vars.grey} !important;
+        }
         html {
           height: 100%;
           margin: 0;

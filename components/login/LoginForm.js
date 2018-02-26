@@ -13,14 +13,13 @@ class LoginForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.props)
+    //console.log(this.props)
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        
         const { email, password } = values
         this.props.login({ email, password })
-        
-        console.log(this.props.login({ email, password }))
+
+        //console.log(this.props.login({ email, password }))
       }
     })
   }

@@ -2,7 +2,7 @@ const path = require('path')
 
 const express = require('express')
 const next = require('next')
-
+const cors = require('cors')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -30,7 +30,6 @@ const startNextServer = () => {
       //   const queryParams = { id: req.params.id }
       //   app.render(req, res, actualPage, queryParams)
       // })
-
       // enable middleware for i18next
       server.use(i18nextMiddleware.handle(i18n))
       // serve locales for client
@@ -40,6 +39,8 @@ const startNextServer = () => {
         '/locales/add/:lng/:ns',
         i18nextMiddleware.missingKeyHandler(i18n)
       )
+      //use cors
+      server.use(cors())
 
       server.get('*', (req, res) => handle(req, res))
 

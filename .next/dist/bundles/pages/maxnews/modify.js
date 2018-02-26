@@ -72,6 +72,53 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./api.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SERVER; });
+/* unused harmony export get */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return post; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch__ = __webpack_require__("isomorphic-fetch");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch__);
+
+//http://localhost:3002
+//https://api.maxmuaythai.com
+//https://beta-api.maxmuaythai.com
+var SERVER = 'https://beta-api.maxmuaythai.com';
+var get = function get(url) {
+  return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(url).then(function (response) {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  }).catch(function (err) {
+    return Promise.reject(err);
+  });
+};
+
+var post = function post(url, json) {
+  return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-type': 'application/json'
+    },
+    mode: 'cors',
+    body: JSON.stringify(json)
+  }).then(function (response) {
+    //console.log('response: ', response)
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  }).catch(function (err) {
+    return Promise.reject(err);
+  });
+};
+
+/***/ }),
+
 /***/ "./components/commons/DataGrid.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -434,7 +481,7 @@ var WrappedSerachForm = __WEBPACK_IMPORTED_MODULE_1_antd__["Form"].create()(Obje
 
 /***/ }),
 
-/***/ "./components/maxNews/Detail.js":
+/***/ "./components/commons/Spinner.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -442,20 +489,63 @@ var WrappedSerachForm = __WEBPACK_IMPORTED_MODULE_1_antd__["Form"].create()(Obje
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_jsx_style___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_jsx_style__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("react");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_DataGrid__ = __webpack_require__("./components/commons/DataGrid.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_Search__ = __webpack_require__("./components/commons/Search.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_Pagination__ = __webpack_require__("./components/commons/Pagination.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux__ = __webpack_require__("react-redux");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_redux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_antd__ = __webpack_require__("antd");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_antd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__UploadImage__ = __webpack_require__("./components/maxNews/UploadImage.js");
+var _jsxFileName = "/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/components/commons/Spinner.js";
+
+
+/* unused harmony default export */ var _unused_webpack_default_export = (function () {
+  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+    "div",
+    {
+      className: "jsx-2433021666",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 2
+      }
+    },
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement("div", {
+      className: "jsx-2433021666" + " " + "loader",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 3
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_styled_jsx_style___default.a, {
+      styleId: "2433021666",
+      css: ".loader.jsx-2433021666{margin:auto auto;border:4px solid #ffffff;border-radius:50%;border-top:4px solid #f05c5c;width:20px;height:20px;-webkit-animation:spin 2s linear infinite;-webkit-animation:spin-jsx-2433021666 2s linear infinite;animation:spin-jsx-2433021666 2s linear infinite;}@-webkit-keyframes spin{0%.jsx-2433021666{-webkit-transform:rotate(0deg);}100%.jsx-2433021666{-webkit-transform:rotate(360deg);}}@-webkit-keyframes spin-jsx-2433021666{0%{-webkit-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}@keyframes spin-jsx-2433021666{0%{-webkit-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}100%{-webkit-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvY29tbW9ucy9TcGlubmVyLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdnQixBQUcwQixBQVlnQixBQUdFLEFBTVYsQUFHRSxpQkF2QkYsY0FZekIsRUFHQSxTQWRrQixrQkFDVyxxQkFtQjdCLE1BR0EsRUFyQlcsV0FDQyxZQUM4QiwwQ0FDUiwwR0FDcEMiLCJmaWxlIjoiY29tcG9uZW50cy9jb21tb25zL1NwaW5uZXIuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL2Zhcm1vei9EZXNrdG9wL01heE11YXlUaGFpL2Ntcy9NYXgtY21zIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgKCkgPT4gKFxuICA8ZGl2PlxuICAgIDxkaXYgY2xhc3NOYW1lPVwibG9hZGVyXCIgLz5cbiAgICA8c3R5bGUganN4PntgXG4gICAgICAubG9hZGVyIHtcbiAgICAgICAgbWFyZ2luOiBhdXRvIGF1dG87XG4gICAgICAgIGJvcmRlcjogNHB4IHNvbGlkICNmZmZmZmY7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICAgICAgYm9yZGVyLXRvcDogNHB4IHNvbGlkICNmMDVjNWM7XG4gICAgICAgIHdpZHRoOiAyMHB4O1xuICAgICAgICBoZWlnaHQ6IDIwcHg7XG4gICAgICAgIC13ZWJraXQtYW5pbWF0aW9uOiBzcGluIDJzIGxpbmVhciBpbmZpbml0ZTtcbiAgICAgICAgYW5pbWF0aW9uOiBzcGluIDJzIGxpbmVhciBpbmZpbml0ZTtcbiAgICAgIH1cblxuICAgICAgQC13ZWJraXQta2V5ZnJhbWVzIHNwaW4ge1xuICAgICAgICAwJSB7XG4gICAgICAgICAgLXdlYmtpdC10cmFuc2Zvcm06IHJvdGF0ZSgwZGVnKTtcbiAgICAgICAgfVxuICAgICAgICAxMDAlIHtcbiAgICAgICAgICAtd2Via2l0LXRyYW5zZm9ybTogcm90YXRlKDM2MGRlZyk7XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgQGtleWZyYW1lcyBzcGluIHtcbiAgICAgICAgMCUge1xuICAgICAgICAgIHRyYW5zZm9ybTogcm90YXRlKDBkZWcpO1xuICAgICAgICB9XG4gICAgICAgIDEwMCUge1xuICAgICAgICAgIHRyYW5zZm9ybTogcm90YXRlKDM2MGRlZyk7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICBgfTwvc3R5bGU+XG4gIDwvZGl2PlxuKVxuIl19 */\n/*@ sourceURL=components/commons/Spinner.js */"
+    })
+  );
+});
+
+/***/ }),
+
+/***/ "./components/maxNews/Detail.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_jsx_style__ = __webpack_require__("styled-jsx/style");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_jsx_style___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_styled_jsx_style__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_DataGrid__ = __webpack_require__("./components/commons/DataGrid.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_Search__ = __webpack_require__("./components/commons/Search.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_Pagination__ = __webpack_require__("./components/commons/Pagination.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_redux__ = __webpack_require__("react-redux");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_UploadImage__ = __webpack_require__("./components/utils/UploadImage.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__api__ = __webpack_require__("./api.js");
+
 var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/components/maxNews/Detail.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 
 
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -470,273 +560,811 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var TextArea = __WEBPACK_IMPORTED_MODULE_6_antd__["Input"].TextArea;
 
-var Detail = function (_Component) {
-  _inherits(Detail, _Component);
 
-  function Detail(props) {
-    _classCallCheck(this, Detail);
+var TextArea = __WEBPACK_IMPORTED_MODULE_7_antd__["Input"].TextArea;
 
-    return _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this, props));
+var Option = __WEBPACK_IMPORTED_MODULE_7_antd__["Select"].Option;
+var FormItem = __WEBPACK_IMPORTED_MODULE_7_antd__["Form"].Item;
+
+var Details = function (_Component) {
+  _inherits(Details, _Component);
+
+  function Details(props) {
+    _classCallCheck(this, Details);
+
+    var _this = _possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).call(this, props));
+
+    _this.state = {
+      heading_en: '',
+      heading_th: '',
+      createDate: '',
+      imageUrl: '',
+      article_en: '',
+      article_th: '',
+      loading: false,
+      programName: ''
+    };
+    _this.handleOnChangeHeadingEn = _this.handleOnChangeHeadingEn.bind(_this);
+    _this.handleOnChangeArticleEn = _this.handleOnChangeArticleEn.bind(_this);
+    _this.handleOnChangeHeadingTh = _this.handleOnChangeHeadingTh.bind(_this);
+    _this.handleOnChangeArticleTh = _this.handleOnChangeArticleTh.bind(_this);
+    _this.handleOnChangeDate = _this.handleOnChangeDate.bind(_this);
+    _this.handleOnchangeImage = _this.handleOnchangeImage.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleBlur = _this.handleBlur.bind(_this);
+    _this.handleFocus = _this.handleFocus.bind(_this);
+    _this.addNews = _this.addNews.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
   }
 
-  _createClass(Detail, [{
+  _createClass(Details, [{
+    key: 'handleOnChangeHeadingEn',
+    value: function handleOnChangeHeadingEn(event) {
+      this.setState({
+        heading_en: event.target.value
+      });
+      console.log(this.state);
+    }
+  }, {
+    key: 'handleOnChangeArticleEn',
+    value: function handleOnChangeArticleEn(event) {
+      this.setState({
+        article_en: event.target.value
+      });
+    }
+  }, {
+    key: 'handleOnChangeHeadingTh',
+    value: function handleOnChangeHeadingTh(event) {
+      this.setState({
+        heading_th: event.target.value
+      });
+      console.log(this.state);
+    }
+  }, {
+    key: 'handleOnChangeArticleTh',
+    value: function handleOnChangeArticleTh(event) {
+      this.setState({
+        article_th: event.target.value
+      });
+    }
+  }, {
+    key: 'handleOnChangeDate',
+    value: function handleOnChangeDate(date, dateString) {
+      this.setState({
+        createDate: date
+      });
+    }
+  }, {
+    key: 'handleOnchangeImage',
+    value: function handleOnchangeImage(imgUrl) {
+      this.setState({
+        imageUrl: imgUrl
+      });
+      return 'success';
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(value) {
+      this.setState({
+        programName: value
+      });
+      console.log('selected ' + value);
+    }
+  }, {
+    key: 'handleBlur',
+    value: function handleBlur() {
+      console.log('blur');
+    }
+  }, {
+    key: 'handleFocus',
+    value: function handleFocus() {
+      console.log('focus');
+    }
+  }, {
+    key: 'addNews',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _ref2, status, data;
+
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_9__api__["b" /* post */](__WEBPACK_IMPORTED_MODULE_9__api__["a" /* SERVER */] + '/maxnews/add/news', this.state);
+
+              case 2:
+                _ref2 = _context.sent;
+                status = _ref2.status;
+                data = _ref2.data;
+
+              case 5:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function addNews() {
+        return _ref.apply(this, arguments);
+      }
+
+      return addNews;
+    }()
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.form.validateFields(function (err, values) {
+        if (!err) {
+          // const { email, password } = values
+          console.log(values);
+          // this.props.login({ email, password })
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        'div',
-        {
-          className: 'jsx-306179296' + ' ' + 'title',
-          __source: {
+      //console.log()
+      //const { getFieldDecorator } = this.props.ƒ
+      var getFieldDecorator = this.props.form.getFieldDecorator;
+      //console.log('1111111111111111', this.props)
+
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_7_antd__["Form"],
+        { onSubmit: this.handleSubmit, __source: {
             fileName: _jsxFileName,
-            lineNumber: 16
+            lineNumber: 128
           }
         },
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_6_antd__["Row"],
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          'div',
           {
+            className: 'jsx-2664233961' + ' ' + 'title',
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 17
+              lineNumber: 129
             }
           },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-            { span: 24, __source: {
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            {
+              __source: {
                 fileName: _jsxFileName,
-                lineNumber: 18
+                lineNumber: 130
               }
             },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'h1',
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
               {
-                className: 'jsx-306179296',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 19
+                  lineNumber: 131
                 }
               },
-              'Max News'
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          {
-            className: 'jsx-306179296' + ' ' + 'setting-row',
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 22
-            }
-          },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_6_antd__["Row"],
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 23
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 3, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 24
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
-                {
-                  className: 'jsx-306179296' + ' ' + 'topic-list',
-                  __source: {
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 24, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 25
+                    lineNumber: 132
                   }
                 },
-                'Heading:'
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'h1',
+                  {
+                    className: 'jsx-2664233961',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 133
+                    }
+                  },
+                  'Max News'
+                )
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 9, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 27
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_antd__["Input"], { placeholder: 'type here', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 28
-                }
-              })
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          {
-            className: 'jsx-306179296' + ' ' + 'setting-row',
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 32
-            }
-          },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_6_antd__["Row"],
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 33
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 3, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 34
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
-                {
-                  className: 'jsx-306179296' + ' ' + 'topic-list',
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 35
-                  }
-                },
-                'Date:'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 9, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 37
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_antd__["DatePicker"], {
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              'div',
+              {
+                className: 'jsx-2664233961' + ' ' + 'setting-row',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 38
-                }
-              })
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          {
-            className: 'jsx-306179296' + ' ' + 'setting-row',
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 42
-            }
-          },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_6_antd__["Row"],
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 43
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 3, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 44
+                  lineNumber: 136
                 }
               },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                'h2',
                 {
-                  className: 'jsx-306179296' + ' ' + 'topic-list-image',
+                  className: 'jsx-2664233961',
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 45
+                    lineNumber: 137
                   }
                 },
-                'Image:'
+                'EN'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 138
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                  { span: 3, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 139
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    'div',
+                    {
+                      className: 'jsx-2664233961' + ' ' + 'topic-list',
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 140
+                      }
+                    },
+                    'Heading:'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                  { span: 9, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 142
+                    }
+                  },
+                  getFieldDecorator('headingEn', {
+                    rules: [{
+                      required: true,
+                      message: 'Please input your Heading'
+                    }]
+                  })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_antd__["Input"], {
+                    onChange: this.handleOnChangeHeadingEn,
+                    placeholder: 'type here',
+                    required: true,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 151
+                    }
+                  }))
+                )
               )
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 9, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 47
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__UploadImage__["a" /* default */], {
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 161
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              FormItem,
+              {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 48
-                }
-              })
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          {
-            className: 'jsx-306179296' + ' ' + 'setting-row',
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 52
-            }
-          },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_6_antd__["Row"],
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 53
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 3, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 54
+                  lineNumber: 162
                 }
               },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
                 {
-                  className: 'jsx-306179296' + ' ' + 'topic-list-image',
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 55
+                    lineNumber: 163
                   }
                 },
-                'Article:'
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                  { span: 3, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 164
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    'div',
+                    {
+                      className: 'jsx-2664233961' + ' ' + 'topic-list-image',
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 165
+                      }
+                    },
+                    'Article:'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                  { span: 18, __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 167
+                    }
+                  },
+                  getFieldDecorator('articleEn', {
+                    rules: [{
+                      required: true,
+                      message: 'Please input your Article'
+                    }]
+                  })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    'div',
+                    { style: { marginBottom: 10 }, className: 'jsx-2664233961',
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 176
+                      }
+                    },
+                    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(TextArea, {
+                      onChange: this.handleOnChangeArticleEn,
+                      rows: 10,
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 177
+                      }
+                    })
+                  ))
+                )
               )
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_6_antd__["Col"],
-              { span: 18, __source: {
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('hr', {
+            className: 'jsx-2664233961',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 187
+            }
+          }),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'h2',
+            {
+              className: 'jsx-2664233961',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 188
+              }
+            },
+            'TH'
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 189
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 57
+                  lineNumber: 190
                 }
               },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(TextArea, { rows: 10, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 58
-                }
-              })
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 3, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 191
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'div',
+                  {
+                    className: 'jsx-2664233961' + ' ' + 'topic-list',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 192
+                    }
+                  },
+                  'Heading:'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 9, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 194
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_antd__["Input"], {
+                  onChange: this.handleOnChangeHeadingTh,
+                  placeholder: 'type here',
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 195
+                  }
+                })
+              )
             )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_styled_jsx_style___default.a, {
-          styleId: '306179296',
-          css: '.title.jsx-306179296{width:100%;padding-left:1rem;}.topic-list.jsx-306179296{font-size:1rem;padding-left:1rem;padding-top:0.3rem;}.topic-list-image.jsx-306179296{font-size:1rem;padding-left:1rem;padding-top:2.5rem;}.setting-row.jsx-306179296{padding-bottom:1rem;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbWF4TmV3cy9EZXRhaWwuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBNkRvQixBQUd3QixBQUlJLEFBS0EsQUFLSyxXQWJGLElBSUEsQUFLQSxLQUtwQixTQWJBLElBSXFCLEFBS0EsbUJBSnJCLEFBS0EiLCJmaWxlIjoiY29tcG9uZW50cy9tYXhOZXdzL0RldGFpbC5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvZmFybW96L0Rlc2t0b3AvTWF4TXVheVRoYWkvY21zL01heC1jbXMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgVGFibGUgZnJvbSAnLi4vY29tbW9ucy9EYXRhR3JpZCdcbmltcG9ydCBTZWFyY2ggZnJvbSAnLi4vY29tbW9ucy9TZWFyY2gnXG5pbXBvcnQgUGFnaW5hdGlvbkRhdGFHcmlkIGZyb20gJy4uL2NvbW1vbnMvUGFnaW5hdGlvbidcbmltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ3JlYWN0J1xuaW1wb3J0IHsgY29ubmVjdCB9IGZyb20gJ3JlYWN0LXJlZHV4J1xuaW1wb3J0IHsgUm93LCBDb2wsIElucHV0LCBEYXRlUGlja2VyLCBVcGxvYWQsIEljb24sIG1lc3NhZ2UgfSBmcm9tICdhbnRkJ1xuaW1wb3J0IFVwbG9hZEltYWdlIGZyb20gJy4vVXBsb2FkSW1hZ2UnXG5jb25zdCB7IFRleHRBcmVhIH0gPSBJbnB1dFxuXG5jbGFzcyBEZXRhaWwgZXh0ZW5kcyBDb21wb25lbnQge1xuICBjb25zdHJ1Y3Rvcihwcm9wcykge1xuICAgIHN1cGVyKHByb3BzKVxuICB9XG4gIHJlbmRlcigpIHtcbiAgICByZXR1cm4gKFxuICAgICAgPGRpdiBjbGFzc05hbWU9eyd0aXRsZSd9PlxuICAgICAgICA8Um93PlxuICAgICAgICAgIDxDb2wgc3Bhbj17MjR9PlxuICAgICAgICAgICAgPGgxPk1heCBOZXdzPC9oMT5cbiAgICAgICAgICA8L0NvbD5cbiAgICAgICAgPC9Sb3c+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPXsnc2V0dGluZy1yb3cnfT5cbiAgICAgICAgICA8Um93PlxuICAgICAgICAgICAgPENvbCBzcGFuPXszfT5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9eyd0b3BpYy1saXN0J30+SGVhZGluZzo8L2Rpdj5cbiAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgPENvbCBzcGFuPXs5fT5cbiAgICAgICAgICAgICAgPElucHV0IHBsYWNlaG9sZGVyPVwidHlwZSBoZXJlXCIgLz5cbiAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgIDwvUm93PlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9eydzZXR0aW5nLXJvdyd9PlxuICAgICAgICAgIDxSb3c+XG4gICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3RvcGljLWxpc3QnfT5EYXRlOjwvZGl2PlxuICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICA8Q29sIHNwYW49ezl9PlxuICAgICAgICAgICAgICA8RGF0ZVBpY2tlciAvPlxuICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgPC9Sb3c+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3NldHRpbmctcm93J30+XG4gICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgIDxDb2wgc3Bhbj17M30+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsndG9waWMtbGlzdC1pbWFnZSd9PkltYWdlOjwvZGl2PlxuICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICA8Q29sIHNwYW49ezl9PlxuICAgICAgICAgICAgICA8VXBsb2FkSW1hZ2UgLz5cbiAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgIDwvUm93PlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9eydzZXR0aW5nLXJvdyd9PlxuICAgICAgICAgIDxSb3c+XG4gICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3RvcGljLWxpc3QtaW1hZ2UnfT5BcnRpY2xlOjwvZGl2PlxuICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICA8Q29sIHNwYW49ezE4fT5cbiAgICAgICAgICAgICAgPFRleHRBcmVhIHJvd3M9ezEwfSAvPlxuICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgPC9Sb3c+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8c3R5bGUganN4PntgXG4gICAgICAgICAgLnRpdGxlIHtcbiAgICAgICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAxcmVtO1xuICAgICAgICAgIH1cbiAgICAgICAgICAudG9waWMtbGlzdCB7XG4gICAgICAgICAgICBmb250LXNpemU6IDFyZW07XG4gICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDFyZW07XG4gICAgICAgICAgICBwYWRkaW5nLXRvcDogMC4zcmVtO1xuICAgICAgICAgIH1cbiAgICAgICAgICAudG9waWMtbGlzdC1pbWFnZSB7XG4gICAgICAgICAgICBmb250LXNpemU6IDFyZW07XG4gICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDFyZW07XG4gICAgICAgICAgICBwYWRkaW5nLXRvcDogMi41cmVtO1xuICAgICAgICAgIH1cbiAgICAgICAgICAuc2V0dGluZy1yb3cge1xuICAgICAgICAgICAgcGFkZGluZy1ib3R0b206IDFyZW07XG4gICAgICAgICAgfVxuICAgICAgICBgfTwvc3R5bGU+XG4gICAgICA8L2Rpdj5cbiAgICApXG4gIH1cbn1cblxuY29uc3QgbWFwU3RhdGVUb1Byb3BzID0gc3RhdGUgPT4gKHtcbiAgc2VhcmNoRGF0YTogc3RhdGUuc2VhcmNoRGF0YS5kYXRhLFxuICBwYWdpbmF0aW9uOiBzdGF0ZS5zZWFyY2hEYXRhLnBhZ2luYXRpb24sXG59KVxuXG5leHBvcnQgZGVmYXVsdCBjb25uZWN0KG1hcFN0YXRlVG9Qcm9wcywgbnVsbCkoRGV0YWlsKVxuIl19 */\n/*@ sourceURL=components/maxNews/Detail.js */'
-        })
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 202
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 203
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 3, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 204
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'div',
+                  {
+                    className: 'jsx-2664233961' + ' ' + 'topic-list-image',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 205
+                    }
+                  },
+                  'Article:'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 18, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 207
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(TextArea, { onChange: this.handleOnChangeArticleTh, rows: 10, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 208
+                  }
+                })
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('hr', {
+            className: 'jsx-2664233961',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 212
+            }
+          }),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'h2',
+            {
+              className: 'jsx-2664233961',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 213
+              }
+            },
+            'Both'
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 214
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 215
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 3, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 216
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'div',
+                  {
+                    className: 'jsx-2664233961' + ' ' + 'topic-list',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 217
+                    }
+                  },
+                  'Program:'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 9, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 219
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7_antd__["Select"],
+                  {
+                    showSearch: true,
+                    style: { width: 250 },
+                    placeholder: 'Select a program',
+                    optionFilterProp: 'children',
+                    onChange: this.handleChange,
+                    onFocus: this.handleFocus,
+                    onBlur: this.handleBlur,
+                    filterOption: function filterOption(input, option) {
+                      return option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+                    },
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 220
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Max Muay Thai', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 234
+                      }
+                    },
+                    'Max Muay Thai'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Muay Thai Battle', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 235
+                      }
+                    },
+                    'Muay Thai Battle'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Muaythai Fighter', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 236
+                      }
+                    },
+                    'Muaythai Fighter'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'The Champion Muay Thai', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 237
+                      }
+                    },
+                    'The Champion Muay Thai'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Global Fight Wednesday', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 240
+                      }
+                    },
+                    'Global Fight Wednesday'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Global Fight Thursday', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 243
+                      }
+                    },
+                    'Global Fight Thursday'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'MUAY THAI FIGHTER Monday', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 246
+                      }
+                    },
+                    'MUAY THAI FIGHTER Monday'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Octa Fight Tuesday', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 249
+                      }
+                    },
+                    'Octa Fight Tuesday'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    Option,
+                    { value: 'Max Sunday Afternoon', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 250
+                      }
+                    },
+                    'Max Sunday Afternoon'
+                  )
+                )
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 257
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 258
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 3, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 259
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'div',
+                  {
+                    className: 'jsx-2664233961' + ' ' + 'topic-list',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 260
+                    }
+                  },
+                  'Date:'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 9, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 262
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_antd__["DatePicker"], { onChange: this.handleOnChangeDate, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 263
+                  }
+                })
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 267
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 268
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 3, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 269
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  'div',
+                  {
+                    className: 'jsx-2664233961' + ' ' + 'topic-list-image',
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 270
+                    }
+                  },
+                  'Image:'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 9, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 272
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__utils_UploadImage__["a" /* default */], { onChangeImg: this.handleOnchangeImage, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 273
+                  }
+                })
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-2664233961' + ' ' + 'submit',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 278
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_7_antd__["Row"],
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 279
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_7_antd__["Col"],
+                { span: 24, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 280
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  FormItem,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 281
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_7_antd__["Button"],
+                    {
+                      type: 'primary',
+                      htmlType: 'submit',
+                      style: { width: '100%' },
+                      loading: this.state.loading,
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 282
+                      }
+                    },
+                    this.state.loading ? '' : 'Save'
+                  )
+                )
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_styled_jsx_style___default.a, {
+            styleId: '2664233961',
+            css: '.title.jsx-2664233961{width:100%;padding-left:1rem;}.topic-list.jsx-2664233961{font-size:1rem;padding-left:1rem;padding-top:0.3rem;}.topic-list-image.jsx-2664233961{font-size:1rem;padding-left:1rem;padding-top:2.5rem;}.setting-row.jsx-2664233961{padding-bottom:1rem;}.submit.jsx-2664233961{padding-bottom:1rem;}.submit-button.jsx-2664233961{width:8rem;height:2rem;background-color:green;color:white;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbWF4TmV3cy9EZXRhaWwuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBcVNzQixBQUcwQixBQUlJLEFBS0EsQUFLSyxBQUdBLEFBR1QsV0FuQk8sQUFvQk4sSUFoQk0sQUFLQSxLQUtwQixBQUdBLEdBSXlCLE1BcEJ6QixJQUlxQixBQUtBLGFBWVAsTUFoQmQsQUFLQSxNQVlBIiwiZmlsZSI6ImNvbXBvbmVudHMvbWF4TmV3cy9EZXRhaWwuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL2Zhcm1vei9EZXNrdG9wL01heE11YXlUaGFpL2Ntcy9NYXgtY21zIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFRhYmxlIGZyb20gJy4uL2NvbW1vbnMvRGF0YUdyaWQnXG5pbXBvcnQgU2VhcmNoIGZyb20gJy4uL2NvbW1vbnMvU2VhcmNoJ1xuaW1wb3J0IFBhZ2luYXRpb25EYXRhR3JpZCBmcm9tICcuLi9jb21tb25zL1BhZ2luYXRpb24nXG5pbXBvcnQgeyBDb21wb25lbnQgfSBmcm9tICdyZWFjdCdcbmltcG9ydCB7IGNvbm5lY3QgfSBmcm9tICdyZWFjdC1yZWR1eCdcbmltcG9ydCB7XG4gIFJvdyxcbiAgQ29sLFxuICBJbnB1dCxcbiAgRGF0ZVBpY2tlcixcbiAgVXBsb2FkLFxuICBJY29uLFxuICBtZXNzYWdlLFxuICBTZWxlY3QsXG4gIEZvcm0sXG4gIEJ1dHRvbixcbn0gZnJvbSAnYW50ZCdcbmltcG9ydCBVcGxvYWRJbWFnZSBmcm9tICcuLi91dGlscy9VcGxvYWRJbWFnZSdcbmltcG9ydCAqIGFzIGFwaSBmcm9tICcuLi8uLi9hcGknXG5cbmNvbnN0IHsgVGV4dEFyZWEgfSA9IElucHV0XG5jb25zdCBPcHRpb24gPSBTZWxlY3QuT3B0aW9uXG5jb25zdCBGb3JtSXRlbSA9IEZvcm0uSXRlbVxuXG5jbGFzcyBEZXRhaWxzIGV4dGVuZHMgQ29tcG9uZW50IHtcbiAgY29uc3RydWN0b3IocHJvcHMpIHtcbiAgICBzdXBlcihwcm9wcylcbiAgICB0aGlzLnN0YXRlID0ge1xuICAgICAgaGVhZGluZ19lbjogJycsXG4gICAgICBoZWFkaW5nX3RoOiAnJyxcbiAgICAgIGNyZWF0ZURhdGU6ICcnLFxuICAgICAgaW1hZ2VVcmw6ICcnLFxuICAgICAgYXJ0aWNsZV9lbjogJycsXG4gICAgICBhcnRpY2xlX3RoOiAnJyxcbiAgICAgIGxvYWRpbmc6IGZhbHNlLFxuICAgICAgcHJvZ3JhbU5hbWU6ICcnLFxuICAgIH1cbiAgICB0aGlzLmhhbmRsZU9uQ2hhbmdlSGVhZGluZ0VuID0gdGhpcy5oYW5kbGVPbkNoYW5nZUhlYWRpbmdFbi5iaW5kKHRoaXMpXG4gICAgdGhpcy5oYW5kbGVPbkNoYW5nZUFydGljbGVFbiA9IHRoaXMuaGFuZGxlT25DaGFuZ2VBcnRpY2xlRW4uYmluZCh0aGlzKVxuICAgIHRoaXMuaGFuZGxlT25DaGFuZ2VIZWFkaW5nVGggPSB0aGlzLmhhbmRsZU9uQ2hhbmdlSGVhZGluZ1RoLmJpbmQodGhpcylcbiAgICB0aGlzLmhhbmRsZU9uQ2hhbmdlQXJ0aWNsZVRoID0gdGhpcy5oYW5kbGVPbkNoYW5nZUFydGljbGVUaC5iaW5kKHRoaXMpXG4gICAgdGhpcy5oYW5kbGVPbkNoYW5nZURhdGUgPSB0aGlzLmhhbmRsZU9uQ2hhbmdlRGF0ZS5iaW5kKHRoaXMpXG4gICAgdGhpcy5oYW5kbGVPbmNoYW5nZUltYWdlID0gdGhpcy5oYW5kbGVPbmNoYW5nZUltYWdlLmJpbmQodGhpcylcbiAgICB0aGlzLmhhbmRsZUNoYW5nZSA9IHRoaXMuaGFuZGxlQ2hhbmdlLmJpbmQodGhpcylcbiAgICB0aGlzLmhhbmRsZUJsdXIgPSB0aGlzLmhhbmRsZUJsdXIuYmluZCh0aGlzKVxuICAgIHRoaXMuaGFuZGxlRm9jdXMgPSB0aGlzLmhhbmRsZUZvY3VzLmJpbmQodGhpcylcbiAgICB0aGlzLmFkZE5ld3MgPSB0aGlzLmFkZE5ld3MuYmluZCh0aGlzKVxuICAgIHRoaXMuaGFuZGxlU3VibWl0ID0gdGhpcy5oYW5kbGVTdWJtaXQuYmluZCh0aGlzKVxuICB9XG5cbiAgaGFuZGxlT25DaGFuZ2VIZWFkaW5nRW4oZXZlbnQpIHtcbiAgICB0aGlzLnNldFN0YXRlKHtcbiAgICAgIGhlYWRpbmdfZW46IGV2ZW50LnRhcmdldC52YWx1ZSxcbiAgICB9KVxuICAgIGNvbnNvbGUubG9nKHRoaXMuc3RhdGUpXG4gIH1cblxuICBoYW5kbGVPbkNoYW5nZUFydGljbGVFbihldmVudCkge1xuICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgYXJ0aWNsZV9lbjogZXZlbnQudGFyZ2V0LnZhbHVlLFxuICAgIH0pXG4gIH1cblxuICBoYW5kbGVPbkNoYW5nZUhlYWRpbmdUaChldmVudCkge1xuICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgaGVhZGluZ190aDogZXZlbnQudGFyZ2V0LnZhbHVlLFxuICAgIH0pXG4gICAgY29uc29sZS5sb2codGhpcy5zdGF0ZSlcbiAgfVxuXG4gIGhhbmRsZU9uQ2hhbmdlQXJ0aWNsZVRoKGV2ZW50KSB7XG4gICAgdGhpcy5zZXRTdGF0ZSh7XG4gICAgICBhcnRpY2xlX3RoOiBldmVudC50YXJnZXQudmFsdWUsXG4gICAgfSlcbiAgfVxuXG4gIGhhbmRsZU9uQ2hhbmdlRGF0ZShkYXRlLCBkYXRlU3RyaW5nKSB7XG4gICAgdGhpcy5zZXRTdGF0ZSh7XG4gICAgICBjcmVhdGVEYXRlOiBkYXRlLFxuICAgIH0pXG4gIH1cblxuICBoYW5kbGVPbmNoYW5nZUltYWdlKGltZ1VybCkge1xuICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgaW1hZ2VVcmw6IGltZ1VybCxcbiAgICB9KVxuICAgIHJldHVybiAnc3VjY2VzcydcbiAgfVxuXG4gIGhhbmRsZUNoYW5nZSh2YWx1ZSkge1xuICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgcHJvZ3JhbU5hbWU6IHZhbHVlLFxuICAgIH0pXG4gICAgY29uc29sZS5sb2coYHNlbGVjdGVkICR7dmFsdWV9YClcbiAgfVxuXG4gIGhhbmRsZUJsdXIoKSB7XG4gICAgY29uc29sZS5sb2coJ2JsdXInKVxuICB9XG5cbiAgaGFuZGxlRm9jdXMoKSB7XG4gICAgY29uc29sZS5sb2coJ2ZvY3VzJylcbiAgfVxuXG4gIGFzeW5jIGFkZE5ld3MoKSB7XG4gICAgY29uc3QgeyBzdGF0dXMsIGRhdGEgfSA9IGF3YWl0IGFwaS5wb3N0KFxuICAgICAgYCR7YXBpLlNFUlZFUn0vbWF4bmV3cy9hZGQvbmV3c2AsXG4gICAgICB0aGlzLnN0YXRlXG4gICAgKVxuICB9XG5cbiAgaGFuZGxlU3VibWl0KGUpIHtcbiAgICBlLnByZXZlbnREZWZhdWx0KClcbiAgICB0aGlzLnByb3BzLmZvcm0udmFsaWRhdGVGaWVsZHMoKGVyciwgdmFsdWVzKSA9PiB7XG4gICAgICBpZiAoIWVycikge1xuICAgICAgICAvLyBjb25zdCB7IGVtYWlsLCBwYXNzd29yZCB9ID0gdmFsdWVzXG4gICAgICAgIGNvbnNvbGUubG9nKHZhbHVlcylcbiAgICAgICAgLy8gdGhpcy5wcm9wcy5sb2dpbih7IGVtYWlsLCBwYXNzd29yZCB9KVxuICAgICAgfVxuICAgIH0pXG4gIH1cbiAgcmVuZGVyKCkge1xuICAgIC8vY29uc29sZS5sb2coKVxuICAgIC8vY29uc3QgeyBnZXRGaWVsZERlY29yYXRvciB9ID0gdGhpcy5wcm9wcy7GklxuICAgIGNvbnN0IHsgZ2V0RmllbGREZWNvcmF0b3IgfSA9IHRoaXMucHJvcHMuZm9ybVxuICAgIC8vY29uc29sZS5sb2coJzExMTExMTExMTExMTExMTEnLCB0aGlzLnByb3BzKVxuICAgIHJldHVybiAoXG4gICAgICA8Rm9ybSBvblN1Ym1pdD17dGhpcy5oYW5kbGVTdWJtaXR9PlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3RpdGxlJ30+XG4gICAgICAgICAgPEZvcm1JdGVtPlxuICAgICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgICAgPENvbCBzcGFuPXsyNH0+XG4gICAgICAgICAgICAgICAgPGgxPk1heCBOZXdzPC9oMT5cbiAgICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICA8L1Jvdz5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsnc2V0dGluZy1yb3cnfT5cbiAgICAgICAgICAgICAgPGgyPkVOPC9oMj5cbiAgICAgICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9eyd0b3BpYy1saXN0J30+SGVhZGluZzo8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L0NvbD5cbiAgICAgICAgICAgICAgICA8Q29sIHNwYW49ezl9PlxuICAgICAgICAgICAgICAgICAge2dldEZpZWxkRGVjb3JhdG9yKCdoZWFkaW5nRW4nLCB7XG4gICAgICAgICAgICAgICAgICAgIHJ1bGVzOiBbXG4gICAgICAgICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICAgICAgcmVxdWlyZWQ6IHRydWUsXG4gICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlOiAnUGxlYXNlIGlucHV0IHlvdXIgSGVhZGluZycsXG4gICAgICAgICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICAgICAgXSxcbiAgICAgICAgICAgICAgICAgIH0pKFxuICAgICAgICAgICAgICAgICAgICA8SW5wdXRcbiAgICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17dGhpcy5oYW5kbGVPbkNoYW5nZUhlYWRpbmdFbn1cbiAgICAgICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cInR5cGUgaGVyZVwiXG4gICAgICAgICAgICAgICAgICAgICAgcmVxdWlyZWRcbiAgICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICAgICl9XG4gICAgICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICAgIDwvUm93PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9Gb3JtSXRlbT5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3NldHRpbmctcm93J30+XG4gICAgICAgICAgICA8Rm9ybUl0ZW0+XG4gICAgICAgICAgICAgIDxSb3c+XG4gICAgICAgICAgICAgICAgPENvbCBzcGFuPXszfT5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsndG9waWMtbGlzdC1pbWFnZSd9PkFydGljbGU6PC9kaXY+XG4gICAgICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICAgICAgPENvbCBzcGFuPXsxOH0+XG4gICAgICAgICAgICAgICAgICB7Z2V0RmllbGREZWNvcmF0b3IoJ2FydGljbGVFbicsIHtcbiAgICAgICAgICAgICAgICAgICAgcnVsZXM6IFtcbiAgICAgICAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgICAgICByZXF1aXJlZDogdHJ1ZSxcbiAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2U6ICdQbGVhc2UgaW5wdXQgeW91ciBBcnRpY2xlJyxcbiAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICBdLFxuICAgICAgICAgICAgICAgICAgfSkoXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9e3sgbWFyZ2luQm90dG9tOiAxMCB9fT5cbiAgICAgICAgICAgICAgICAgICAgICA8VGV4dEFyZWFcbiAgICAgICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXt0aGlzLmhhbmRsZU9uQ2hhbmdlQXJ0aWNsZUVufVxuICAgICAgICAgICAgICAgICAgICAgICAgcm93cz17MTB9XG4gICAgICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICApfVxuICAgICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgICA8L1Jvdz5cbiAgICAgICAgICAgIDwvRm9ybUl0ZW0+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGhyIC8+XG4gICAgICAgICAgPGgyPlRIPC9oMj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3NldHRpbmctcm93J30+XG4gICAgICAgICAgICA8Um93PlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsndG9waWMtbGlzdCd9PkhlYWRpbmc6PC9kaXY+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezl9PlxuICAgICAgICAgICAgICAgIDxJbnB1dFxuICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9e3RoaXMuaGFuZGxlT25DaGFuZ2VIZWFkaW5nVGh9XG4gICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cInR5cGUgaGVyZVwiXG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICA8L1Jvdz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3NldHRpbmctcm93J30+XG4gICAgICAgICAgICA8Um93PlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsndG9waWMtbGlzdC1pbWFnZSd9PkFydGljbGU6PC9kaXY+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezE4fT5cbiAgICAgICAgICAgICAgICA8VGV4dEFyZWEgb25DaGFuZ2U9e3RoaXMuaGFuZGxlT25DaGFuZ2VBcnRpY2xlVGh9IHJvd3M9ezEwfSAvPlxuICAgICAgICAgICAgICA8L0NvbD5cbiAgICAgICAgICAgIDwvUm93PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxociAvPlxuICAgICAgICAgIDxoMj5Cb3RoPC9oMj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3NldHRpbmctcm93J30+XG4gICAgICAgICAgICA8Um93PlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezN9PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsndG9waWMtbGlzdCd9PlByb2dyYW06PC9kaXY+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgICA8Q29sIHNwYW49ezl9PlxuICAgICAgICAgICAgICAgIDxTZWxlY3RcbiAgICAgICAgICAgICAgICAgIHNob3dTZWFyY2hcbiAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IHdpZHRoOiAyNTAgfX1cbiAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiU2VsZWN0IGEgcHJvZ3JhbVwiXG4gICAgICAgICAgICAgICAgICBvcHRpb25GaWx0ZXJQcm9wPVwiY2hpbGRyZW5cIlxuICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9e3RoaXMuaGFuZGxlQ2hhbmdlfVxuICAgICAgICAgICAgICAgICAgb25Gb2N1cz17dGhpcy5oYW5kbGVGb2N1c31cbiAgICAgICAgICAgICAgICAgIG9uQmx1cj17dGhpcy5oYW5kbGVCbHVyfVxuICAgICAgICAgICAgICAgICAgZmlsdGVyT3B0aW9uPXsoaW5wdXQsIG9wdGlvbikgPT5cbiAgICAgICAgICAgICAgICAgICAgb3B0aW9uLnByb3BzLmNoaWxkcmVuXG4gICAgICAgICAgICAgICAgICAgICAgLnRvTG93ZXJDYXNlKClcbiAgICAgICAgICAgICAgICAgICAgICAuaW5kZXhPZihpbnB1dC50b0xvd2VyQ2FzZSgpKSA+PSAwXG4gICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgPE9wdGlvbiB2YWx1ZT1cIk1heCBNdWF5IFRoYWlcIj5NYXggTXVheSBUaGFpPC9PcHRpb24+XG4gICAgICAgICAgICAgICAgICA8T3B0aW9uIHZhbHVlPVwiTXVheSBUaGFpIEJhdHRsZVwiPk11YXkgVGhhaSBCYXR0bGU8L09wdGlvbj5cbiAgICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNdWF5dGhhaSBGaWdodGVyXCI+TXVheXRoYWkgRmlnaHRlcjwvT3B0aW9uPlxuICAgICAgICAgICAgICAgICAgPE9wdGlvbiB2YWx1ZT1cIlRoZSBDaGFtcGlvbiBNdWF5IFRoYWlcIj5cbiAgICAgICAgICAgICAgICAgICAgVGhlIENoYW1waW9uIE11YXkgVGhhaVxuICAgICAgICAgICAgICAgICAgPC9PcHRpb24+XG4gICAgICAgICAgICAgICAgICA8T3B0aW9uIHZhbHVlPVwiR2xvYmFsIEZpZ2h0IFdlZG5lc2RheVwiPlxuICAgICAgICAgICAgICAgICAgICBHbG9iYWwgRmlnaHQgV2VkbmVzZGF5XG4gICAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJHbG9iYWwgRmlnaHQgVGh1cnNkYXlcIj5cbiAgICAgICAgICAgICAgICAgICAgR2xvYmFsIEZpZ2h0IFRodXJzZGF5XG4gICAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNVUFZIFRIQUkgRklHSFRFUiBNb25kYXlcIj5cbiAgICAgICAgICAgICAgICAgICAgTVVBWSBUSEFJIEZJR0hURVIgTW9uZGF5XG4gICAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJPY3RhIEZpZ2h0IFR1ZXNkYXlcIj5PY3RhIEZpZ2h0IFR1ZXNkYXk8L09wdGlvbj5cbiAgICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNYXggU3VuZGF5IEFmdGVybm9vblwiPlxuICAgICAgICAgICAgICAgICAgICBNYXggU3VuZGF5IEFmdGVybm9vblxuICAgICAgICAgICAgICAgICAgPC9PcHRpb24+XG4gICAgICAgICAgICAgICAgPC9TZWxlY3Q+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgPC9Sb3c+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9eydzZXR0aW5nLXJvdyd9PlxuICAgICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgICAgPENvbCBzcGFuPXszfT5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3RvcGljLWxpc3QnfT5EYXRlOjwvZGl2PlxuICAgICAgICAgICAgICA8L0NvbD5cbiAgICAgICAgICAgICAgPENvbCBzcGFuPXs5fT5cbiAgICAgICAgICAgICAgICA8RGF0ZVBpY2tlciBvbkNoYW5nZT17dGhpcy5oYW5kbGVPbkNoYW5nZURhdGV9IC8+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgPC9Sb3c+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9eydzZXR0aW5nLXJvdyd9PlxuICAgICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgICAgPENvbCBzcGFuPXszfT5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3RvcGljLWxpc3QtaW1hZ2UnfT5JbWFnZTo8L2Rpdj5cbiAgICAgICAgICAgICAgPC9Db2w+XG4gICAgICAgICAgICAgIDxDb2wgc3Bhbj17OX0+XG4gICAgICAgICAgICAgICAgPFVwbG9hZEltYWdlIG9uQ2hhbmdlSW1nPXt0aGlzLmhhbmRsZU9uY2hhbmdlSW1hZ2V9IC8+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgPC9Sb3c+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17J3N1Ym1pdCd9PlxuICAgICAgICAgICAgPFJvdz5cbiAgICAgICAgICAgICAgPENvbCBzcGFuPXsyNH0+XG4gICAgICAgICAgICAgICAgPEZvcm1JdGVtPlxuICAgICAgICAgICAgICAgICAgPEJ1dHRvblxuICAgICAgICAgICAgICAgICAgICB0eXBlPVwicHJpbWFyeVwiXG4gICAgICAgICAgICAgICAgICAgIGh0bWxUeXBlPVwic3VibWl0XCJcbiAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgd2lkdGg6ICcxMDAlJyB9fVxuICAgICAgICAgICAgICAgICAgICBsb2FkaW5nPXt0aGlzLnN0YXRlLmxvYWRpbmd9XG4gICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgIHt0aGlzLnN0YXRlLmxvYWRpbmcgPyAnJyA6ICdTYXZlJ31cbiAgICAgICAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgICAgICAgIDwvRm9ybUl0ZW0+XG4gICAgICAgICAgICAgIDwvQ29sPlxuICAgICAgICAgICAgPC9Sb3c+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPHN0eWxlIGpzeD57YFxuICAgICAgICAgICAgLnRpdGxlIHtcbiAgICAgICAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgICAgICAgIHBhZGRpbmctbGVmdDogMXJlbTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIC50b3BpYy1saXN0IHtcbiAgICAgICAgICAgICAgZm9udC1zaXplOiAxcmVtO1xuICAgICAgICAgICAgICBwYWRkaW5nLWxlZnQ6IDFyZW07XG4gICAgICAgICAgICAgIHBhZGRpbmctdG9wOiAwLjNyZW07XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICAudG9waWMtbGlzdC1pbWFnZSB7XG4gICAgICAgICAgICAgIGZvbnQtc2l6ZTogMXJlbTtcbiAgICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiAxcmVtO1xuICAgICAgICAgICAgICBwYWRkaW5nLXRvcDogMi41cmVtO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgLnNldHRpbmctcm93IHtcbiAgICAgICAgICAgICAgcGFkZGluZy1ib3R0b206IDFyZW07XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICAuc3VibWl0IHtcbiAgICAgICAgICAgICAgcGFkZGluZy1ib3R0b206IDFyZW07XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICAuc3VibWl0LWJ1dHRvbiB7XG4gICAgICAgICAgICAgIHdpZHRoOiA4cmVtO1xuICAgICAgICAgICAgICBoZWlnaHQ6IDJyZW07XG4gICAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IGdyZWVuO1xuICAgICAgICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgYH08L3N0eWxlPlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvRm9ybT5cbiAgICApXG4gIH1cbn1cblxuY29uc3QgbWFwU3RhdGVUb1Byb3BzID0gc3RhdGUgPT4gKHtcbiAgc2VhcmNoRGF0YTogc3RhdGUuc2VhcmNoRGF0YS5kYXRhLFxuICBwYWdpbmF0aW9uOiBzdGF0ZS5zZWFyY2hEYXRhLnBhZ2luYXRpb24sXG59KVxuXG5jb25zdCBEZXRhaWwgPSBGb3JtLmNyZWF0ZSgpKGNvbm5lY3QobWFwU3RhdGVUb1Byb3BzLCBudWxsKShEZXRhaWxzKSlcblxuZXhwb3J0IGRlZmF1bHQgRGV0YWlsXG4iXX0= */\n/*@ sourceURL=components/maxNews/Detail.js */'
+          })
+        )
       );
     }
   }]);
 
-  return Detail;
-}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+  return Details;
+}(__WEBPACK_IMPORTED_MODULE_2_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -745,11 +1373,618 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_5_react_redux__["connect"])(mapStateToProps, null)(Detail));
+var Detail = __WEBPACK_IMPORTED_MODULE_7_antd__["Form"].create()(Object(__WEBPACK_IMPORTED_MODULE_6_react_redux__["connect"])(mapStateToProps, null)(Details));
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Detail);
 
 /***/ }),
 
-/***/ "./components/maxNews/UploadImage.js":
+/***/ "./components/maxNews/MaxNewsInsert.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_jsx_style__ = __webpack_require__("styled-jsx/style");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_styled_jsx_style___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_styled_jsx_style__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_UploadImage__ = __webpack_require__("./components/utils/UploadImage.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__api__ = __webpack_require__("./api.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_Spinner__ = __webpack_require__("./components/commons/Spinner.js");
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/components/maxNews/MaxNewsInsert.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var FormItem = __WEBPACK_IMPORTED_MODULE_3_antd__["Form"].Item;
+var Option = __WEBPACK_IMPORTED_MODULE_3_antd__["Select"].Option;
+var AutoCompleteOption = __WEBPACK_IMPORTED_MODULE_3_antd__["AutoComplete"].Option;
+var TextArea = __WEBPACK_IMPORTED_MODULE_3_antd__["Input"].TextArea;
+
+var MaxNewsInsertForm = function (_React$Component) {
+  _inherits(MaxNewsInsertForm, _React$Component);
+
+  function MaxNewsInsertForm(props) {
+    var _this2 = this;
+
+    _classCallCheck(this, MaxNewsInsertForm);
+
+    var _this = _possibleConstructorReturn(this, (MaxNewsInsertForm.__proto__ || Object.getPrototypeOf(MaxNewsInsertForm)).call(this, props));
+
+    _this.handleSubmit = function (e) {
+      e.preventDefault();
+      _this.props.form.validateFieldsAndScroll(function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(err, values) {
+          return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _this.setState({
+                    loading: true
+                  });
+
+                  if (err) {
+                    _context.next = 5;
+                    break;
+                  }
+
+                  _context.next = 4;
+                  return _this.addNews(values);
+
+                case 4:
+                  //console.log('3', values)
+                  _this.info();
+
+                case 5:
+                  _this.setState({
+                    loading: false
+                  });
+
+                case 6:
+                case 'end':
+                  return _context.stop();
+              }
+            }
+          }, _callee, _this2);
+        }));
+
+        return function (_x, _x2) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    };
+
+    _this.state = {
+      loading: false
+    };
+    _this.handleOnchangeImage = _this.handleOnchangeImage.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.info = _this.info.bind(_this);
+    return _this;
+  }
+
+  _createClass(MaxNewsInsertForm, [{
+    key: 'handleOnchangeImage',
+    value: function handleOnchangeImage(imgUrl) {
+      if (imgUrl !== '') {
+        this.props.form.setFieldsValue({
+          imageUrl: imgUrl
+        });
+      }
+      return 'success';
+    }
+  }, {
+    key: 'addNews',
+    value: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(value) {
+        var result;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_5__api__["b" /* post */](__WEBPACK_IMPORTED_MODULE_5__api__["a" /* SERVER */] + '/maxnews/add/news', value);
+
+              case 2:
+                result = _context2.sent;
+
+              case 3:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function addNews(_x3) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return addNews;
+    }()
+  }, {
+    key: 'info',
+    value: function info() {
+      __WEBPACK_IMPORTED_MODULE_3_antd__["Modal"].info({
+        title: 'Success for new max news',
+        content: __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 72
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'p',
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 73
+              }
+            },
+            'you add 1 news'
+          )
+        ),
+        onOk: function onOk() {}
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var getFieldDecorator = this.props.form.getFieldDecorator;
+      //console.log('111111111111', this.props.form)
+
+      var autoCompleteResult = this.state.autoCompleteResult;
+
+
+      var formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 4 }
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 16 }
+        }
+      };
+      var tailFormItemLayout = {
+        wrapperCol: {
+          xs: {
+            span: 24,
+            offset: 0
+          },
+          sm: {
+            span: 14,
+            offset: 10
+          }
+        }
+      };
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+        'div',
+        {
+          className: 'jsx-4016259393',
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 108
+          }
+        },
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_antd__["Row"],
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 109
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_antd__["Col"],
+            { span: 24, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 110
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              'h1',
+              {
+                className: 'jsx-4016259393',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 111
+                }
+              },
+              'Max News'
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          'div',
+          {
+            className: 'jsx-4016259393' + ' ' + 'setting-row',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 114
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'h2',
+            {
+              className: 'jsx-4016259393',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 115
+              }
+            },
+            'EN'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_antd__["Form"],
+          { onSubmit: this.handleSubmit, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 117
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Heading:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 118
+              }
+            }),
+            getFieldDecorator('heading_en', {
+              rules: [{
+                required: true,
+                message: 'Please input your Heading!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_antd__["Input"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 126
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Article:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 128
+              }
+            }),
+            getFieldDecorator('article_en', {
+              rules: [{
+                required: true,
+                message: 'Please input your Article!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(TextArea, { rows: 10, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 136
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('hr', {
+            className: 'jsx-4016259393' + ' ' + 'hr-tag',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 138
+            }
+          }),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-4016259393' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 139
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              'h2',
+              {
+                className: 'jsx-4016259393',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 140
+                }
+              },
+              'TH'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Heading:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 142
+              }
+            }),
+            getFieldDecorator('heading_th', {
+              rules: [{
+                required: true,
+                message: 'Please confirm your Heading!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_antd__["Input"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 150
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Article:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 152
+              }
+            }),
+            getFieldDecorator('article_th', {
+              rules: [{
+                required: true,
+                message: 'Please confirm your Article!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(TextArea, { rows: 10, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 160
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('hr', {
+            className: 'jsx-4016259393' + ' ' + 'hr-tag',
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 162
+            }
+          }),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            'div',
+            {
+              className: 'jsx-4016259393' + ' ' + 'setting-row',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 163
+              }
+            },
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              'h2',
+              {
+                className: 'jsx-4016259393',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 164
+                }
+              },
+              'BOTH'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Program:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 166
+              }
+            }),
+            getFieldDecorator('programName', {
+              rules: [{
+                required: true,
+                message: 'Please select program!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_antd__["Select"],
+              {
+                showSearch: true,
+                style: { width: 250 },
+                placeholder: 'Select a program',
+                optionFilterProp: 'children'
+                //onChange={this.handleChange}
+                //onFocus={this.handleFocus}
+                //onBlur={this.handleBlur}
+                , filterOption: function filterOption(input, option) {
+                  return option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 175
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Max Muay Thai', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 189
+                  }
+                },
+                'Max Muay Thai'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Muay Thai Battle', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 190
+                  }
+                },
+                'Muay Thai Battle'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Muaythai Fighter', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 191
+                  }
+                },
+                'Muaythai Fighter'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'The Champion Muay Thai', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 192
+                  }
+                },
+                'The Champion Muay Thai'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Global Fight Wednesday', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 195
+                  }
+                },
+                'Global Fight Wednesday'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Global Fight Thursday', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 198
+                  }
+                },
+                'Global Fight Thursday'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'MUAY THAI FIGHTER Monday', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 201
+                  }
+                },
+                'MUAY THAI FIGHTER Monday'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Octa Fight Tuesday', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 204
+                  }
+                },
+                'Octa Fight Tuesday'
+              ),
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                Option,
+                { value: 'Max Sunday Afternoon', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 205
+                  }
+                },
+                'Max Sunday Afternoon'
+              )
+            ))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Date:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 211
+              }
+            }),
+            getFieldDecorator('createDate', {
+              rules: [{
+                required: true,
+                message: 'Please enter Date!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_antd__["DatePicker"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 219
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, formItemLayout, { label: 'Image:', __source: {
+                fileName: _jsxFileName,
+                lineNumber: 221
+              }
+            }),
+            getFieldDecorator('imageUrl', {
+              valuePropName: 'fileList',
+              getValueFromEvent: this.normFile,
+              rules: [{
+                required: true,
+                message: 'Please upload Image!'
+              }]
+            })(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__utils_UploadImage__["a" /* default */], { onChangeImg: this.handleOnchangeImage, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 231
+              }
+            }))
+          ),
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            FormItem,
+            _extends({}, tailFormItemLayout, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 233
+              }
+            }),
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              'div',
+              {
+                className: 'jsx-4016259393',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 234
+                }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_3_antd__["Button"],
+                {
+                  style: {
+                    width: '9rem',
+                    height: '2.5rem',
+                    backgroundColor: '#4caf4f',
+                    color: 'white',
+                    fontSize: '1.2rem'
+                  },
+                  loading: this.state.loading,
+                  htmlType: 'submit',
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 235
+                  }
+                },
+                'save'
+              )
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_styled_jsx_style___default.a, {
+          styleId: '4016259393',
+          css: '.setting-row.jsx-4016259393{margin-left:1rem;}.hr-tag.jsx-4016259393{margin-bottom:1.5rem;}.submit-button.jsx-4016259393{width:8rem;height:2rem;background-color:green;color:white;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbWF4TmV3cy9NYXhOZXdzSW5zZXJ0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTBQb0IsQUFHOEIsQUFHSSxBQUdWLFdBQ0MsTUFOZCxJQUdBLEVBSXlCLHVCQUNYLFlBQ2QiLCJmaWxlIjoiY29tcG9uZW50cy9tYXhOZXdzL01heE5ld3NJbnNlcnQuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL2Zhcm1vei9EZXNrdG9wL01heE11YXlUaGFpL2Ntcy9NYXgtY21zIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgRGF0ZVBpY2tlcixcbiAgRm9ybSxcbiAgSW5wdXQsXG4gIFRvb2x0aXAsXG4gIEljb24sXG4gIENhc2NhZGVyLFxuICBTZWxlY3QsXG4gIFJvdyxcbiAgQ29sLFxuICBDaGVja2JveCxcbiAgQnV0dG9uLFxuICBBdXRvQ29tcGxldGUsXG4gIE1vZGFsLFxufSBmcm9tICdhbnRkJ1xuaW1wb3J0IFVwbG9hZEltYWdlIGZyb20gJy4uL3V0aWxzL1VwbG9hZEltYWdlJ1xuaW1wb3J0ICogYXMgYXBpIGZyb20gJy4uLy4uL2FwaSdcbmltcG9ydCBTcGlubmVyIGZyb20gJy4uL2NvbW1vbnMvU3Bpbm5lcidcblxuY29uc3QgRm9ybUl0ZW0gPSBGb3JtLkl0ZW1cbmNvbnN0IE9wdGlvbiA9IFNlbGVjdC5PcHRpb25cbmNvbnN0IEF1dG9Db21wbGV0ZU9wdGlvbiA9IEF1dG9Db21wbGV0ZS5PcHRpb25cbmNvbnN0IHsgVGV4dEFyZWEgfSA9IElucHV0XG5cbmNsYXNzIE1heE5ld3NJbnNlcnRGb3JtIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgY29uc3RydWN0b3IocHJvcHMpIHtcbiAgICBzdXBlcihwcm9wcylcbiAgICB0aGlzLnN0YXRlID0ge1xuICAgICAgbG9hZGluZzogZmFsc2UsXG4gICAgfVxuICAgIHRoaXMuaGFuZGxlT25jaGFuZ2VJbWFnZSA9IHRoaXMuaGFuZGxlT25jaGFuZ2VJbWFnZS5iaW5kKHRoaXMpXG4gICAgdGhpcy5oYW5kbGVTdWJtaXQgPSB0aGlzLmhhbmRsZVN1Ym1pdC5iaW5kKHRoaXMpXG4gICAgdGhpcy5pbmZvID0gdGhpcy5pbmZvLmJpbmQodGhpcylcbiAgfVxuXG4gIGhhbmRsZU9uY2hhbmdlSW1hZ2UoaW1nVXJsKSB7XG4gICAgaWYgKGltZ1VybCAhPT0gJycpIHtcbiAgICAgIHRoaXMucHJvcHMuZm9ybS5zZXRGaWVsZHNWYWx1ZSh7XG4gICAgICAgIGltYWdlVXJsOiBpbWdVcmwsXG4gICAgICB9KVxuICAgIH1cbiAgICByZXR1cm4gJ3N1Y2Nlc3MnXG4gIH1cblxuICBhc3luYyBhZGROZXdzKHZhbHVlKSB7XG4gICAgLy9jb25zb2xlLmxvZygnMScsIHZhbHVlKVxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGFwaS5wb3N0KGAke2FwaS5TRVJWRVJ9L21heG5ld3MvYWRkL25ld3NgLCB2YWx1ZSlcbiAgICAvL2NvbnNvbGUubG9nKCcyJywgcmVzdWx0KVxuICB9XG5cbiAgaGFuZGxlU3VibWl0ID0gZSA9PiB7XG4gICAgZS5wcmV2ZW50RGVmYXVsdCgpXG4gICAgdGhpcy5wcm9wcy5mb3JtLnZhbGlkYXRlRmllbGRzQW5kU2Nyb2xsKGFzeW5jIChlcnIsIHZhbHVlcykgPT4ge1xuICAgICAgdGhpcy5zZXRTdGF0ZSh7XG4gICAgICAgIGxvYWRpbmc6IHRydWUsXG4gICAgICB9KVxuICAgICAgaWYgKCFlcnIpIHtcbiAgICAgICAgYXdhaXQgdGhpcy5hZGROZXdzKHZhbHVlcylcbiAgICAgICAgLy9jb25zb2xlLmxvZygnMycsIHZhbHVlcylcbiAgICAgICAgdGhpcy5pbmZvKClcbiAgICAgIH1cbiAgICAgIHRoaXMuc2V0U3RhdGUoe1xuICAgICAgICBsb2FkaW5nOiBmYWxzZSxcbiAgICAgIH0pXG4gICAgfSlcbiAgfVxuXG4gIGluZm8oKSB7XG4gICAgTW9kYWwuaW5mbyh7XG4gICAgICB0aXRsZTogJ1N1Y2Nlc3MgZm9yIG5ldyBtYXggbmV3cycsXG4gICAgICBjb250ZW50OiAoXG4gICAgICAgIDxkaXY+XG4gICAgICAgICAgPHA+eW91IGFkZCAxIG5ld3M8L3A+XG4gICAgICAgIDwvZGl2PlxuICAgICAgKSxcbiAgICAgIG9uT2soKSB7fSxcbiAgICB9KVxuICB9XG5cbiAgcmVuZGVyKCkge1xuICAgIGNvbnN0IHsgZ2V0RmllbGREZWNvcmF0b3IgfSA9IHRoaXMucHJvcHMuZm9ybVxuICAgIC8vY29uc29sZS5sb2coJzExMTExMTExMTExMScsIHRoaXMucHJvcHMuZm9ybSlcbiAgICBjb25zdCB7IGF1dG9Db21wbGV0ZVJlc3VsdCB9ID0gdGhpcy5zdGF0ZVxuXG4gICAgY29uc3QgZm9ybUl0ZW1MYXlvdXQgPSB7XG4gICAgICBsYWJlbENvbDoge1xuICAgICAgICB4czogeyBzcGFuOiAyNCB9LFxuICAgICAgICBzbTogeyBzcGFuOiA0IH0sXG4gICAgICB9LFxuICAgICAgd3JhcHBlckNvbDoge1xuICAgICAgICB4czogeyBzcGFuOiAyNCB9LFxuICAgICAgICBzbTogeyBzcGFuOiAxNiB9LFxuICAgICAgfSxcbiAgICB9XG4gICAgY29uc3QgdGFpbEZvcm1JdGVtTGF5b3V0ID0ge1xuICAgICAgd3JhcHBlckNvbDoge1xuICAgICAgICB4czoge1xuICAgICAgICAgIHNwYW46IDI0LFxuICAgICAgICAgIG9mZnNldDogMCxcbiAgICAgICAgfSxcbiAgICAgICAgc206IHtcbiAgICAgICAgICBzcGFuOiAxNCxcbiAgICAgICAgICBvZmZzZXQ6IDEwLFxuICAgICAgICB9LFxuICAgICAgfSxcbiAgICB9XG4gICAgcmV0dXJuIChcbiAgICAgIDxkaXY+XG4gICAgICAgIDxSb3c+XG4gICAgICAgICAgPENvbCBzcGFuPXsyNH0+XG4gICAgICAgICAgICA8aDE+TWF4IE5ld3M8L2gxPlxuICAgICAgICAgIDwvQ29sPlxuICAgICAgICA8L1Jvdz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9eydzZXR0aW5nLXJvdyd9PlxuICAgICAgICAgIDxoMj5FTjwvaDI+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8Rm9ybSBvblN1Ym1pdD17dGhpcy5oYW5kbGVTdWJtaXR9PlxuICAgICAgICAgIDxGb3JtSXRlbSB7Li4uZm9ybUl0ZW1MYXlvdXR9IGxhYmVsPVwiSGVhZGluZzpcIj5cbiAgICAgICAgICAgIHtnZXRGaWVsZERlY29yYXRvcignaGVhZGluZ19lbicsIHtcbiAgICAgICAgICAgICAgcnVsZXM6IFtcbiAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICByZXF1aXJlZDogdHJ1ZSxcbiAgICAgICAgICAgICAgICAgIG1lc3NhZ2U6ICdQbGVhc2UgaW5wdXQgeW91ciBIZWFkaW5nIScsXG4gICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgXSxcbiAgICAgICAgICAgIH0pKDxJbnB1dCAvPil9XG4gICAgICAgICAgPC9Gb3JtSXRlbT5cbiAgICAgICAgICA8Rm9ybUl0ZW0gey4uLmZvcm1JdGVtTGF5b3V0fSBsYWJlbD1cIkFydGljbGU6XCI+XG4gICAgICAgICAgICB7Z2V0RmllbGREZWNvcmF0b3IoJ2FydGljbGVfZW4nLCB7XG4gICAgICAgICAgICAgIHJ1bGVzOiBbXG4gICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgcmVxdWlyZWQ6IHRydWUsXG4gICAgICAgICAgICAgICAgICBtZXNzYWdlOiAnUGxlYXNlIGlucHV0IHlvdXIgQXJ0aWNsZSEnLFxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICB9KSg8VGV4dEFyZWEgcm93cz17MTB9IC8+KX1cbiAgICAgICAgICA8L0Zvcm1JdGVtPlxuICAgICAgICAgIDxociBjbGFzc05hbWU9e2Boci10YWdgfSAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsnc2V0dGluZy1yb3cnfT5cbiAgICAgICAgICAgIDxoMj5USDwvaDI+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPEZvcm1JdGVtIHsuLi5mb3JtSXRlbUxheW91dH0gbGFiZWw9XCJIZWFkaW5nOlwiPlxuICAgICAgICAgICAge2dldEZpZWxkRGVjb3JhdG9yKCdoZWFkaW5nX3RoJywge1xuICAgICAgICAgICAgICBydWxlczogW1xuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgICAgICAgICAgICAgICAgbWVzc2FnZTogJ1BsZWFzZSBjb25maXJtIHlvdXIgSGVhZGluZyEnLFxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICB9KSg8SW5wdXQgLz4pfVxuICAgICAgICAgIDwvRm9ybUl0ZW0+XG4gICAgICAgICAgPEZvcm1JdGVtIHsuLi5mb3JtSXRlbUxheW91dH0gbGFiZWw9XCJBcnRpY2xlOlwiPlxuICAgICAgICAgICAge2dldEZpZWxkRGVjb3JhdG9yKCdhcnRpY2xlX3RoJywge1xuICAgICAgICAgICAgICBydWxlczogW1xuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgICAgICAgICAgICAgICAgbWVzc2FnZTogJ1BsZWFzZSBjb25maXJtIHlvdXIgQXJ0aWNsZSEnLFxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICB9KSg8VGV4dEFyZWEgcm93cz17MTB9IC8+KX1cbiAgICAgICAgICA8L0Zvcm1JdGVtPlxuICAgICAgICAgIDxociBjbGFzc05hbWU9e2Boci10YWdgfSAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXsnc2V0dGluZy1yb3cnfT5cbiAgICAgICAgICAgIDxoMj5CT1RIPC9oMj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8Rm9ybUl0ZW0gey4uLmZvcm1JdGVtTGF5b3V0fSBsYWJlbD1cIlByb2dyYW06XCI+XG4gICAgICAgICAgICB7Z2V0RmllbGREZWNvcmF0b3IoJ3Byb2dyYW1OYW1lJywge1xuICAgICAgICAgICAgICBydWxlczogW1xuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgICAgICAgICAgICAgICAgbWVzc2FnZTogJ1BsZWFzZSBzZWxlY3QgcHJvZ3JhbSEnLFxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICB9KShcbiAgICAgICAgICAgICAgPFNlbGVjdFxuICAgICAgICAgICAgICAgIHNob3dTZWFyY2hcbiAgICAgICAgICAgICAgICBzdHlsZT17eyB3aWR0aDogMjUwIH19XG4gICAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9XCJTZWxlY3QgYSBwcm9ncmFtXCJcbiAgICAgICAgICAgICAgICBvcHRpb25GaWx0ZXJQcm9wPVwiY2hpbGRyZW5cIlxuICAgICAgICAgICAgICAgIC8vb25DaGFuZ2U9e3RoaXMuaGFuZGxlQ2hhbmdlfVxuICAgICAgICAgICAgICAgIC8vb25Gb2N1cz17dGhpcy5oYW5kbGVGb2N1c31cbiAgICAgICAgICAgICAgICAvL29uQmx1cj17dGhpcy5oYW5kbGVCbHVyfVxuICAgICAgICAgICAgICAgIGZpbHRlck9wdGlvbj17KGlucHV0LCBvcHRpb24pID0+XG4gICAgICAgICAgICAgICAgICBvcHRpb24ucHJvcHMuY2hpbGRyZW5cbiAgICAgICAgICAgICAgICAgICAgLnRvTG93ZXJDYXNlKClcbiAgICAgICAgICAgICAgICAgICAgLmluZGV4T2YoaW5wdXQudG9Mb3dlckNhc2UoKSkgPj0gMFxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNYXggTXVheSBUaGFpXCI+TWF4IE11YXkgVGhhaTwvT3B0aW9uPlxuICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNdWF5IFRoYWkgQmF0dGxlXCI+TXVheSBUaGFpIEJhdHRsZTwvT3B0aW9uPlxuICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJNdWF5dGhhaSBGaWdodGVyXCI+TXVheXRoYWkgRmlnaHRlcjwvT3B0aW9uPlxuICAgICAgICAgICAgICAgIDxPcHRpb24gdmFsdWU9XCJUaGUgQ2hhbXBpb24gTXVheSBUaGFpXCI+XG4gICAgICAgICAgICAgICAgICBUaGUgQ2hhbXBpb24gTXVheSBUaGFpXG4gICAgICAgICAgICAgICAgPC9PcHRpb24+XG4gICAgICAgICAgICAgICAgPE9wdGlvbiB2YWx1ZT1cIkdsb2JhbCBGaWdodCBXZWRuZXNkYXlcIj5cbiAgICAgICAgICAgICAgICAgIEdsb2JhbCBGaWdodCBXZWRuZXNkYXlcbiAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICA8T3B0aW9uIHZhbHVlPVwiR2xvYmFsIEZpZ2h0IFRodXJzZGF5XCI+XG4gICAgICAgICAgICAgICAgICBHbG9iYWwgRmlnaHQgVGh1cnNkYXlcbiAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICA8T3B0aW9uIHZhbHVlPVwiTVVBWSBUSEFJIEZJR0hURVIgTW9uZGF5XCI+XG4gICAgICAgICAgICAgICAgICBNVUFZIFRIQUkgRklHSFRFUiBNb25kYXlcbiAgICAgICAgICAgICAgICA8L09wdGlvbj5cbiAgICAgICAgICAgICAgICA8T3B0aW9uIHZhbHVlPVwiT2N0YSBGaWdodCBUdWVzZGF5XCI+T2N0YSBGaWdodCBUdWVzZGF5PC9PcHRpb24+XG4gICAgICAgICAgICAgICAgPE9wdGlvbiB2YWx1ZT1cIk1heCBTdW5kYXkgQWZ0ZXJub29uXCI+XG4gICAgICAgICAgICAgICAgICBNYXggU3VuZGF5IEFmdGVybm9vblxuICAgICAgICAgICAgICAgIDwvT3B0aW9uPlxuICAgICAgICAgICAgICA8L1NlbGVjdD5cbiAgICAgICAgICAgICl9XG4gICAgICAgICAgPC9Gb3JtSXRlbT5cbiAgICAgICAgICA8Rm9ybUl0ZW0gey4uLmZvcm1JdGVtTGF5b3V0fSBsYWJlbD1cIkRhdGU6XCI+XG4gICAgICAgICAgICB7Z2V0RmllbGREZWNvcmF0b3IoJ2NyZWF0ZURhdGUnLCB7XG4gICAgICAgICAgICAgIHJ1bGVzOiBbXG4gICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgcmVxdWlyZWQ6IHRydWUsXG4gICAgICAgICAgICAgICAgICBtZXNzYWdlOiAnUGxlYXNlIGVudGVyIERhdGUhJyxcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICBdLFxuICAgICAgICAgICAgfSkoPERhdGVQaWNrZXIgLz4pfVxuICAgICAgICAgIDwvRm9ybUl0ZW0+XG4gICAgICAgICAgPEZvcm1JdGVtIHsuLi5mb3JtSXRlbUxheW91dH0gbGFiZWw9XCJJbWFnZTpcIj5cbiAgICAgICAgICAgIHtnZXRGaWVsZERlY29yYXRvcignaW1hZ2VVcmwnLCB7XG4gICAgICAgICAgICAgIHZhbHVlUHJvcE5hbWU6ICdmaWxlTGlzdCcsXG4gICAgICAgICAgICAgIGdldFZhbHVlRnJvbUV2ZW50OiB0aGlzLm5vcm1GaWxlLFxuICAgICAgICAgICAgICBydWxlczogW1xuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgICAgICAgICAgICAgICAgbWVzc2FnZTogJ1BsZWFzZSB1cGxvYWQgSW1hZ2UhJyxcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICBdLFxuICAgICAgICAgICAgfSkoPFVwbG9hZEltYWdlIG9uQ2hhbmdlSW1nPXt0aGlzLmhhbmRsZU9uY2hhbmdlSW1hZ2V9IC8+KX1cbiAgICAgICAgICA8L0Zvcm1JdGVtPlxuICAgICAgICAgIDxGb3JtSXRlbSB7Li4udGFpbEZvcm1JdGVtTGF5b3V0fT5cbiAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgIDxCdXR0b25cbiAgICAgICAgICAgICAgICBzdHlsZT17e1xuICAgICAgICAgICAgICAgICAgd2lkdGg6ICc5cmVtJyxcbiAgICAgICAgICAgICAgICAgIGhlaWdodDogJzIuNXJlbScsXG4gICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6ICcjNGNhZjRmJyxcbiAgICAgICAgICAgICAgICAgIGNvbG9yOiAnd2hpdGUnLFxuICAgICAgICAgICAgICAgICAgZm9udFNpemU6ICcxLjJyZW0nLFxuICAgICAgICAgICAgICAgIH19XG4gICAgICAgICAgICAgICAgbG9hZGluZz17dGhpcy5zdGF0ZS5sb2FkaW5nfVxuICAgICAgICAgICAgICAgIGh0bWxUeXBlPVwic3VibWl0XCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIHNhdmVcbiAgICAgICAgICAgICAgPC9CdXR0b24+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L0Zvcm1JdGVtPlxuICAgICAgICA8L0Zvcm0+XG4gICAgICAgIDxzdHlsZSBqc3g+e2BcbiAgICAgICAgICAuc2V0dGluZy1yb3cge1xuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IDFyZW07XG4gICAgICAgICAgfVxuICAgICAgICAgIC5oci10YWcge1xuICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMS41cmVtO1xuICAgICAgICAgIH1cbiAgICAgICAgICAuc3VibWl0LWJ1dHRvbiB7XG4gICAgICAgICAgICB3aWR0aDogOHJlbTtcbiAgICAgICAgICAgIGhlaWdodDogMnJlbTtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IGdyZWVuO1xuICAgICAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICAgIH1cbiAgICAgICAgYH08L3N0eWxlPlxuICAgICAgPC9kaXY+XG4gICAgKVxuICB9XG59XG5jb25zdCBJbmZvID0gRm9ybS5jcmVhdGUoKShNYXhOZXdzSW5zZXJ0Rm9ybSlcbmV4cG9ydCBkZWZhdWx0IEluZm9cbiJdfQ== */\n/*@ sourceURL=components/maxNews/MaxNewsInsert.js */'
+        })
+      );
+    }
+  }]);
+
+  return MaxNewsInsertForm;
+}(__WEBPACK_IMPORTED_MODULE_2_react___default.a.Component);
+
+var Info = __WEBPACK_IMPORTED_MODULE_3_antd__["Form"].create()(MaxNewsInsertForm);
+/* harmony default export */ __webpack_exports__["a"] = (Info);
+
+/***/ }),
+
+/***/ "./components/utils/UploadImage.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -757,7 +1992,8 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd__ = __webpack_require__("antd");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd__);
-var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/components/maxNews/UploadImage.js';
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api__ = __webpack_require__("./api.js");
+var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/components/utils/UploadImage.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -768,6 +2004,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -796,7 +2033,8 @@ var UploadImage = function (_Component) {
       if (info.file.status === 'done') {
         // Get this url from response in real world.
         getBase64(info.file.originFileObj, function (imageUrl) {
-          return _this.setState({
+          _this.props.onChangeImg(info.file.name);
+          _this.setState({
             imageUrl: imageUrl,
             loading: false
           });
@@ -813,25 +2051,26 @@ var UploadImage = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 25
+            lineNumber: 27
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Icon"], { type: this.state.loading ? 'loading' : 'plus', __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 28
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'ant-upload-text', __source: {
               fileName: _jsxFileName,
-              lineNumber: 27
+              lineNumber: 29
             }
           },
           'Upload'
         )
       );
       var imageUrl = this.state.imageUrl;
+      //console.log('imageUrl: ', imageUrl)
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_1_antd__["Upload"],
         {
@@ -839,16 +2078,16 @@ var UploadImage = function (_Component) {
           listType: 'picture-card',
           className: 'avatar-uploader',
           showUploadList: false,
-          action: '//jsonplaceholder.typicode.com/posts/',
+          action: __WEBPACK_IMPORTED_MODULE_2__api__["a" /* SERVER */] + '/maxnews/upload/image',
           onChange: this.handleChange,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 35
           }
         },
-        imageUrl ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: imageUrl, alt: '', __source: {
+        imageUrl ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { style: { width: '12rem' }, src: imageUrl, alt: '', __source: {
             fileName: _jsxFileName,
-            lineNumber: 40
+            lineNumber: 44
           }
         }) : uploadButton
       );
@@ -978,24 +2217,23 @@ var FullPageLayout = function FullPageLayout(_ref) {
     'div',
     {
       style: {
-        backgroundColor: '' + __WEBPACK_IMPORTED_MODULE_4__styles_vars__["a" /* vars */].grey,
         display: 'flex',
         height: '100%',
         width: '100%'
       },
-      className: 'jsx-3052578447',
+      className: 'jsx-3771808128',
       __source: {
         fileName: _jsxFileName,
         lineNumber: 7
       }
     },
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_styled_jsx_style___default.a, {
-      styleId: '3052578447',
-      css: 'body,html{height:100%;margin:0;width:100%;}#__next{height:100%;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxheW91dHMvRnVsbFBhZ2VMYXlvdXQuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBY3lCLEFBSXVCLEFBS0EsWUFKSCxBQUtYLFNBSmEsV0FDYiIsImZpbGUiOiJsYXlvdXRzL0Z1bGxQYWdlTGF5b3V0LmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9mYXJtb3ovRGVza3RvcC9NYXhNdWF5VGhhaS9jbXMvTWF4LWNtcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBzdHlsZXNoZWV0IGZyb20gJ2FudGQvZGlzdC9hbnRkLm1pbi5jc3MnXG5pbXBvcnQgUHJvcFR5cGVzIGZyb20gJ3Byb3AtdHlwZXMnXG5pbXBvcnQgeyB2YXJzIH0gZnJvbSAnLi4vc3R5bGVzL3ZhcnMnXG5cbmNvbnN0IEZ1bGxQYWdlTGF5b3V0ID0gKHsgY2hpbGRyZW4gfSkgPT4ge1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHN0eWxlPXt7XG4gICAgICAgIGJhY2tncm91bmRDb2xvcjogYCR7dmFycy5ncmV5fWAsXG4gICAgICAgIGRpc3BsYXk6ICdmbGV4JyxcbiAgICAgICAgaGVpZ2h0OiAnMTAwJScsXG4gICAgICAgIHdpZHRoOiAnMTAwJScsXG4gICAgICB9fVxuICAgID5cbiAgICAgIDxzdHlsZSBqc3ggZ2xvYmFsPntgXG4gICAgICAgIGJvZHksXG4gICAgICAgIGh0bWwge1xuICAgICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIH1cbiAgICAgICAgOmdsb2JhbCgjX19uZXh0KSB7XG4gICAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICB9XG4gICAgICBgfTwvc3R5bGU+XG4gICAgICA8c3R5bGUgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUw9e3sgX19odG1sOiBzdHlsZXNoZWV0IH19IC8+XG4gICAgICB7Y2hpbGRyZW59XG4gICAgPC9kaXY+XG4gIClcbn1cbkZ1bGxQYWdlTGF5b3V0LnByb3BUeXBlcyA9IHtcbiAgY2hpbGRyZW46IFByb3BUeXBlcy5ub2RlLFxufVxuRnVsbFBhZ2VMYXlvdXQuZGVmYXVsdFByb3BzID0ge1xuICBjaGlsZHJlbjogbnVsbCwgLy8gcmVuZGVyIG5vdGhpbmdcbn1cblxuZXhwb3J0IGRlZmF1bHQgRnVsbFBhZ2VMYXlvdXRcbiJdfQ== */\n/*@ sourceURL=layouts/FullPageLayout.js */'
+      styleId: '3771808128',
+      css: 'body{background-color:' + __WEBPACK_IMPORTED_MODULE_4__styles_vars__["a" /* vars */].grey + ' !important;}html{height:100%;margin:0;width:100%;}#__next{height:100%;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxheW91dHMvRnVsbFBhZ2VMYXlvdXQuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBYXlCLEFBR29FLEFBRzdDLEFBS0EsWUFKSCxBQUtYLFNBSmEsV0FDYix5QkFMQSIsImZpbGUiOiJsYXlvdXRzL0Z1bGxQYWdlTGF5b3V0LmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9mYXJtb3ovRGVza3RvcC9NYXhNdWF5VGhhaS9jbXMvTWF4LWNtcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBzdHlsZXNoZWV0IGZyb20gJ2FudGQvZGlzdC9hbnRkLm1pbi5jc3MnXG5pbXBvcnQgUHJvcFR5cGVzIGZyb20gJ3Byb3AtdHlwZXMnXG5pbXBvcnQgeyB2YXJzIH0gZnJvbSAnLi4vc3R5bGVzL3ZhcnMnXG5cbmNvbnN0IEZ1bGxQYWdlTGF5b3V0ID0gKHsgY2hpbGRyZW4gfSkgPT4ge1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHN0eWxlPXt7XG4gICAgICAgIGRpc3BsYXk6ICdmbGV4JyxcbiAgICAgICAgaGVpZ2h0OiAnMTAwJScsXG4gICAgICAgIHdpZHRoOiAnMTAwJScsXG4gICAgICB9fVxuICAgID5cbiAgICAgIDxzdHlsZSBqc3ggZ2xvYmFsPntgXG4gICAgICAgIGJvZHkge1xuICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICR7dmFycy5ncmV5fSAhaW1wb3J0YW50O1xuICAgICAgICB9XG4gICAgICAgIGh0bWwge1xuICAgICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIH1cbiAgICAgICAgOmdsb2JhbCgjX19uZXh0KSB7XG4gICAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICB9XG4gICAgICBgfTwvc3R5bGU+XG4gICAgICA8c3R5bGUgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUw9e3sgX19odG1sOiBzdHlsZXNoZWV0IH19IC8+XG4gICAgICB7Y2hpbGRyZW59XG4gICAgPC9kaXY+XG4gIClcbn1cbkZ1bGxQYWdlTGF5b3V0LnByb3BUeXBlcyA9IHtcbiAgY2hpbGRyZW46IFByb3BUeXBlcy5ub2RlLFxufVxuRnVsbFBhZ2VMYXlvdXQuZGVmYXVsdFByb3BzID0ge1xuICBjaGlsZHJlbjogbnVsbCwgLy8gcmVuZGVyIG5vdGhpbmdcbn1cblxuZXhwb3J0IGRlZmF1bHQgRnVsbFBhZ2VMYXlvdXRcbiJdfQ== */\n/*@ sourceURL=layouts/FullPageLayout.js */'
     }),
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('style', { dangerouslySetInnerHTML: { __html: __WEBPACK_IMPORTED_MODULE_2_antd_dist_antd_min_css___default.a }, __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 27
       }
     }),
     children
@@ -1020,6 +2258,10 @@ FullPageLayout.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd__ = __webpack_require__("antd");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__("prop-types");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_link__ = __webpack_require__("next/link");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_next_link___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_next_link__);
 var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/layouts/Main.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1034,80 +2276,70 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var SubMenu = __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].SubMenu;
-var MenuItemGroup = __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].ItemGroup;
 
-var Main = function (_Component) {
-  _inherits(Main, _Component);
 
-  function Main() {
-    var _ref;
 
-    var _temp, _this, _ret;
+var Header = __WEBPACK_IMPORTED_MODULE_1_antd__["Layout"].Header,
+    Content = __WEBPACK_IMPORTED_MODULE_1_antd__["Layout"].Content,
+    Footer = __WEBPACK_IMPORTED_MODULE_1_antd__["Layout"].Footer;
 
+var Main = function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  function Main(props) {
     _classCallCheck(this, Main);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function (e) {
-      console.log('click ', e);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    _this.changedefaultSelectedKeys = function (value) {
+      _this.setState({
+        defaultSelectedKeys: value
+      });
+    };
+
+    _this.state = {
+      defaultSelectedKeys: 1
+    };
+    _this.changedefaultSelectedKeys = _this.changedefaultSelectedKeys.bind(_this);
+    return _this;
   }
 
   _createClass(Main, [{
     key: 'render',
     value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          keyNavbar = _props.keyNavbar;
+
+      console.log('key: ', keyNavbar);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"],
+        __WEBPACK_IMPORTED_MODULE_1_antd__["Layout"],
         {
-          onClick: this.handleClick,
-          style: { width: 256 },
-          defaultSelectedKeys: ['1'],
-          defaultOpenKeys: ['sub1'],
-          mode: 'inline',
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 12
+            lineNumber: 25
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          SubMenu,
-          {
-            key: 'sub1',
-            title: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              {
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 22
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Icon"], { type: 'mail', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 23
-                }
-              }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 24
-                  }
-                },
-                'Navigation One'
-              )
-            ),
-            __source: {
+          Header,
+          { style: { width: '100%' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 19
+              lineNumber: 26
             }
           },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'logo', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 27
+            }
+          }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            MenuItemGroup,
-            { key: 'g1', title: 'Item 1', __source: {
+            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"],
+            {
+              theme: 'dark',
+              mode: 'horizontal',
+              defaultSelectedKeys: [keyNavbar],
+              style: { lineHeight: '64px' },
+              __source: {
                 fileName: _jsxFileName,
                 lineNumber: 28
               }
@@ -1116,202 +2348,121 @@ var Main = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
               { key: '1', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 29
+                  lineNumber: 34
                 }
               },
-              'Option 1'
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_3_next_link___default.a,
+                { href: '/login', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 35
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 36
+                    }
+                  },
+                  'Home'
+                )
+              )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
               { key: '2', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 30
+                  lineNumber: 39
                 }
               },
-              'Option 2'
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            MenuItemGroup,
-            { key: 'g2', title: 'Item 2', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 32
-              }
-            },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_3_next_link___default.a,
+                { href: '/maxnews/modify', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 40
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 41
+                    }
+                  },
+                  'Maxnews'
+                )
+              )
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
               { key: '3', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 33
+                  lineNumber: 44
                 }
               },
-              'Option 3'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-              { key: '4', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 34
-                }
-              },
-              'Option 4'
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_3_next_link___default.a,
+                { href: '/vods/modify', __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 45
+                  }
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'a',
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 46
+                    }
+                  },
+                  'Vods'
+                )
+              )
             )
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          SubMenu,
-          {
-            key: 'sub2',
-            title: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              {
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 40
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Icon"], { type: 'appstore', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 41
-                }
-              }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 42
-                  }
-                },
-                'Navigation Two'
-              )
-            ),
-            __source: {
+          Content,
+          { style: { padding: '0 50px', marginTop: 64 }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 37
+              lineNumber: 51
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '5', __source: {
+            'div',
+            { style: { background: '#fff', padding: 24, minHeight: 380 }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 46
+                lineNumber: 52
               }
             },
-            'Option 5'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '6', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 47
-              }
-            },
-            'Option 6'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            SubMenu,
-            { key: 'sub3', title: 'Submenu', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 48
-              }
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-              { key: '7', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 49
-                }
-              },
-              'Option 7'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-              { key: '8', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 50
-                }
-              },
-              'Option 8'
-            )
+            children
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          SubMenu,
-          {
-            key: 'sub4',
-            title: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              {
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 56
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Icon"], { type: 'setting', __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 57
-                }
-              }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                {
-                  __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 58
-                  }
-                },
-                'Navigation Three'
-              )
-            ),
-            __source: {
+          Footer,
+          { style: { textAlign: 'center' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 53
+              lineNumber: 56
             }
           },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '9', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 62
-              }
-            },
-            'Option 9'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '10', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 63
-              }
-            },
-            'Option 10'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '11', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 64
-              }
-            },
-            'Option 11'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd__["Menu"].Item,
-            { key: '12', __source: {
-                fileName: _jsxFileName,
-                lineNumber: 65
-              }
-            },
-            'Option 12'
-          )
+          'Ant Design \xA92016 Created by Ant UED'
         )
       );
     }
   }]);
 
   return Main;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+// Main.propTypes = {
+//   children: PropTypes.node,
+// }
+// Main.defaultProps = {
+//   children: null, // render nothing
+// }
 
 /* harmony default export */ __webpack_exports__["a"] = (Main);
 
@@ -1338,10 +2489,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__ = __webpack_require__("./hocs/connectI18n.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_FullPageLayout__ = __webpack_require__("./layouts/FullPageLayout.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_maxNews_Detail__ = __webpack_require__("./components/maxNews/Detail.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__layouts_Main__ = __webpack_require__("./layouts/Main.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__redux_store__ = __webpack_require__("./redux/store.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd__ = __webpack_require__("antd");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_antd__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_maxNews_MaxNewsInsert__ = __webpack_require__("./components/maxNews/MaxNewsInsert.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__layouts_Main__ = __webpack_require__("./layouts/Main.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__redux_store__ = __webpack_require__("./redux/store.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd__ = __webpack_require__("antd");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_antd__);
 var _jsxFileName = '/Users/farmoz/Desktop/MaxMuayThai/cms/Max-cms/pages/maxnews/modify.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1353,6 +2505,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -1381,21 +2534,23 @@ var Modify = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 14
-          }
-        },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__layouts_Main__["a" /* default */], {
-          __source: {
-            fileName: _jsxFileName,
             lineNumber: 15
           }
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_maxNews_Detail__["a" /* default */], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 16
-          }
-        })
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_7__layouts_Main__["a" /* default */],
+          { keyNavbar: '2', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 16
+            }
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_maxNews_MaxNewsInsert__["a" /* default */], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 17
+            }
+          })
+        )
       );
     }
   }]);
@@ -1403,7 +2558,7 @@ var Modify = function (_Component) {
   return Modify;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_redux__["compose"])(__WEBPACK_IMPORTED_MODULE_7__redux_store__["a" /* withReduxSaga */], Object(__WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__["a" /* connectI18n */])(['common']))(Modify));
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_redux__["compose"])(__WEBPACK_IMPORTED_MODULE_8__redux_store__["a" /* withReduxSaga */], Object(__WEBPACK_IMPORTED_MODULE_3__hocs_connectI18n__["a" /* connectI18n */])(['common']))(Modify));
 
 /***/ }),
 
@@ -1570,7 +2725,7 @@ var reducer = function reducer() {
       }
     case SEARCH_SUCCESS:
       {
-        console.log(action.payload);
+        //console.log(action.payload)
         return {
           error: {},
           code: action.payload.code,
@@ -1764,7 +2919,7 @@ function searchDataSaga(action) {
       switch (_context.prev = _context.next) {
         case 0:
           if (true) {
-            console.log('action', action);
+            //console.log('action',action)
             __WEBPACK_IMPORTED_MODULE_1_fetch_mock___default.a.restore();
             data = action.payload.data;
 
@@ -1798,8 +2953,8 @@ function searchDataSaga(action) {
                   }]
                 }
               });
-            } else if (data === "test") {
-              console.log('false123445234523452345');
+            } else if (data === 'test') {
+              //console.log('false123445234523452345')
               __WEBPACK_IMPORTED_MODULE_1_fetch_mock___default.a.post(__WEBPACK_IMPORTED_MODULE_4__tools_api__["a" /* API_SERVER */] + '/applications/search', {
                 body: {
                   code: 200,
@@ -2009,7 +3164,11 @@ function configureStore() {
 
   var store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["createStore"])(__WEBPACK_IMPORTED_MODULE_4__ducks_ducks__["b" /* rootReducer */], initialState, bindMiddleware([sagaMiddleware]));
 
-  store.sagaTask = sagaMiddleware.run(__WEBPACK_IMPORTED_MODULE_5__sagas_rootSaga__["a" /* rootSaga */]);
+  store.runSagaTask = function () {
+    store.sagaTask = sagaMiddleware.run(__WEBPACK_IMPORTED_MODULE_5__sagas_rootSaga__["a" /* rootSaga */]);
+  };
+  store.runSagaTask();
+
   return store;
 }
 
@@ -2302,6 +3461,13 @@ module.exports = require("next-redux-saga");
 /***/ (function(module, exports) {
 
 module.exports = require("next-redux-wrapper");
+
+/***/ }),
+
+/***/ "next/link":
+/***/ (function(module, exports) {
+
+module.exports = require("next/link");
 
 /***/ }),
 
