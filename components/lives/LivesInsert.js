@@ -13,7 +13,9 @@ import {
   AutoComplete,
   Modal,
 } from 'antd'
-import UploadImage from '../utils/UploadImage'
+import UploadFightcardImage from '../utils/UploadFightcardImage'
+import UploadImageBanner from '../utils/UploadImageBanner'
+import UploadLogoImage from '../utils/UploadLogoImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
 
@@ -28,15 +30,35 @@ class LivesInsert extends React.Component {
     this.state = {
       loading: false,
     }
-    this.handleOnchangeImage = this.handleOnchangeImage.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.info = this.info.bind(this)
+    this.handleFightcardImage = this.handleFightcardImage.bind(this)
+    this.handleBannerImage = this.handleBannerImage.bind(this)
+    this.handleLogoImage = this.handleLogoImage.bind(this)
   }
 
-  handleOnchangeImage(imgUrl) {
+  handleFightcardImage(imgUrl) {
     if (imgUrl !== '') {
       this.props.form.setFieldsValue({
-        thumbnailUrl: imgUrl,
+        fightcardUrl: imgUrl,
+      })
+    }
+    return 'success'
+  }
+
+  handleBannerImage(imgUrl) {
+    if (imgUrl !== '') {
+      this.props.form.setFieldsValue({
+        bannerUrl: imgUrl,
+      })
+    }
+    return 'success'
+  }
+
+  handleLogoImage(imgUrl) {
+    if (imgUrl !== '') {
+      this.props.form.setFieldsValue({
+        logoUrl: imgUrl,
       })
     }
     return 'success'
@@ -55,9 +77,10 @@ class LivesInsert extends React.Component {
         loading: true,
       })
       if (!err) {
-        await this.addNews(values)
+        console.log(values)
+        //await this.addNews(values)
         //console.log('3', values)
-        this.info()
+        //this.info()
       }
       this.setState({
         loading: false,
@@ -161,21 +184,21 @@ class LivesInsert extends React.Component {
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc1:">
-            {getFieldDecorator('desc_en', {
+            {getFieldDecorator('shortDesc1_en', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input your Desc!',
+                  message: 'Please input your Short-desc1!',
                 },
               ],
             })(<TextArea rows={10} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc2:">
-            {getFieldDecorator('desc_en', {
+            {getFieldDecorator('shortDesc2_en', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input your Desc!',
+                  message: 'Please input your Short-desc2!',
                 },
               ],
             })(<TextArea rows={10} />)}
@@ -242,27 +265,27 @@ class LivesInsert extends React.Component {
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc1:">
-            {getFieldDecorator('desc_th', {
+            {getFieldDecorator('shortDesc1_th', {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert your Desc!',
+                  message: 'Please insert your Short-desc1!',
                 },
               ],
             })(<TextArea rows={10} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc2:">
-            {getFieldDecorator('desc_en', {
+            {getFieldDecorator('shortDesc2_th', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input your Desc!',
+                  message: 'Please input your Short-desc2!',
                 },
               ],
             })(<TextArea rows={10} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Desc:">
-            {getFieldDecorator('desc_en', {
+            {getFieldDecorator('desc_th', {
               rules: [
                 {
                   required: true,
@@ -272,12 +295,12 @@ class LivesInsert extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          <FormItem {...formItemLayout} label="LiveToDate:">
-            {getFieldDecorator('onAirDate', {
+          <FormItem {...formItemLayout} label="Live-To-Date:">
+            {getFieldDecorator('liveToDate', {
               rules: [
                 {
                   required: true,
-                  message: 'Please enter OnAirDate!',
+                  message: 'Please enter Live-To-Date!',
                 },
               ],
             })(
@@ -289,12 +312,12 @@ class LivesInsert extends React.Component {
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="LiveFromDate:">
-            {getFieldDecorator('onAirDate', {
+          <FormItem {...formItemLayout} label="Live-From-Date:">
+            {getFieldDecorator('liveFromDate', {
               rules: [
                 {
                   required: true,
-                  message: 'Please enter OnAirDate!',
+                  message: 'Please enter Live-From-Date!',
                 },
               ],
             })(
@@ -305,19 +328,9 @@ class LivesInsert extends React.Component {
                 style={{ paddingRight: '2rem' }}
               />
             )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="productId:">
-            {getFieldDecorator('videoUrl', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please insert your Video-url!',
-                },
-              ],
-            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Program-name:">
-            {getFieldDecorator('programName_en', {
+            {getFieldDecorator('programName', {
               rules: [
                 {
                   required: true,
@@ -361,57 +374,72 @@ class LivesInsert extends React.Component {
               </Select>
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="showOrder:">
-            {getFieldDecorator('videoUrl', {
+          <FormItem {...formItemLayout} label="Start-Time:">
+            {getFieldDecorator('startTime', {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert your Video-url!',
+                  message: 'Please insert your Start-Time!',
                 },
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="startTime:">
-            {getFieldDecorator('videoUrl', {
+          <FormItem {...formItemLayout} label="End-Time:">
+            {getFieldDecorator('endTime', {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert your Video-url!',
+                  message: 'Please insert yourEnd-Time!',
                 },
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="endTime:">
-            {getFieldDecorator('videoUrl', {
+          <FormItem {...formItemLayout} label="Live-Date:">
+            {getFieldDecorator('liveDay', {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert your Video-url!',
+                  message: 'Please insert your Live-Date!',
                 },
               ],
-            })(<Input />)}
+            })(
+              <Select
+                showSearch
+                style={{ width: 250 }}
+                placeholder="Select a day"
+                optionFilterProp="children"
+                //onChange={this.handleChange}
+                //onFocus={this.handleFocus}
+                //onBlur={this.handleBlur}
+                filterOption={(input, option) =>
+                  option.props.children
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                <Option value="Monday">Monday</Option>
+                <Option value="Tuesday">Tuesday</Option>
+                <Option value="Wednesday">Wednesday</Option>
+                <Option value="Thursday">Thursday</Option>
+                <Option value="Friday">Friday</Option>
+                <Option value="Saturday">Saturday</Option>
+                <Option value="Sunday">Sunday</Option>
+              </Select>
+            )}
           </FormItem>
-          <FormItem {...formItemLayout} label="liveDay:">
-            {getFieldDecorator('videoUrl', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please insert your Video-url!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          <FormItem {...formItemLayout} label="fightcardUrl:">
-            {getFieldDecorator('thumbnailUrl', {
+          <FormItem {...formItemLayout} label="Fightcard-Url:">
+            {getFieldDecorator('fightcardUrl', {
               valuePropName: 'fileList',
               getValueFromEvent: this.normFile,
               rules: [
                 {
                   required: true,
-                  message: 'Please upload Thumbnail-url!',
+                  message: 'Please upload Fightcard!',
                 },
               ],
-            })(<UploadImage onChangeImg={this.handleOnchangeImage} />)}
+            })(
+              <UploadFightcardImage onChangeImg={this.handleFightcardImage} />
+            )}
           </FormItem>
           <FormItem {...formItemLayout} label="Video-url:">
             {getFieldDecorator('videoUrl', {
@@ -434,59 +462,39 @@ class LivesInsert extends React.Component {
             })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Banner-url:">
-            {getFieldDecorator('thumbnailUrl', {
+            {getFieldDecorator('bannerUrl', {
               valuePropName: 'fileList',
               getValueFromEvent: this.normFile,
               rules: [
                 {
                   required: true,
-                  message: 'Please upload Thumbnail-url!',
+                  message: 'Please upload Banner-url!',
                 },
               ],
-            })(<UploadImage onChangeImg={this.handleOnchangeImage} />)}
+            })(<UploadImageBanner onChangeImg={this.handleBannerImage} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Logo-url:">
-            {getFieldDecorator('thumbnailUrl', {
+            {getFieldDecorator('logoUrl', {
               valuePropName: 'fileList',
               getValueFromEvent: this.normFile,
               rules: [
                 {
                   required: true,
-                  message: 'Please upload Thumbnail-url!',
+                  message: 'Please upload Logo-url!',
                 },
               ],
-            })(<UploadImage onChangeImg={this.handleOnchangeImage} />)}
+            })(<UploadLogoImage onChangeImg={this.handleLogoImage} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Price:">
-            {getFieldDecorator('duration', {
+            {getFieldDecorator('price', {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert your Duration!',
+                  message: 'Please insert your Price!',
                 },
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="status:">
-            {getFieldDecorator('duration', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please insert your Duration!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem>
-          {/* <FormItem {...formItemLayout} label="Feature:">
-            {getFieldDecorator('feature', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please select your Feature!',
-                },
-              ],
-            })(<Input />)}
-          </FormItem> */}
           <FormItem {...tailFormItemLayout}>
             <div>
               <Button
