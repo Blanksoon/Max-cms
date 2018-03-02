@@ -160,9 +160,6 @@ class MaxNewsInsertForm extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          <div className={'setting-row'}>
-            <h2>BOTH</h2>
-          </div>
           <FormItem {...formItemLayout} label="Program:">
             {getFieldDecorator('programName', {
               rules: [

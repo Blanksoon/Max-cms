@@ -7,14 +7,11 @@ const FullPageLayout = ({ children }) => {
     <div
       style={{
         display: 'flex',
-        height: '100%',
+        //height: '100%',
         width: '100%',
       }}
     >
       <style jsx global>{`
-        body {
-          background-color: ${vars.grey} !important;
-        }
         html {
           height: 100%;
           margin: 0;

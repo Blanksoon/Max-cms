@@ -20,9 +20,9 @@ class Main extends React.Component {
 
   render() {
     const { children, keyNavbar } = this.props
-    console.log('key: ', keyNavbar)
+    //console.log('key: ', keyNavbar)
     return (
-      <Layout>
+      <Layout style={{ backgroundColor: '#032447' }}>
         <Header style={{ width: '100%' }}>
           <div className="logo" />
           <Menu
@@ -31,25 +31,30 @@ class Main extends React.Component {
             defaultSelectedKeys={[keyNavbar]}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">
+            <Menu.Item key="Home">
               <Link href="/login">
                 <a>Home</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Link href="/maxnews/modify">
+            <Menu.Item key="Maxnews">
+              <Link href="/maxnews">
                 <a>Maxnews</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="3">
-              <Link href="/vods/modify">
+            <Menu.Item key="Vods">
+              <Link href="/vods">
                 <a>Vods</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="Live">
+              <Link href="/live">
+                <a>Live</a>
               </Link>
             </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px', marginTop: 64 }}>
-          <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
+        <Content style={{ padding: '0 30px', marginTop: 24 }}>
+          <div style={{ background: '#fff', padding: 0, minHeight: 380 }}>
             {children}
           </div>
         </Content>

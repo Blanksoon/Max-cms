@@ -43,9 +43,9 @@ class VodsInsert extends React.Component {
   }
 
   async addNews(value) {
-    console.log('1', value)
+    //console.log('1', value)
     const result = await api.post(`${api.SERVER}/vods/new`, value)
-    console.log('2', result)
+    //console.log('2', result)
   }
 
   handleSubmit = e => {
@@ -324,9 +324,6 @@ class VodsInsert extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          <div className={'setting-row'}>
-            <h2>BOTH</h2>
-          </div>
           <FormItem {...formItemLayout} label="Video-url:">
             {getFieldDecorator('videoUrl', {
               rules: [

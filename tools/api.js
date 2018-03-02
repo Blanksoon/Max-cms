@@ -30,6 +30,7 @@ const handleError = async response => {
 }
 
 export const { API_SERVER } = process.env
+
 export const postJSON = async (url, jsonBody) => {
   try {
     const response = await fetch(url, {
@@ -37,6 +38,22 @@ export const postJSON = async (url, jsonBody) => {
       headers: defaultHeaders,
       mode,
       body: JSON.stringify(jsonBody),
+    })
+    const json = await handleError(response)
+    return json
+  } catch (error) {
+    // error is Error object of shape
+    // { code: <http code>, message: <error message>, response: <response obj> }
+    throw error
+  }
+}
+
+export const getJSON = async url => {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: defaultHeaders,
+      mode: 'cors',
     })
     const json = await handleError(response)
     return json

@@ -36,6 +36,7 @@ export function* loginSaga(action) {
     yield put(loginFailure({ code, message }))
   }
 }
+
 export function* authSagas() {
   yield all([takeLatest(LOGIN, loginSaga)])
 }

@@ -1,10 +1,10 @@
-import { Form, Input } from 'antd';
+import { Form, Input } from 'antd'
 import { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { searchData } from '../../redux/ducks/search'
 import PropTypes from 'prop-types'
 
-const InputSearch = Input.Search;
+const InputSearch = Input.Search
 
 class Search extends Component {
   constructor(props) {
@@ -12,22 +12,22 @@ class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(e) {
-    const data  = e
+    const data = e
     const dataSearch = this.props.searchData({ data })
   }
   componentDidMount() {
-    const data = "test"
-    this.props.searchData({data})
+    const data = 'test'
+    this.props.searchData({ data })
   }
   render() {
-    console.log('error',this.props.errorMessage)
+    //console.log('error',this.props.errorMessage)
     const { errorMessage } = this.props
     return (
       <div>
         <InputSearch
-            placeholder="input search text"
-            onSearch={this.handleSubmit}
-            enterButton
+          placeholder="input search text"
+          onSearch={this.handleSubmit}
+          enterButton
         />
       </div>
     )

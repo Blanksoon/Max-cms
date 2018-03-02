@@ -52,7 +52,7 @@ class Details extends Component {
     this.setState({
       heading_en: event.target.value,
     })
-    console.log(this.state)
+    //console.log(this.state)
   }
 
   handleOnChangeArticleEn(event) {
@@ -65,7 +65,7 @@ class Details extends Component {
     this.setState({
       heading_th: event.target.value,
     })
-    console.log(this.state)
+    //console.log(this.state)
   }
 
   handleOnChangeArticleTh(event) {
@@ -91,15 +91,15 @@ class Details extends Component {
     this.setState({
       programName: value,
     })
-    console.log(`selected ${value}`)
+    //console.log(`selected ${value}`)
   }
 
   handleBlur() {
-    console.log('blur')
+    //console.log('blur')
   }
 
   handleFocus() {
-    console.log('focus')
+    //console.log('focus')
   }
 
   async addNews() {
@@ -114,7 +114,7 @@ class Details extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         // const { email, password } = values
-        console.log(values)
+        //console.log(values)
         // this.props.login({ email, password })
       }
     })
