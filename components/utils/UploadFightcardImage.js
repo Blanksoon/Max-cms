@@ -22,6 +22,17 @@ class UploadFightcardImage extends Component {
       })
     }
   }
+
+  componentWillReceiveProps(nexProps) {
+    if (nexProps !== this.props) {
+      if (this.props.image !== undefined) {
+        this.setState({
+          imageUrl: this.props.image,
+        })
+      }
+    }
+  }
+
   render() {
     const uploadButton = (
       <div>

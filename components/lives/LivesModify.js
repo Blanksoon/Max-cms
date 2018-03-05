@@ -37,7 +37,7 @@ class LivesModify extends React.Component {
     this.handleFightcardImage = this.handleFightcardImage.bind(this)
     this.handleBannerImage = this.handleBannerImage.bind(this)
     this.handleLogoImage = this.handleLogoImage.bind(this)
-    this.addLives = this.addLives.bind(this)
+    this.updateLive = this.updateLive.bind(this)
     this.setFieldsDataInForm = this.setFieldsDataInForm.bind(this)
     this.checkLiveDate = this.checkLiveDate.bind(this)
   }
@@ -162,9 +162,10 @@ class LivesModify extends React.Component {
     return 'success'
   }
 
-  async addLives(value) {
+  async updateLive(value) {
     console.log('1', value)
-    const result = await api.post(`${api.SERVER}/cms/new-lives`, value)
+    value._id = this.state.data._id
+    const result = await api.post(`${api.SERVER}/cms/lives/update`, value)
     return 'hi'
     console.log('2', result)
   }
@@ -177,7 +178,7 @@ class LivesModify extends React.Component {
       })
       if (!err) {
         console.log(values)
-        await this.addLives(values)
+        await this.updateLive(values)
         //console.log('3', values)
         this.info()
       }
@@ -189,10 +190,10 @@ class LivesModify extends React.Component {
 
   info() {
     Modal.info({
-      title: 'Success for add new live',
+      title: 'Success for update live',
       content: (
         <div>
-          <p>you add 1 live</p>
+          <p>you update 1 live</p>
         </div>
       ),
       onOk() {
@@ -203,7 +204,7 @@ class LivesModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    //console.log('111111111111', this.state.data)
+    //console.log('111111111111', this.state.data.logoUrl)
     const { autoCompleteResult } = this.state
     //this.setFieldsDataInForm()
     const formItemLayout = {
@@ -396,40 +397,6 @@ class LivesModify extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          {/* <FormItem {...formItemLayout} label="Live-To-Date:">
-            {getFieldDecorator('liveToDate', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter Live-To-Date!',
-                },
-              ],
-            })(
-              <DatePicker
-                showTime
-                placeholder="Select Date and Time"
-                format="YYYY-MM-DD HH:mm:ss"
-                style={{ paddingRight: '2rem' }}
-              />
-            )}
-          </FormItem>
-          <FormItem {...formItemLayout} label="Live-From-Date:">
-            {getFieldDecorator('liveFromDate', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter Live-From-Date!',
-                },
-              ],
-            })(
-              <DatePicker
-                showTime
-                placeholder="Select Date and Time"
-                format="YYYY-MM-DD HH:mm:ss"
-                style={{ paddingRight: '2rem' }}
-              />
-            )}
-          </FormItem> */}
           <FormItem {...formItemLayout} label="Program-name:">
             {getFieldDecorator('programName', {
               rules: [
@@ -539,7 +506,10 @@ class LivesModify extends React.Component {
                 },
               ],
             })(
-              <UploadFightcardImage onChangeImg={this.handleFightcardImage} />
+              <UploadFightcardImage
+                onChangeImg={this.handleFightcardImage}
+                image={this.state.data.fightcardUrl}
+              />
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="Video-url:">
@@ -572,7 +542,12 @@ class LivesModify extends React.Component {
                   message: 'Please upload Banner-url!',
                 },
               ],
-            })(<UploadImageBanner onChangeImg={this.handleBannerImage} />)}
+            })(
+              <UploadImageBanner
+                onChangeImg={this.handleBannerImage}
+                image={this.state.data.bannerUrl}
+              />
+            )}
           </FormItem>
           <FormItem {...formItemLayout} label="Logo-url:">
             {getFieldDecorator('logoUrl', {
@@ -584,7 +559,12 @@ class LivesModify extends React.Component {
                   message: 'Please upload Logo-url!',
                 },
               ],
-            })(<UploadLogoImage onChangeImg={this.handleLogoImage} />)}
+            })(
+              <UploadLogoImage
+                onChangeImg={this.handleLogoImage}
+                image={this.state.data.logoUrl}
+              />
+            )}
           </FormItem>
           <FormItem {...formItemLayout} label="Price:">
             {getFieldDecorator('price', {

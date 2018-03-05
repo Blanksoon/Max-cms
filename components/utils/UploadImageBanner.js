@@ -6,6 +6,7 @@ class UploadImageBanner extends Component {
   state = {
     loading: false,
   }
+
   handleChange = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })
@@ -22,6 +23,17 @@ class UploadImageBanner extends Component {
       })
     }
   }
+
+  componentWillReceiveProps(nexProps) {
+    if (nexProps !== this.props) {
+      if (this.props.image !== undefined) {
+        this.setState({
+          imageUrl: this.props.image,
+        })
+      }
+    }
+  }
+
   render() {
     const uploadButton = (
       <div>
