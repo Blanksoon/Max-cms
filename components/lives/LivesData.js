@@ -5,17 +5,31 @@ import { Component } from 'react'
 import { fetchLivesDucks } from '../../redux/ducks/lives'
 import { Row, Col, Breadcrumb, Button } from 'antd'
 import Link from 'next/link'
+import * as api from '../../api'
+import Router from 'next/router'
 
 import vars from '../../components/commons/vars'
 
 class LivesData extends Component {
   constructor(props) {
     super(props)
+    this.deleteData = this.deleteData.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchLivesDucks()
   }
+
+  async deleteData(data) {
+    const result = await api.post(`${api.SERVER}/cms/delete-lives`, data)
+    console.log('1')
+    this.props.fetchLivesDucks()
+  }
+
+  async redirectToModify(data) {
+    Router.push(`/live/modify?id=${data.id}`)
+  }
+
   render() {
     //console.log('this.props', this.props)
     return (
@@ -71,6 +85,8 @@ class LivesData extends Component {
         <LivesTable
           livesData={this.props.livesData.data}
           lengtOflives={this.props.livesData.lengthOfData}
+          deleteData={this.deleteData}
+          redirectToModify={this.redirectToModify}
         />
         <style jsx global>{`
           .ant-breadcrumb-separator {

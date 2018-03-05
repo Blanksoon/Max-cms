@@ -18,6 +18,7 @@ import UploadImageBanner from '../utils/UploadImageBanner'
 import UploadLogoImage from '../utils/UploadLogoImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
+import Router from 'next/router'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -35,6 +36,7 @@ class LivesInsert extends React.Component {
     this.handleFightcardImage = this.handleFightcardImage.bind(this)
     this.handleBannerImage = this.handleBannerImage.bind(this)
     this.handleLogoImage = this.handleLogoImage.bind(this)
+    this.addLives = this.addLives.bind(this)
   }
 
   handleFightcardImage(imgUrl) {
@@ -64,10 +66,11 @@ class LivesInsert extends React.Component {
     return 'success'
   }
 
-  async addNews(value) {
-    //console.log('1', value)
-    const result = await api.post(`${api.SERVER}/vods/new`, value)
-    //console.log('2', result)
+  async addLives(value) {
+    console.log('1', value)
+    const result = await api.post(`${api.SERVER}/cms/new-lives`, value)
+    return 'hi'
+    console.log('2', result)
   }
 
   handleSubmit = e => {
@@ -78,9 +81,9 @@ class LivesInsert extends React.Component {
       })
       if (!err) {
         console.log(values)
-        //await this.addNews(values)
+        await this.addLives(values)
         //console.log('3', values)
-        //this.info()
+        this.info()
       }
       this.setState({
         loading: false,
@@ -90,13 +93,15 @@ class LivesInsert extends React.Component {
 
   info() {
     Modal.info({
-      title: 'Success for new vod',
+      title: 'Success for add new live',
       content: (
         <div>
-          <p>you add 1 vod</p>
+          <p>you add 1 live</p>
         </div>
       ),
-      onOk() {},
+      onOk() {
+        Router.push(`/live`)
+      },
     })
   }
 
@@ -295,7 +300,7 @@ class LivesInsert extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          <FormItem {...formItemLayout} label="Live-To-Date:">
+          {/* <FormItem {...formItemLayout} label="Live-To-Date:">
             {getFieldDecorator('liveToDate', {
               rules: [
                 {
@@ -328,7 +333,7 @@ class LivesInsert extends React.Component {
                 style={{ paddingRight: '2rem' }}
               />
             )}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label="Program-name:">
             {getFieldDecorator('programName', {
               rules: [

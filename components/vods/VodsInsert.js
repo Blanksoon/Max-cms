@@ -67,7 +67,7 @@ class VodsInsert extends React.Component {
 
   info() {
     Modal.info({
-      title: 'Success for new vod',
+      title: 'Success for add new vod',
       content: (
         <div>
           <p>you add 1 vod</p>

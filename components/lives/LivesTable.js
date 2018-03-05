@@ -1,4 +1,4 @@
-import { Table, Icon, Divider } from 'antd'
+import { Table, Icon, Divider, Button } from 'antd'
 import vars from '../commons/vars'
 
 const { Column, ColumnGroup } = Table
@@ -60,19 +60,27 @@ class LivesTable extends React.Component {
             key="action"
             render={(text, record) => (
               <span>
-                <a href="#">
+                <Button
+                  shape="circle"
+                  onClick={() =>
+                    this.props.redirectToModify({ id: record._id })
+                  }
+                >
                   <Icon
                     type="edit"
                     style={{ color: `#607d8b`, fontSize: `1.5rem` }}
                   />
-                </a>
+                </Button>
                 <Divider type="vertical" />
-                <a href="#">
+                <Button
+                  shape="circle"
+                  onClick={() => this.props.deleteData({ id: record._id })}
+                >
                   <Icon
                     type="delete"
                     style={{ color: `red`, fontSize: `1.5rem` }}
                   />
-                </a>
+                </Button>
               </span>
             )}
           />
@@ -88,6 +96,9 @@ class LivesTable extends React.Component {
           .ant-table ant-table-large ant-table-scroll-position-left {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
               0 1px 2px rgba(0, 0, 0, 0.24) !important;
+          }
+          .ant-btn {
+            border-color: #fff !important;
           }
         `}</style>
       </div>
