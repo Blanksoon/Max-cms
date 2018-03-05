@@ -52,6 +52,7 @@ class LivesModify extends React.Component {
   }
 
   handleFightcardImage(imgUrl) {
+    //console.log('222222')
     if (imgUrl !== '') {
       this.props.form.setFieldsValue({
         fightcardUrl: imgUrl,
@@ -163,11 +164,11 @@ class LivesModify extends React.Component {
   }
 
   async updateLive(value) {
-    console.log('1', value)
+    //console.log('1', value)
     value._id = this.state.data._id
     const result = await api.post(`${api.SERVER}/cms/lives/update`, value)
     return 'hi'
-    console.log('2', result)
+    //console.log('2', result)
   }
 
   handleSubmit = e => {
@@ -177,7 +178,7 @@ class LivesModify extends React.Component {
         loading: true,
       })
       if (!err) {
-        console.log(values)
+        //console.log(values)
         await this.updateLive(values)
         //console.log('3', values)
         this.info()
@@ -204,7 +205,7 @@ class LivesModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    //console.log('111111111111', this.state.data.logoUrl)
+    //console.log('111111111111', this.state.data)
     const { autoCompleteResult } = this.state
     //this.setFieldsDataInForm()
     const formItemLayout = {
@@ -457,7 +458,7 @@ class LivesModify extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: 'Please insert yourEnd-Time!',
+                  message: 'Please insert your End-Time!',
                 },
               ],
             })(<Input />)}

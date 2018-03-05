@@ -54,7 +54,7 @@ class Main extends React.Component {
           </Menu>
         </Header>
         <Content style={{ padding: '0 30px', marginTop: 24 }}>
-          <div style={{ background: '#fff', padding: 0, minHeight: 380 }}>
+          <div style={{ background: '#fff', padding: 0, minHeight: 450 }}>
             {children}
           </div>
         </Content>

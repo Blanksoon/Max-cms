@@ -12,10 +12,12 @@ import {
   Button,
   AutoComplete,
   Modal,
+  Breadcrumb,
 } from 'antd'
 import UploadImage from '../utils/UploadImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
+import Router from 'next/router'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -73,7 +75,9 @@ class VodsInsert extends React.Component {
           <p>you add 1 vod</p>
         </div>
       ),
-      onOk() {},
+      onOk() {
+        Router.push(`/vods`)
+      },
     })
   }
 

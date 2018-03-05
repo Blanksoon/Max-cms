@@ -3,8 +3,13 @@ import { Component } from 'react'
 import * as api from '../../api'
 
 class UploadImageBanner extends Component {
-  state = {
-    loading: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      imageUrl: '',
+    }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange = info => {
@@ -25,10 +30,10 @@ class UploadImageBanner extends Component {
   }
 
   componentWillReceiveProps(nexProps) {
-    if (nexProps !== this.props) {
-      if (this.props.image !== undefined) {
+    if (nexProps.image !== this.state.imageUrl) {
+      if (nexProps.image !== undefined) {
         this.setState({
-          imageUrl: this.props.image,
+          imageUrl: nexProps.image,
         })
       }
     }
@@ -47,7 +52,7 @@ class UploadImageBanner extends Component {
       <Upload
         name="avatar"
         listType="picture-card"
-        className="avatar-uploader"
+        //className="avatar-uploader"
         showUploadList={false}
         action={api.SERVER + '/maxnews/upload/image'}
         onChange={this.handleChange}

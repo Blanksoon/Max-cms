@@ -67,10 +67,10 @@ class LivesInsert extends React.Component {
   }
 
   async addLives(value) {
-    console.log('1', value)
+    //console.log('1', value)
     const result = await api.post(`${api.SERVER}/cms/new-lives`, value)
     return 'hi'
-    console.log('2', result)
+    //console.log('2', result)
   }
 
   handleSubmit = e => {

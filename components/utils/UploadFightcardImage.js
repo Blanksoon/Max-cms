@@ -3,10 +3,17 @@ import { Component } from 'react'
 import * as api from '../../api'
 
 class UploadFightcardImage extends Component {
-  state = {
-    loading: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      imageUrl: '',
+    }
+    this.handleChange = this.handleChange.bind(this)
   }
+
   handleChange = info => {
+    console.log('do it')
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })
       return
@@ -16,7 +23,7 @@ class UploadFightcardImage extends Component {
       getBase64(info.file.originFileObj, imageUrl => {
         this.props.onChangeImg(info.file.name)
         this.setState({
-          imageUrl,
+          imageUrl: imageUrl,
           loading: false,
         })
       })
@@ -24,10 +31,14 @@ class UploadFightcardImage extends Component {
   }
 
   componentWillReceiveProps(nexProps) {
-    if (nexProps !== this.props) {
-      if (this.props.image !== undefined) {
+    //console.log('FightCard.nextProps: ', nexProps.image)
+    //console.log('FightCardn.props: ', this.state.imageUrl)
+    if (nexProps.image !== this.state.imageUrl) {
+      //console.log('in')
+      if (nexProps.image !== undefined) {
+        //console.log('1')
         this.setState({
-          imageUrl: this.props.image,
+          imageUrl: nexProps.image,
         })
       }
     }
@@ -41,7 +52,7 @@ class UploadFightcardImage extends Component {
       </div>
     )
     const imageUrl = this.state.imageUrl
-    //console.log('imageUrl: ', imageUrl)
+    console.log('imageUrl: ', imageUrl)
     return (
       <Upload
         name="avatar"

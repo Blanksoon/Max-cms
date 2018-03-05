@@ -27,8 +27,8 @@ class MaxNewsData extends Component {
             color: '#fff',
           }}
         >
-          <Breadcrumb.Item>Maxnews</Breadcrumb.Item>
-          <Breadcrumb.Item>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          {/* <Breadcrumb.Item>
             <a href="" style={{ color: `${vars.lightBlue}` }}>
               Application Center
             </a>
@@ -37,9 +37,9 @@ class MaxNewsData extends Component {
             <a href="" style={{ color: `${vars.lightBlue}` }}>
               Application List
             </a>
-          </Breadcrumb.Item>
+          </Breadcrumb.Item> */}
           <Breadcrumb.Item style={{ color: `${vars.white}` }}>
-            An Application
+            Maxnews
           </Breadcrumb.Item>
         </Breadcrumb>
         <div>
@@ -83,8 +83,6 @@ class MaxNewsData extends Component {
             font-size: 1.5rem;
             font-weight: 700;
             margin-top: 0.7rem;
-          }
-          .serch {
           }
         `}</style>
       </div>

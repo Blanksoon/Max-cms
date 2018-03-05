@@ -41,19 +41,9 @@ class LivesData extends Component {
             color: '#fff',
           }}
         >
-          <Breadcrumb.Item>Lives</Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <a href="" style={{ color: `${vars.lightBlue}` }}>
-              Application Center
-            </a>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <a href="" style={{ color: `${vars.lightBlue}` }}>
-              Application List
-            </a>
-          </Breadcrumb.Item>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item style={{ color: `${vars.white}` }}>
-            An Application
+            Live
           </Breadcrumb.Item>
         </Breadcrumb>
         <div>

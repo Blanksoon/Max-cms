@@ -5,17 +5,31 @@ import { Component } from 'react'
 import { fetchVodsDucks } from '../../redux/ducks/vods'
 import { Row, Col, Breadcrumb, Button } from 'antd'
 import Link from 'next/link'
+import * as api from '../../api'
+import Router from 'next/router'
 
 import vars from '../../components/commons/vars'
 
 class VodsData extends Component {
   constructor(props) {
     super(props)
+    this.deleteData = this.deleteData.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchVodsDucks()
   }
+
+  async deleteData(data) {
+    const result = await api.post(`${api.SERVER}/cms/delete-vods`, data)
+    console.log('1')
+    this.props.fetchVodsDucks()
+  }
+
+  async redirectToModify(data) {
+    Router.push(`/vods/modify?id=${data.id}`)
+  }
+
   render() {
     //console.log('this.props', this.props)
     return (
@@ -27,8 +41,8 @@ class VodsData extends Component {
             color: '#fff',
           }}
         >
-          <Breadcrumb.Item>Vods</Breadcrumb.Item>
-          <Breadcrumb.Item>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          {/* <Breadcrumb.Item>
             <a href="" style={{ color: `${vars.lightBlue}` }}>
               Application Center
             </a>
@@ -37,9 +51,9 @@ class VodsData extends Component {
             <a href="" style={{ color: `${vars.lightBlue}` }}>
               Application List
             </a>
-          </Breadcrumb.Item>
+          </Breadcrumb.Item> */}
           <Breadcrumb.Item style={{ color: `${vars.white}` }}>
-            An Application
+            Vods
           </Breadcrumb.Item>
         </Breadcrumb>
         <div>
@@ -71,6 +85,8 @@ class VodsData extends Component {
         <VodsTable
           vodsData={this.props.vodsData.data}
           lengtOfvods={this.props.vodsData.lengthOfData}
+          deleteData={this.deleteData}
+          redirectToModify={this.redirectToModify}
         />
         <style jsx global>{`
           .ant-breadcrumb-separator {

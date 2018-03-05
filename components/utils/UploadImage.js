@@ -3,9 +3,28 @@ import { Component } from 'react'
 import * as api from '../../api'
 
 class UploadImage extends Component {
-  state = {
-    loading: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      imageUrl: '',
+    }
   }
+
+  componentWillReceiveProps(nexProps) {
+    //console.log('FightCard.nextProps: ', nexProps.image)
+    //console.log('FightCardn.props: ', this.state.imageUrl)
+    if (nexProps.image !== this.state.imageUrl) {
+      //console.log('in')
+      if (nexProps.image !== undefined) {
+        //console.log('1')
+        this.setState({
+          imageUrl: nexProps.image,
+        })
+      }
+    }
+  }
+
   handleChange = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })

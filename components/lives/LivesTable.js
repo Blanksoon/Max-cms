@@ -32,13 +32,13 @@ class LivesTable extends React.Component {
             dataIndex="shortDesc1_en"
             key="shortDesc1_en"
           />
-          <Column title="shortDesc2_en" dataIndex="shortDesc2_en" key="shortDesc2_en" />
+          <Column title="shortDesc2_en" dataIndex="shortDesc2_en" key="shortDesc2_en" /> */}
           <Column
             title="shortDesc1_th"
             dataIndex="shortDesc2_th"
             key="shortDesc2_th"
           />
-          <Column
+          {/* <Column
             title="shortDesc2_th"
             dataIndex="shortDesc2_th"
             key="shortDesc2_th"

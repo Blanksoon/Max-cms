@@ -5,7 +5,7 @@ import { API_SERVER, postJSON, getJSON } from '../../tools/api'
 export function* fetchLives(action) {
   //console.log('hello')
   try {
-    console.log('1')
+    // console.log('1')
     const data = yield call(getJSON, `${API_SERVER}/cms/lives`)
     //console.log('3', data.dataLength)
     yield put(fetchLivesSuccessDucks(data.data, data.dataLength))

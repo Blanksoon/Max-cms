@@ -9,7 +9,7 @@ import { Component } from 'react'
 
 class Modify extends Component {
   render() {
-    console.log(this.props.url.query.id)
+    //console.log(this.props.url.query.id)
     return (
       <FullPageLayout>
         <Main keyNavbar="Live">
