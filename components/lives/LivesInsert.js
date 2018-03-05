@@ -131,7 +131,7 @@ class LivesInsert extends React.Component {
       <div>
         <Row>
           <Col span={24}>
-            <h1>Lives</h1>
+            <h1>Live</h1>
           </Col>
         </Row>
         <div className={'setting-row'}>
