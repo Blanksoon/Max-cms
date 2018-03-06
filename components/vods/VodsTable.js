@@ -72,7 +72,7 @@ class VodsTable extends React.Component {
         <style jsx global>{`
           th {
             background-color: ${vars.blue} !important;
-            //text-align: center !important;
+            text-align: center !important;
           }
           .ant-table-thead > tr > th {
             color: ${vars.white} !important;
@@ -83,6 +83,9 @@ class VodsTable extends React.Component {
           }
           .ant-btn {
             border-color: #fff !important;
+          }
+          .ant-table table {
+            text-align: center !important;
           }
         `}</style>
       </div>

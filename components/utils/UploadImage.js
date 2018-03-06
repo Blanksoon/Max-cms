@@ -12,12 +12,8 @@ class UploadImage extends Component {
   }
 
   componentWillReceiveProps(nexProps) {
-    //console.log('FightCard.nextProps: ', nexProps.image)
-    //console.log('FightCardn.props: ', this.state.imageUrl)
     if (nexProps.image !== this.state.imageUrl) {
-      //console.log('in')
       if (nexProps.image !== undefined) {
-        //console.log('1')
         this.setState({
           imageUrl: nexProps.image,
         })
@@ -33,7 +29,7 @@ class UploadImage extends Component {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
-        this.props.onChangeImg(info.file.name)
+        this.props.onChangeImg(info.file.name, imageUrl)
         this.setState({
           imageUrl,
           loading: false,

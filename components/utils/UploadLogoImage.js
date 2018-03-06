@@ -14,7 +14,7 @@ class UploadLogoImage extends Component {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
-        this.props.onChangeImg(info.file.name)
+        this.props.onChangeImg(info.file.name, imageUrl)
         this.setState({
           imageUrl,
           loading: false,
@@ -23,10 +23,10 @@ class UploadLogoImage extends Component {
     }
   }
   componentWillReceiveProps(nexProps) {
-    if (nexProps !== this.props) {
-      if (this.props.image !== undefined) {
+    if (nexProps.image !== this.state.imageUrl) {
+      if (nexProps.image !== undefined) {
         this.setState({
-          imageUrl: this.props.image,
+          imageUrl: nexProps.image,
         })
       }
     }

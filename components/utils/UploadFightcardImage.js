@@ -13,7 +13,7 @@ class UploadFightcardImage extends Component {
   }
 
   handleChange = info => {
-    console.log('do it')
+    //console.log('do it')
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })
       return
@@ -21,7 +21,7 @@ class UploadFightcardImage extends Component {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
-        this.props.onChangeImg(info.file.name)
+        this.props.onChangeImg(info.file.name, imageUrl)
         this.setState({
           imageUrl: imageUrl,
           loading: false,
@@ -52,7 +52,7 @@ class UploadFightcardImage extends Component {
       </div>
     )
     const imageUrl = this.state.imageUrl
-    console.log('imageUrl: ', imageUrl)
+    //console.log('imageUrlFight: ', imageUrl)
     return (
       <Upload
         name="avatar"

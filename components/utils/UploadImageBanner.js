@@ -20,7 +20,7 @@ class UploadImageBanner extends Component {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
-        this.props.onChangeImg(info.file.name)
+        this.props.onChangeImg(info.file.name, imageUrl)
         this.setState({
           imageUrl,
           loading: false,

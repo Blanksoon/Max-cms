@@ -111,17 +111,23 @@ class VodsModify extends React.Component {
     }
   }
 
-  handleOnchangeImage(imgUrl) {
+  handleOnchangeImage(imgUrl, imageUrl) {
     if (imgUrl !== '') {
       this.props.form.setFieldsValue({
         thumbnailUrl: imgUrl,
+      })
+      this.setState({
+        data: {
+          ...this.state.data,
+          thumbnailUrl: imageUrl,
+        },
       })
     }
     return 'success'
   }
 
   async updateVods(value) {
-    //console.log('1', value)
+    console.log('1', this.state.data)
     value._id = this.state.data._id
     const result = await api.post(`${api.SERVER}/cms/vods/update`, value)
     return 'hi'

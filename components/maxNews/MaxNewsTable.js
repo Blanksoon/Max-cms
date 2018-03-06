@@ -51,7 +51,7 @@ class MaxNewsTable extends React.Component {
         <style jsx global>{`
           th {
             background-color: ${vars.blue} !important;
-            //text-align: center !important;
+            text-align: center !important;
           }
           .ant-table-thead > tr > th {
             color: ${vars.white} !important;
@@ -59,6 +59,9 @@ class MaxNewsTable extends React.Component {
           .ant-table ant-table-large ant-table-scroll-position-left {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
               0 1px 2px rgba(0, 0, 0, 0.24) !important;
+          }
+          .ant-table table {
+            text-align: center !important;
           }
         `}</style>
       </div>

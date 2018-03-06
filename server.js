@@ -60,6 +60,7 @@ i18n
   .use(i18nextMiddleware.LanguageDetector)
   .init(
     {
+      debug: false,
       preload: ['en', 'th'], // preload all langages
       ns: ['common'], // need to preload all the namespaces
       backend: {

@@ -338,7 +338,7 @@ class VodsInsert extends React.Component {
               ],
             })(<Input />)}
           </FormItem>
-          <FormItem {...formItemLayout} label="Promo-url:">
+          {/* <FormItem {...formItemLayout} label="Promo-url:">
             {getFieldDecorator('promoUrl', {
               rules: [
                 {
@@ -347,7 +347,7 @@ class VodsInsert extends React.Component {
                 },
               ],
             })(<Input />)}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label="Thumbnail-url:">
             {getFieldDecorator('thumbnailUrl', {
               valuePropName: 'fileList',

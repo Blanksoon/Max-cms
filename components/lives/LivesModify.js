@@ -51,29 +51,47 @@ class LivesModify extends React.Component {
     this.setFieldsDataInForm()
   }
 
-  handleFightcardImage(imgUrl) {
+  handleFightcardImage(imageName, imageUrl) {
     //console.log('222222')
-    if (imgUrl !== '') {
+    if (imageName !== '') {
       this.props.form.setFieldsValue({
-        fightcardUrl: imgUrl,
+        fightcardUrl: imageName,
+      })
+      this.setState({
+        data: {
+          ...this.state.data,
+          fightcardUrl: imageUrl,
+        },
       })
     }
     return 'success'
   }
 
-  handleBannerImage(imgUrl) {
-    if (imgUrl !== '') {
+  handleBannerImage(imageName, imageUrl) {
+    if (imageName !== '') {
       this.props.form.setFieldsValue({
-        bannerUrl: imgUrl,
+        bannerUrl: imageName,
+      })
+      this.setState({
+        data: {
+          ...this.state.data,
+          bannerUrl: imageUrl,
+        },
       })
     }
     return 'success'
   }
 
-  handleLogoImage(imgUrl) {
-    if (imgUrl !== '') {
+  handleLogoImage(imageName, imageUrl) {
+    if (imageName !== '') {
       this.props.form.setFieldsValue({
-        logoUrl: imgUrl,
+        logoUrl: imageName,
+      })
+      this.setState({
+        data: {
+          ...this.state.data,
+          logoUrl: imageUrl,
+        },
       })
     }
     return 'success'
@@ -205,7 +223,7 @@ class LivesModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    //console.log('111111111111', this.state.data)
+    console.log('111111111111', this.state.data.fightcardUrl)
     const { autoCompleteResult } = this.state
     //this.setFieldsDataInForm()
     const formItemLayout = {
@@ -249,42 +267,7 @@ class LivesModify extends React.Component {
                   message: 'Please select Title!',
                 },
               ],
-            })(
-              <Select
-                showSearch
-                style={{ width: 250 }}
-                placeholder="Select a title"
-                optionFilterProp="children"
-                //onChange={this.handleChange}
-                //onFocus={this.handleFocus}
-                //onBlur={this.handleBlur}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Battle Muay Thai">Muay Thai Battle</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
-              </Select>
-            )}
+            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc1:">
             {getFieldDecorator('shortDesc1_en', {
@@ -328,44 +311,7 @@ class LivesModify extends React.Component {
                   message: 'Please select Title!',
                 },
               ],
-            })(
-              <Select
-                showSearch
-                style={{ width: 250 }}
-                placeholder="Select a Title"
-                optionFilterProp="children"
-                //onChange={this.handleChange}
-                //onFocus={this.handleFocus}
-                //onBlur={this.handleBlur}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                <Option value="แม็กซ์มวยไทย">แม็กซ์มวยไทย</Option>
-                <Option value="มวยไทย แบทเทิล">มวยไทย แบทเทิล</Option>
-                <Option value="มวยไทย ไฟต์เตอร์">มวยไทย ไฟต์เตอร์</Option>
-                <Option value="เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก">
-                  เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพุธ">
-                  โกลด์บอล ไฟท์ วันพุธ
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพฤหัส">
-                  โกลด์บอล ไฟท์ วันพฤหัส
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันจันทร์">
-                  มวยไทยไฟต์เตอร์ วันจันทร์
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันอังคาร">
-                  มวยไทยไฟต์เตอร์ วันอังคาร
-                </Option>
-                <Option value="แม็กซ์ วันอาทิตย์ บ่าย">
-                  แม็กซ์ วันอาทิตย์ บ่าย
-                </Option>
-              </Select>
-            )}
+            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Short-desc1:">
             {getFieldDecorator('shortDesc1_th', {
@@ -406,42 +352,7 @@ class LivesModify extends React.Component {
                   message: 'Please select Program-name!',
                 },
               ],
-            })(
-              <Select
-                showSearch
-                style={{ width: 250 }}
-                placeholder="Select a program"
-                optionFilterProp="children"
-                //onChange={this.handleChange}
-                //onFocus={this.handleFocus}
-                //onBlur={this.handleBlur}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Battle Muay Thai">Battle Muay Thai</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
-              </Select>
-            )}
+            })(<Input />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Start-Time:">
             {getFieldDecorator('startTime', {

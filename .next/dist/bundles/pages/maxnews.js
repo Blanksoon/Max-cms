@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -76,16 +76,20 @@ module.exports =
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* unused harmony export API_SERVER */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SERVER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return get; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return post; });
+/* unused harmony export get */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return post; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch__ = __webpack_require__("isomorphic-fetch");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch__);
 
 //http://localhost:3002
 //https://api.maxmuaythai.com
 //https://beta-api.maxmuaythai.com
-var SERVER = 'https://beta-api.maxmuaythai.com';
+var API_SERVER = "http://localhost:3002";
+
+
+var SERVER = API_SERVER;
 var get = function get(url) {
   return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(url).then(function (response) {
     if (!response.ok) {
@@ -98,6 +102,7 @@ var get = function get(url) {
 };
 
 var post = function post(url, json) {
+  //console.log('json: ', json)
   return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(url, {
     method: 'POST',
     headers: {
@@ -654,7 +659,7 @@ var Details = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_9__api__["c" /* post */](__WEBPACK_IMPORTED_MODULE_9__api__["a" /* SERVER */] + '/maxnews/add/news', this.state);
+                return __WEBPACK_IMPORTED_MODULE_9__api__["b" /* post */](__WEBPACK_IMPORTED_MODULE_9__api__["a" /* SERVER */] + '/maxnews/add/news', this.state);
 
               case 2:
                 _ref2 = _context.sent;
@@ -1624,7 +1629,7 @@ var MaxNewsTable = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         {
-          className: 'jsx-366090949',
+          className: 'jsx-3523496834',
           __source: {
             fileName: _jsxFileName,
             lineNumber: 11
@@ -1684,7 +1689,7 @@ var MaxNewsTable = function (_React$Component) {
               return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'span',
                 {
-                  className: 'jsx-366090949',
+                  className: 'jsx-3523496834',
                   __source: {
                     fileName: _jsxFileName,
                     lineNumber: 33
@@ -1692,7 +1697,7 @@ var MaxNewsTable = function (_React$Component) {
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   'a',
-                  { href: '#', className: 'jsx-366090949',
+                  { href: '#', className: 'jsx-3523496834',
                     __source: {
                       fileName: _jsxFileName,
                       lineNumber: 34
@@ -1714,7 +1719,7 @@ var MaxNewsTable = function (_React$Component) {
                 }),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   'a',
-                  { href: '#', className: 'jsx-366090949',
+                  { href: '#', className: 'jsx-3523496834',
                     __source: {
                       fileName: _jsxFileName,
                       lineNumber: 41
@@ -1738,8 +1743,8 @@ var MaxNewsTable = function (_React$Component) {
           })
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_styled_jsx_style___default.a, {
-          styleId: '366090949',
-          css: 'th{background-color:' + __WEBPACK_IMPORTED_MODULE_3__commons_vars__["a" /* default */].blue + ' !important;}.ant-table-thead>tr>th{color:' + __WEBPACK_IMPORTED_MODULE_3__commons_vars__["a" /* default */].white + ' !important;}.ant-table ant-table-large ant-table-scroll-position-left{box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbWF4TmV3cy9NYXhOZXdzVGFibGUuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0QyQixBQUdzRSxBQUlYLEFBSUosOENBSDVDLFdBSEEsb0JBT0EiLCJmaWxlIjoiY29tcG9uZW50cy9tYXhOZXdzL01heE5ld3NUYWJsZS5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvZmFybW96L0Rlc2t0b3AvTWF4TXVheVRoYWkvY21zL01heC1jbXMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBUYWJsZSwgSWNvbiwgRGl2aWRlciB9IGZyb20gJ2FudGQnXG5pbXBvcnQgdmFycyBmcm9tICcuLi9jb21tb25zL3ZhcnMnXG5cbmNvbnN0IHsgQ29sdW1uLCBDb2x1bW5Hcm91cCB9ID0gVGFibGVcblxuY2xhc3MgTWF4TmV3c1RhYmxlIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgcmVuZGVyKCkge1xuICAgIGNvbnN0IHsgbWF4bmV3c0RhdGEsIGxlbmd0T2ZNYXhuZXdzIH0gPSB0aGlzLnByb3BzXG4gICAgLy9jb25zb2xlLmxvZygnMTExMTExMTEnLCB0aGlzLnByb3BzKVxuICAgIHJldHVybiAoXG4gICAgICA8ZGl2PlxuICAgICAgICA8VGFibGVcbiAgICAgICAgICBkYXRhU291cmNlPXttYXhuZXdzRGF0YX1cbiAgICAgICAgICBwYWdpbmF0aW9uPXtsZW5ndE9mTWF4bmV3c31cbiAgICAgICAgICByb3dLZXk9e21heG5ld3NEYXRhID0+IG1heG5ld3NEYXRhLl9pZH1cbiAgICAgICAgPlxuICAgICAgICAgIHsvKiA8Q29sdW1uIHRpdGxlPVwiaWRcIiBkYXRhSW5kZXg9XCJfaWRcIiBrZXk9XCJfaWRcIiAvPiAqL31cbiAgICAgICAgICA8Q29sdW1uIHRpdGxlPVwiaGVhZGluZ0VuXCIgZGF0YUluZGV4PVwiaGVhZGluZ19lblwiIGtleT1cImhlYWRpbmdfZW5cIiAvPlxuICAgICAgICAgIDxDb2x1bW4gdGl0bGU9XCJhcnRpY2xlRW5cIiBkYXRhSW5kZXg9XCJhcnRpY2xlX2VuXCIga2V5PVwiYXJ0aWNsZV9lblwiIC8+XG4gICAgICAgICAgPENvbHVtbiB0aXRsZT1cImhlYWRpbmdUaFwiIGRhdGFJbmRleD1cImhlYWRpbmdfdGhcIiBrZXk9XCJoZWFkaW5nX3RoXCIgLz5cbiAgICAgICAgICA8Q29sdW1uIHRpdGxlPVwiYXJ0aWNsZVRoXCIgZGF0YUluZGV4PVwiYXJ0aWNsZV90aFwiIGtleT1cImFydGljbGVfdGhcIiAvPlxuICAgICAgICAgIDxDb2x1bW5cbiAgICAgICAgICAgIHRpdGxlPVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgICAgZGF0YUluZGV4PVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgICAga2V5PVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgIC8+XG4gICAgICAgICAgPENvbHVtbiB0aXRsZT1cImNyZWF0ZURhdGVcIiBkYXRhSW5kZXg9XCJjcmVhdGVEYXRlXCIga2V5PVwiY3JlYXRlRGF0ZVwiIC8+XG4gICAgICAgICAgey8qIDxDb2x1bW4gdGl0bGU9XCJpbWFnZVVybFwiIGRhdGFJbmRleD1cImltYWdlVXJsXCIga2V5PVwiaW1hZ2VVcmxcIiAvPiAqL31cbiAgICAgICAgICA8Q29sdW1uXG4gICAgICAgICAgICB0aXRsZT1cIkFjdGlvblwiXG4gICAgICAgICAgICBrZXk9XCJhY3Rpb25cIlxuICAgICAgICAgICAgcmVuZGVyPXsodGV4dCwgcmVjb3JkKSA9PiAoXG4gICAgICAgICAgICAgIDxzcGFuPlxuICAgICAgICAgICAgICAgIDxhIGhyZWY9XCIjXCI+XG4gICAgICAgICAgICAgICAgICA8SWNvblxuICAgICAgICAgICAgICAgICAgICB0eXBlPVwiZWRpdFwiXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGNvbG9yOiBgIzYwN2Q4YmAsIGZvbnRTaXplOiBgMS41cmVtYCB9fVxuICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgPERpdmlkZXIgdHlwZT1cInZlcnRpY2FsXCIgLz5cbiAgICAgICAgICAgICAgICA8YSBocmVmPVwiI1wiPlxuICAgICAgICAgICAgICAgICAgPEljb25cbiAgICAgICAgICAgICAgICAgICAgdHlwZT1cImRlbGV0ZVwiXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGNvbG9yOiBgcmVkYCwgZm9udFNpemU6IGAxLjVyZW1gIH19XG4gICAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgIDwvYT5cbiAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgKX1cbiAgICAgICAgICAvPlxuICAgICAgICA8L1RhYmxlPlxuICAgICAgICA8c3R5bGUganN4IGdsb2JhbD57YFxuICAgICAgICAgIHRoIHtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICR7dmFycy5ibHVlfSAhaW1wb3J0YW50O1xuICAgICAgICAgICAgLy90ZXh0LWFsaWduOiBjZW50ZXIgIWltcG9ydGFudDtcbiAgICAgICAgICB9XG4gICAgICAgICAgLmFudC10YWJsZS10aGVhZCA+IHRyID4gdGgge1xuICAgICAgICAgICAgY29sb3I6ICR7dmFycy53aGl0ZX0gIWltcG9ydGFudDtcbiAgICAgICAgICB9XG4gICAgICAgICAgLmFudC10YWJsZSBhbnQtdGFibGUtbGFyZ2UgYW50LXRhYmxlLXNjcm9sbC1wb3NpdGlvbi1sZWZ0IHtcbiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMXB4IDNweCByZ2JhKDAsIDAsIDAsIDAuMTIpLFxuICAgICAgICAgICAgICAwIDFweCAycHggcmdiYSgwLCAwLCAwLCAwLjI0KSAhaW1wb3J0YW50O1xuICAgICAgICAgIH1cbiAgICAgICAgYH08L3N0eWxlPlxuICAgICAgPC9kaXY+XG4gICAgKVxuICB9XG59XG5cbmV4cG9ydCBkZWZhdWx0IE1heE5ld3NUYWJsZVxuIl19 */\n/*@ sourceURL=components/maxNews/MaxNewsTable.js */'
+          styleId: '3523496834',
+          css: 'th{background-color:' + __WEBPACK_IMPORTED_MODULE_3__commons_vars__["a" /* default */].blue + ' !important;text-align:center !important;}.ant-table-thead>tr>th{color:' + __WEBPACK_IMPORTED_MODULE_3__commons_vars__["a" /* default */].white + ' !important;}.ant-table ant-table-large ant-table-scroll-position-left{box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;}.ant-table table{text-align:center !important;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvbWF4TmV3cy9NYXhOZXdzVGFibGUuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0QyQixBQUdzRSxBQUlYLEFBSUosQUFHYiw2QkFDL0IsaUJBUEEsV0FKK0Isb0JBUS9CLFNBUEEiLCJmaWxlIjoiY29tcG9uZW50cy9tYXhOZXdzL01heE5ld3NUYWJsZS5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvZmFybW96L0Rlc2t0b3AvTWF4TXVheVRoYWkvY21zL01heC1jbXMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBUYWJsZSwgSWNvbiwgRGl2aWRlciB9IGZyb20gJ2FudGQnXG5pbXBvcnQgdmFycyBmcm9tICcuLi9jb21tb25zL3ZhcnMnXG5cbmNvbnN0IHsgQ29sdW1uLCBDb2x1bW5Hcm91cCB9ID0gVGFibGVcblxuY2xhc3MgTWF4TmV3c1RhYmxlIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgcmVuZGVyKCkge1xuICAgIGNvbnN0IHsgbWF4bmV3c0RhdGEsIGxlbmd0T2ZNYXhuZXdzIH0gPSB0aGlzLnByb3BzXG4gICAgLy9jb25zb2xlLmxvZygnMTExMTExMTEnLCB0aGlzLnByb3BzKVxuICAgIHJldHVybiAoXG4gICAgICA8ZGl2PlxuICAgICAgICA8VGFibGVcbiAgICAgICAgICBkYXRhU291cmNlPXttYXhuZXdzRGF0YX1cbiAgICAgICAgICBwYWdpbmF0aW9uPXtsZW5ndE9mTWF4bmV3c31cbiAgICAgICAgICByb3dLZXk9e21heG5ld3NEYXRhID0+IG1heG5ld3NEYXRhLl9pZH1cbiAgICAgICAgPlxuICAgICAgICAgIHsvKiA8Q29sdW1uIHRpdGxlPVwiaWRcIiBkYXRhSW5kZXg9XCJfaWRcIiBrZXk9XCJfaWRcIiAvPiAqL31cbiAgICAgICAgICA8Q29sdW1uIHRpdGxlPVwiaGVhZGluZ0VuXCIgZGF0YUluZGV4PVwiaGVhZGluZ19lblwiIGtleT1cImhlYWRpbmdfZW5cIiAvPlxuICAgICAgICAgIDxDb2x1bW4gdGl0bGU9XCJhcnRpY2xlRW5cIiBkYXRhSW5kZXg9XCJhcnRpY2xlX2VuXCIga2V5PVwiYXJ0aWNsZV9lblwiIC8+XG4gICAgICAgICAgPENvbHVtbiB0aXRsZT1cImhlYWRpbmdUaFwiIGRhdGFJbmRleD1cImhlYWRpbmdfdGhcIiBrZXk9XCJoZWFkaW5nX3RoXCIgLz5cbiAgICAgICAgICA8Q29sdW1uIHRpdGxlPVwiYXJ0aWNsZVRoXCIgZGF0YUluZGV4PVwiYXJ0aWNsZV90aFwiIGtleT1cImFydGljbGVfdGhcIiAvPlxuICAgICAgICAgIDxDb2x1bW5cbiAgICAgICAgICAgIHRpdGxlPVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgICAgZGF0YUluZGV4PVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgICAga2V5PVwicHJvZ3JhbU5hbWVcIlxuICAgICAgICAgIC8+XG4gICAgICAgICAgPENvbHVtbiB0aXRsZT1cImNyZWF0ZURhdGVcIiBkYXRhSW5kZXg9XCJjcmVhdGVEYXRlXCIga2V5PVwiY3JlYXRlRGF0ZVwiIC8+XG4gICAgICAgICAgey8qIDxDb2x1bW4gdGl0bGU9XCJpbWFnZVVybFwiIGRhdGFJbmRleD1cImltYWdlVXJsXCIga2V5PVwiaW1hZ2VVcmxcIiAvPiAqL31cbiAgICAgICAgICA8Q29sdW1uXG4gICAgICAgICAgICB0aXRsZT1cIkFjdGlvblwiXG4gICAgICAgICAgICBrZXk9XCJhY3Rpb25cIlxuICAgICAgICAgICAgcmVuZGVyPXsodGV4dCwgcmVjb3JkKSA9PiAoXG4gICAgICAgICAgICAgIDxzcGFuPlxuICAgICAgICAgICAgICAgIDxhIGhyZWY9XCIjXCI+XG4gICAgICAgICAgICAgICAgICA8SWNvblxuICAgICAgICAgICAgICAgICAgICB0eXBlPVwiZWRpdFwiXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGNvbG9yOiBgIzYwN2Q4YmAsIGZvbnRTaXplOiBgMS41cmVtYCB9fVxuICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICAgICAgPERpdmlkZXIgdHlwZT1cInZlcnRpY2FsXCIgLz5cbiAgICAgICAgICAgICAgICA8YSBocmVmPVwiI1wiPlxuICAgICAgICAgICAgICAgICAgPEljb25cbiAgICAgICAgICAgICAgICAgICAgdHlwZT1cImRlbGV0ZVwiXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7IGNvbG9yOiBgcmVkYCwgZm9udFNpemU6IGAxLjVyZW1gIH19XG4gICAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgIDwvYT5cbiAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgKX1cbiAgICAgICAgICAvPlxuICAgICAgICA8L1RhYmxlPlxuICAgICAgICA8c3R5bGUganN4IGdsb2JhbD57YFxuICAgICAgICAgIHRoIHtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICR7dmFycy5ibHVlfSAhaW1wb3J0YW50O1xuICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyICFpbXBvcnRhbnQ7XG4gICAgICAgICAgfVxuICAgICAgICAgIC5hbnQtdGFibGUtdGhlYWQgPiB0ciA+IHRoIHtcbiAgICAgICAgICAgIGNvbG9yOiAke3ZhcnMud2hpdGV9ICFpbXBvcnRhbnQ7XG4gICAgICAgICAgfVxuICAgICAgICAgIC5hbnQtdGFibGUgYW50LXRhYmxlLWxhcmdlIGFudC10YWJsZS1zY3JvbGwtcG9zaXRpb24tbGVmdCB7XG4gICAgICAgICAgICBib3gtc2hhZG93OiAwIDFweCAzcHggcmdiYSgwLCAwLCAwLCAwLjEyKSxcbiAgICAgICAgICAgICAgMCAxcHggMnB4IHJnYmEoMCwgMCwgMCwgMC4yNCkgIWltcG9ydGFudDtcbiAgICAgICAgICB9XG4gICAgICAgICAgLmFudC10YWJsZSB0YWJsZSB7XG4gICAgICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXIgIWltcG9ydGFudDtcbiAgICAgICAgICB9XG4gICAgICAgIGB9PC9zdHlsZT5cbiAgICAgIDwvZGl2PlxuICAgIClcbiAgfVxufVxuXG5leHBvcnQgZGVmYXVsdCBNYXhOZXdzVGFibGVcbiJdfQ== */\n/*@ sourceURL=components/maxNews/MaxNewsTable.js */'
         })
       );
     }
@@ -1793,7 +1798,7 @@ var UploadImage = function (_Component) {
       if (info.file.status === 'done') {
         // Get this url from response in real world.
         getBase64(info.file.originFileObj, function (imageUrl) {
-          _this.props.onChangeImg(info.file.name);
+          _this.props.onChangeImg(info.file.name, imageUrl);
           _this.setState({
             imageUrl: imageUrl,
             loading: false
@@ -1812,12 +1817,8 @@ var UploadImage = function (_Component) {
   _createClass(UploadImage, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nexProps) {
-      //console.log('FightCard.nextProps: ', nexProps.image)
-      //console.log('FightCardn.props: ', this.state.imageUrl)
       if (nexProps.image !== this.state.imageUrl) {
-        //console.log('in')
         if (nexProps.image !== undefined) {
-          //console.log('1')
           this.setState({
             imageUrl: nexProps.image
           });
@@ -1832,19 +1833,19 @@ var UploadImage = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 46
+            lineNumber: 42
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_antd__["Icon"], { type: this.state.loading ? 'loading' : 'plus', __source: {
             fileName: _jsxFileName,
-            lineNumber: 47
+            lineNumber: 43
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'ant-upload-text', __source: {
               fileName: _jsxFileName,
-              lineNumber: 48
+              lineNumber: 44
             }
           },
           'Upload'
@@ -1863,12 +1864,12 @@ var UploadImage = function (_Component) {
           onChange: this.handleChange,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 50
           }
         },
         imageUrl ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { style: { width: '12rem' }, src: imageUrl, alt: '', __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 59
           }
         }) : uploadButton
       );
@@ -2707,8 +2708,8 @@ var reducer = function reducer() {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FETCH_VODS; });
 /* unused harmony export FETCH_VODS_SUCCESS */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fetchVodsDucks; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchVodsSuccessDucks; });
+/* unused harmony export fetchVodsDucks */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fetchVodsSuccessDucks; });
 var FETCH_VODS = 'FETCH_VODS';
 var FETCH_VODS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS';
 
@@ -3321,7 +3322,7 @@ function fetchVods(action) {
         case 3:
           data = _context.sent;
           _context.next = 6;
-          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_vods__["d" /* fetchVodsSuccessDucks */])(data.data, data.dataLength));
+          return Object(__WEBPACK_IMPORTED_MODULE_1_redux_saga_effects__["put"])(Object(__WEBPACK_IMPORTED_MODULE_2__ducks_vods__["c" /* fetchVodsSuccessDucks */])(data.data, data.dataLength));
 
         case 6:
           _context.next = 11;
@@ -3513,7 +3514,7 @@ var handleError = function () {
   };
 }();
 
-var API_SERVER = "https://beta-api.maxmuaythai.com";
+var API_SERVER = "http://localhost:3002";
 
 
 
@@ -3669,7 +3670,7 @@ module.exports = i18n;
 
 /***/ }),
 
-/***/ 2:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/maxnews/index.js");
