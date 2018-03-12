@@ -1,4 +1,5 @@
 import {
+  TimePicker,
   DatePicker,
   Form,
   Input,
@@ -19,6 +20,7 @@ import UploadLogoImage from '../utils/UploadLogoImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
 import Router from 'next/router'
+import { connect } from 'react-redux'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -68,8 +70,12 @@ class LivesInsert extends React.Component {
 
   async addLives(value) {
     //console.log('1', value)
-    const result = await api.post(`${api.SERVER}/cms/new-lives`, value)
-    return 'hi'
+    const data = {
+      token: this.props.auth.token,
+      data: value,
+    }
+    const result = await api.post(`${api.SERVER}/cms/new-lives`, data)
+    //return 'hi'
     //console.log('2', result)
   }
 
@@ -280,7 +286,7 @@ class LivesInsert extends React.Component {
                   message: 'Please insert your Start-Time!',
                 },
               ],
-            })(<Input />)}
+            })(<TimePicker />)}
           </FormItem>
           <FormItem {...formItemLayout} label="End-Time:">
             {getFieldDecorator('endTime', {
@@ -290,7 +296,7 @@ class LivesInsert extends React.Component {
                   message: 'Please insert yourEnd-Time!',
                 },
               ],
-            })(<Input />)}
+            })(<TimePicker />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Live-Date:">
             {getFieldDecorator('liveDay', {
@@ -450,6 +456,8 @@ class LivesInsert extends React.Component {
 //   duration //
 //   feature //
 // }
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
 
-const Info = Form.create()(LivesInsert)
-export default Info
+export default Form.create()(connect(mapStateToProps, null)(LivesInsert))

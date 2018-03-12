@@ -11,6 +11,7 @@ const handleError = async response => {
   let json
   try {
     json = await response.json()
+    console.log('json: ', response.ok)
     errorMessage = json.message
   } catch (error) {
     // api does not return error object use default statusText
@@ -36,7 +37,7 @@ export const postJSON = async (url, jsonBody) => {
     const response = await fetch(url, {
       method: 'POST',
       headers: defaultHeaders,
-      mode,
+      mode: 'cors',
       body: JSON.stringify(jsonBody),
     })
     const json = await handleError(response)

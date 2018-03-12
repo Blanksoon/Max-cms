@@ -1,4 +1,5 @@
 import {
+  TimePicker,
   DatePicker,
   Form,
   Input,
@@ -13,12 +14,14 @@ import {
   AutoComplete,
   Modal,
 } from 'antd'
+import { connect } from 'react-redux'
 import UploadFightcardImage from '../utils/UploadFightcardImage'
 import UploadImageBanner from '../utils/UploadImageBanner'
 import UploadLogoImage from '../utils/UploadLogoImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
 import Router from 'next/router'
+import moment from 'moment'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -43,7 +46,9 @@ class LivesModify extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await api.get(`${api.SERVER}/cms/lives/${this.props.id}`)
+    const data = await api.get(
+      `${api.SERVER}/cms/lives/${this.props.id}?token=${this.props.auth.token}`
+    )
     data.liveDay = this.checkLiveDate(data.liveDay)
     this.setState({
       data: data,
@@ -146,10 +151,10 @@ class LivesModify extends React.Component {
       programName: this.state.data.programName,
     })
     this.props.form.setFieldsValue({
-      startTime: this.state.data.startTime,
+      startTime: moment(this.state.data.startTime, 'HH:mm:ss'),
     })
     this.props.form.setFieldsValue({
-      endTime: this.state.data.endTime,
+      endTime: moment(this.state.data.endTime, 'HH:mm:ss'),
     })
     this.props.form.setFieldsValue({
       liveDay: this.state.data.liveDay,
@@ -184,8 +189,11 @@ class LivesModify extends React.Component {
   async updateLive(value) {
     //console.log('1', value)
     value._id = this.state.data._id
-    const result = await api.post(`${api.SERVER}/cms/lives/update`, value)
-    return 'hi'
+    const data = {
+      token: this.props.auth.token,
+      data: value,
+    }
+    const result = await api.post(`${api.SERVER}/cms/lives/update`, data)
     //console.log('2', result)
   }
 
@@ -362,7 +370,7 @@ class LivesModify extends React.Component {
                   message: 'Please insert your Start-Time!',
                 },
               ],
-            })(<Input />)}
+            })(<TimePicker />)}
           </FormItem>
           <FormItem {...formItemLayout} label="End-Time:">
             {getFieldDecorator('endTime', {
@@ -372,7 +380,7 @@ class LivesModify extends React.Component {
                   message: 'Please insert your End-Time!',
                 },
               ],
-            })(<Input />)}
+            })(<TimePicker />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Live-Date:">
             {getFieldDecorator('liveDay', {
@@ -524,6 +532,7 @@ class LivesModify extends React.Component {
     )
   }
 }
-
-const Info = Form.create()(LivesModify)
-export default Info
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+export default Form.create()(connect(mapStateToProps, null)(LivesModify))

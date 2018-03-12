@@ -1,14 +1,15 @@
 export const FETCH_MAXNEWS = 'FETCH_MAXNEWS'
 export const FETCH_MAXNEWS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS'
 
-export const fetchMaxnewsDucks = () => {
+export const fetchMaxnewsDucks = token => {
   return {
     type: FETCH_MAXNEWS,
+    token: token,
   }
 }
 
 export const fetchMaxnewsSuccessDucks = (data, dataLength) => {
-  console.log(dataLength)
+  //console.log(dataLength)
   return {
     type: FETCH_MAXNEWS_SUCCESS,
     payload: { data, dataLength },

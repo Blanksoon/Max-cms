@@ -2,6 +2,7 @@ import { Layout, Menu } from 'antd'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Component from 'react'
+import Logout from '../components/commons/Logout'
 
 const { Header, Content, Footer } = Layout
 class Main extends React.Component {
@@ -25,17 +26,20 @@ class Main extends React.Component {
       <Layout style={{ backgroundColor: '#032447' }}>
         <Header style={{ width: '100%' }}>
           <div className="logo" />
+          <div style={{ float: 'right' }}>
+            <Logout />
+          </div>
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={[keyNavbar]}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="Home">
+            {/* <Menu.Item key="Home">
               <Link href="/login">
                 <a>Home</a>
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="Maxnews">
               <Link href="/maxnews">
                 <a>Maxnews</a>

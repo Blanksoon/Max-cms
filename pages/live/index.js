@@ -8,6 +8,7 @@ import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import { fetchMaxnewsDucks } from '../../redux/ducks/news'
 import LivesData from '../../components/lives/LivesData'
+import { requireAuth } from '../../hocs/requireAuth'
 import {
   Row,
   Col,
@@ -40,4 +41,6 @@ class Index extends Component {
   }
 }
 
-export default compose(withReduxSaga, connectI18n(['common']))(Index)
+export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(
+  Index
+)

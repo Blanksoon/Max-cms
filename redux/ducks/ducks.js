@@ -4,6 +4,7 @@ import searchReducer from './search'
 import newsReducer from './news'
 import vodsReducer from './vods'
 import livesReducer from './lives'
+import cookieReducer from './cookie'
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,5 +12,6 @@ export const rootReducer = combineReducers({
   news: newsReducer,
   vods: vodsReducer,
   lives: livesReducer,
+  cookie: cookieReducer,
 })
 export const defaultState = {}

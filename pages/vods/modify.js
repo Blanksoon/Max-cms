@@ -8,6 +8,7 @@ import Main from '../../layouts/Main'
 import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import { Row, Col, Input, DatePicker, Upload, Icon, message } from 'antd'
+import { requireAuth } from '../../hocs/requireAuth'
 
 class Modify extends Component {
   render() {
@@ -21,4 +22,6 @@ class Modify extends Component {
   }
 }
 
-export default compose(withReduxSaga, connectI18n(['common']))(Modify)
+export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(
+  Modify
+)

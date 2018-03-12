@@ -6,7 +6,10 @@ export function* fetchVods(action) {
   //console.log('hello')
   try {
     // console.log('1')
-    const data = yield call(getJSON, `${API_SERVER}/cms/vods`)
+    const data = yield call(
+      getJSON,
+      `${API_SERVER}/cms/vods?token=${action.token}`
+    )
     //console.log('3', data.dataLength)
     yield put(fetchVodsSuccessDucks(data.data, data.dataLength))
   } catch (error) {

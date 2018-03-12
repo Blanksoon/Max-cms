@@ -20,8 +20,8 @@ class VodsTable extends React.Component {
             dataIndex="programName_en"
             key="programName_en"
           />
-          <Column title="title_en" dataIndex="title_en" key="title_en" />
-          {/* <Column title="desc_en" dataIndex="desc_en" key="desc_en" /> */}
+          {/* <Column title="title_en" dataIndex="title_en" key="title_en" />
+          <Column title="desc_en" dataIndex="desc_en" key="desc_en" /> */}
           <Column
             title="programName_th"
             dataIndex="programName_th"
@@ -29,8 +29,12 @@ class VodsTable extends React.Component {
           />
           {/* <Column title="title_th" dataIndex="title_th" key="title_th" /> */}
           <Column title="desc_th" dataIndex="desc_th" key="desc_th" />
-          {/* <Column title="videoUrl" dataIndex="videoUrl" key="videoUrl" />
-          <Column title="promoUrl" dataIndex="promoUrl" key="promoUrl" />
+          <Column
+            title="promo-vdo-media-id"
+            dataIndex="videoUrl"
+            key="videoUrl"
+          />
+          {/* <Column title="promoUrl" dataIndex="promoUrl" key="promoUrl" />
           <Column
             title="thumbnailUrl"
             dataIndex="thumbnailUrl"

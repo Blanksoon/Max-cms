@@ -5,17 +5,35 @@ import { Component } from 'react'
 import { fetchMaxnewsDucks } from '../../redux/ducks/news'
 import { Row, Col, Breadcrumb, Button } from 'antd'
 import Link from 'next/link'
+import * as api from '../../api'
+import Router from 'next/router'
 
 import vars from '../../components/commons/vars'
 
 class MaxNewsData extends Component {
   constructor(props) {
     super(props)
+    this.deleteData = this.deleteData.bind(this)
+    this.redirectToModify = this.redirectToModify.bind(this)
   }
 
   componentDidMount() {
-    this.props.fetchMaxnewsDucks()
+    this.props.fetchMaxnewsDucks(this.props.auth.token)
   }
+
+  async deleteData(data) {
+    const value = {
+      data,
+      token: this.props.auth.token,
+    }
+    const result = await api.post(`${api.SERVER}/cms/delete-news`, value)
+    this.props.fetchMaxnewsDucks(this.props.auth.token)
+  }
+
+  async redirectToModify(data) {
+    Router.push(`/maxnews/modify?id=${data.id}`)
+  }
+
   render() {
     //console.log('this.props', this.props)
     return (
@@ -71,6 +89,8 @@ class MaxNewsData extends Component {
         <MaxNewsTable
           maxnewsData={this.props.maxnewsData.data}
           lengtOfMaxnews={this.props.maxnewsData.lengthOfData}
+          deleteData={this.deleteData}
+          redirectToModify={this.redirectToModify}
         />
         <style jsx global>{`
           .ant-breadcrumb-separator {
@@ -92,6 +112,7 @@ class MaxNewsData extends Component {
 
 const mapStateToProps = state => ({
   maxnewsData: state.news,
+  auth: state.auth,
 })
 
 export default connect(mapStateToProps, { fetchMaxnewsDucks })(MaxNewsData)

@@ -14,19 +14,19 @@ class LivesTable extends React.Component {
           pagination={lengtOflives}
           rowKey={livesData => livesData._id}
         >
-          <Column title="id" dataIndex="_id" key="_id" />
+          {/* <Column title="id" dataIndex="_id" key="_id" /> */}
           <Column title="productId" dataIndex="productId" key="productId" />
-          <Column
+          {/* <Column
             title="programName"
             dataIndex="programName"
             key="programName"
-          />
+          /> */}
           <Column title="title_en" dataIndex="title_en" key="title_en" />
           <Column title="title_th" dataIndex="title_th" key="title_th" />
-          {/* <Column title="showOrder" dataIndex="showOrder" key="showOrder" />
+          {/* <Column title="showOrder" dataIndex="showOrder" key="showOrder" /> */}
           <Column title="startTime" dataIndex="startTime" key="startTime" />
           <Column title="endTime" dataIndex="endTime" key="endTime" />
-          <Column title="liveDay" dataIndex="liveDay" key="liveDay" />
+          {/* <Column title="liveDay" dataIndex="liveDay" key="liveDay" />
           <Column
             title="shortDesc1_en"
             dataIndex="shortDesc1_en"
@@ -49,9 +49,9 @@ class LivesTable extends React.Component {
             dataIndex="fightcardUrl"
             key="fightcardUrl"
           />
-          <Column title="videoUrl" dataIndex="videoUrl" key="videoUrl" />
+          <Column title="videoUrl" dataIndex="videoUrl" key="videoUrl" /> */}
           <Column title="promoUrl" dataIndex="promoUrl" key="promoUrl" />
-          <Column title="bannerUrl" dataIndex="bannerUrl" key="bannerUrl" />
+          {/* <Column title="bannerUrl" dataIndex="bannerUrl" key="bannerUrl" />
           <Column title="logoUrl" dataIndex="logoUrl" key="logoUrl" />
           <Column title="price" dataIndex="price" key="price" />
           <Column title="status" dataIndex="status" key="status" /> */}

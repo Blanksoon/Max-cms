@@ -6,7 +6,10 @@ export function* fetchLives(action) {
   //console.log('hello')
   try {
     // console.log('1')
-    const data = yield call(getJSON, `${API_SERVER}/cms/lives`)
+    const data = yield call(
+      getJSON,
+      `${API_SERVER}/cms/lives?token=${action.token}`
+    )
     //console.log('3', data.dataLength)
     yield put(fetchLivesSuccessDucks(data.data, data.dataLength))
   } catch (error) {

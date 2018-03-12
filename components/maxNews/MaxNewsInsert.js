@@ -13,9 +13,11 @@ import {
   AutoComplete,
   Modal,
 } from 'antd'
+import { connect } from 'react-redux'
 import UploadImage from '../utils/UploadImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
+import Router from 'next/router'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -27,10 +29,16 @@ class MaxNewsInsertForm extends React.Component {
     super(props)
     this.state = {
       loading: false,
+      prognameEn: [],
     }
     this.handleOnchangeImage = this.handleOnchangeImage.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.fetchProgName = this.fetchProgName.bind(this)
     this.info = this.info.bind(this)
+  }
+
+  componentDidMount() {
+    this.fetchProgName()
   }
 
   handleOnchangeImage(imgUrl) {
@@ -43,9 +51,26 @@ class MaxNewsInsertForm extends React.Component {
   }
 
   async addNews(value) {
+    console.log('token: ', this.props.auth.token)
+    const data = {
+      token: this.props.auth.token,
+      data: value,
+    }
     //console.log('1', value)
-    const result = await api.post(`${api.SERVER}/maxnews/add/news`, value)
+    const result = await api.post(`${api.SERVER}/maxnews/add/news`, data)
     //console.log('2', result)
+  }
+
+  async fetchProgName() {
+    const result = await api.get(`${api.SERVER}/cms/lives/get-progname`)
+    console.log(result)
+    let prognameEn = []
+    prognameEn = result.map(item => (
+      <Option value={item.programName}>{item.programName}</Option>
+    ))
+    this.setState({
+      prognameEn: prognameEn,
+    })
   }
 
   handleSubmit = e => {
@@ -73,7 +98,9 @@ class MaxNewsInsertForm extends React.Component {
           <p>you add 1 news</p>
         </div>
       ),
-      onOk() {},
+      onOk() {
+        Router.push(`/maxnews`)
+      },
     })
   }
 
@@ -81,6 +108,13 @@ class MaxNewsInsertForm extends React.Component {
     const { getFieldDecorator } = this.props.form
     //console.log('111111111111', this.props.form)
     const { autoCompleteResult } = this.state
+    console.log('this.props: ', this.props)
+    let programNameEn = []
+    if (this.state.prognameEn === []) {
+      programNameEn = null
+    } else {
+      programNameEn = this.state.prognameEn
+    }
 
     const formItemLayout = {
       labelCol: {
@@ -183,25 +217,7 @@ class MaxNewsInsertForm extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Muay Thai Battle">Muay Thai Battle</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
+                {programNameEn}
               </Select>
             )}
           </FormItem>
@@ -263,5 +279,8 @@ class MaxNewsInsertForm extends React.Component {
     )
   }
 }
-const Info = Form.create()(MaxNewsInsertForm)
-export default Info
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+//const Info = Form.create()(MaxNewsInsertForm)
+export default Form.create()(connect(mapStateToProps, null)(MaxNewsInsertForm))

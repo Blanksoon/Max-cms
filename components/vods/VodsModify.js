@@ -12,7 +12,9 @@ import {
   Button,
   AutoComplete,
   Modal,
+  Radio,
 } from 'antd'
+import { connect } from 'react-redux'
 import UploadImage from '../utils/UploadImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
@@ -23,6 +25,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 const AutoCompleteOption = AutoComplete.Option
 const { TextArea } = Input
+const RadioGroup = Radio.Group
 
 class VodsModify extends React.Component {
   constructor(props) {
@@ -30,6 +33,9 @@ class VodsModify extends React.Component {
     this.state = {
       loading: false,
       data: {},
+      prognameEn: [],
+      prognameEnList: [],
+      titleTh: [],
     }
     this.handleOnchangeImage = this.handleOnchangeImage.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,11 +45,14 @@ class VodsModify extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await api.get(`${api.SERVER}/cms/vods/${this.props.id}`)
+    const data = await api.get(
+      `${api.SERVER}/cms/vods/${this.props.id}?token=${this.props.auth.token}`
+    )
     data.logoUrl = this.checkLogoUrl(data.logoUrl)
     this.setState({
       data: data,
     })
+    this.fetchProgName()
     this.setFieldsDataInForm()
   }
 
@@ -85,6 +94,9 @@ class VodsModify extends React.Component {
     this.props.form.setFieldsValue({
       duration: this.state.data.duration,
     })
+    this.props.form.setFieldsValue({
+      feature: this.state.data.feature,
+    })
     return 'success'
   }
 
@@ -111,6 +123,41 @@ class VodsModify extends React.Component {
     }
   }
 
+  async fetchProgName() {
+    const result = await api.get(`${api.SERVER}/cms/lives/get-progname`)
+    //console.log(result)
+    let i = 0
+    let prognameEn = []
+    let titleEn = []
+    let titleTh = []
+    titleEn = result.map(item => (
+      <Option value={item.title_en}>{item.title_en}</Option>
+    ))
+    titleTh = result.map(item => (
+      <Option value={item.title_th}>{item.title_th}</Option>
+    ))
+    while (i < result.length) {
+      if (result[i].programName === 'Muay Thai Battle') {
+        prognameEn[i] = (
+          <Option value="Battle Muay Thai">Battle Muay Thai</Option>
+        )
+      } else {
+        prognameEn[i] = (
+          <Option value={result[i].programName}>{result[i].programName}</Option>
+        )
+      }
+      i++
+    }
+
+    const prognameEnList = result.map(item => item.programName)
+    this.setState({
+      prognameEn: prognameEn,
+      prognameEnList: prognameEnList,
+      titleEn: titleEn,
+      titleTh: titleTh,
+    })
+  }
+
   handleOnchangeImage(imgUrl, imageUrl) {
     if (imgUrl !== '') {
       this.props.form.setFieldsValue({
@@ -127,10 +174,12 @@ class VodsModify extends React.Component {
   }
 
   async updateVods(value) {
-    console.log('1', this.state.data)
     value._id = this.state.data._id
-    const result = await api.post(`${api.SERVER}/cms/vods/update`, value)
-    return 'hi'
+    const data = {
+      token: this.props.auth.token,
+      data: value,
+    }
+    const result = await api.post(`${api.SERVER}/cms/vods/update`, data)
     //console.log('2', result)
   }
 
@@ -167,8 +216,28 @@ class VodsModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    //console.log('111111111111', this.state.data.thumbnailUrl)
+    //console.log('111111111111', programNameEn)
     const { autoCompleteResult } = this.state
+
+    let programNameEn = []
+    if (this.state.prognameEn === []) {
+      programNameEn = null
+    } else {
+      programNameEn = this.state.prognameEn
+    }
+    console.log('111111111111', programNameEn)
+    let titleEn = []
+    if (this.state.titleEn === []) {
+      titleEn = null
+    } else {
+      titleEn = this.state.titleEn
+    }
+    let titleTh = []
+    if (this.state.titleTh === []) {
+      titleTh = null
+    } else {
+      titleTh = this.state.titleTh
+    }
 
     const formItemLayout = {
       labelCol: {
@@ -226,25 +295,7 @@ class VodsModify extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Battle Muay Thai">Battle Muay Thai</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
+                {programNameEn}
               </Select>
             )}
           </FormItem>
@@ -271,25 +322,7 @@ class VodsModify extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Battle Muay Thai">Muay Thai Battle</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
+                {titleEn}
               </Select>
             )}
           </FormItem>
@@ -330,27 +363,7 @@ class VodsModify extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="แม็กซ์มวยไทย">แม็กซ์มวยไทย</Option>
-                <Option value="มวยไทย แบทเทิล">มวยไทย แบทเทิล</Option>
-                <Option value="มวยไทย ไฟต์เตอร์">มวยไทย ไฟต์เตอร์</Option>
-                <Option value="เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก">
-                  เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพุธ">
-                  โกลด์บอล ไฟท์ วันพุธ
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพฤหัส">
-                  โกลด์บอล ไฟท์ วันพฤหัส
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันจันทร์">
-                  มวยไทยไฟต์เตอร์ วันจันทร์
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันอังคาร">
-                  มวยไทยไฟต์เตอร์ วันอังคาร
-                </Option>
-                <Option value="แม็กซ์ วันอาทิตย์ บ่าย">
-                  แม็กซ์ วันอาทิตย์ บ่าย
-                </Option>
+                {titleTh}
               </Select>
             )}
           </FormItem>
@@ -377,27 +390,7 @@ class VodsModify extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="แม็กซ์มวยไทย">แม็กซ์มวยไทย</Option>
-                <Option value="มวยไทย แบทเทิล">มวยไทย แบทเทิล</Option>
-                <Option value="มวยไทย ไฟต์เตอร์">มวยไทย ไฟต์เตอร์</Option>
-                <Option value="เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก">
-                  เดอะแชมป์เปี้ยน มวยไทย ตัดเชือก
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพุธ">
-                  โกลด์บอล ไฟท์ วันพุธ
-                </Option>
-                <Option value="โกลด์บอล ไฟท์ วันพฤหัส">
-                  โกลด์บอล ไฟท์ วันพฤหัส
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันจันทร์">
-                  มวยไทยไฟต์เตอร์ วันจันทร์
-                </Option>
-                <Option value="มวยไทยไฟต์เตอร์ วันอังคาร">
-                  มวยไทยไฟต์เตอร์ วันอังคาร
-                </Option>
-                <Option value="แม็กซ์ วันอาทิตย์ บ่าย">
-                  แม็กซ์ วันอาทิตย์ บ่าย
-                </Option>
+                {titleTh}
               </Select>
             )}
           </FormItem>
@@ -412,7 +405,7 @@ class VodsModify extends React.Component {
             })(<TextArea rows={10} />)}
           </FormItem>
           <hr className={`hr-tag`} />
-          <FormItem {...formItemLayout} label="Video-url:">
+          {/* <FormItem {...formItemLayout} label="Video-url:">
             {getFieldDecorator('videoUrl', {
               rules: [
                 {
@@ -428,6 +421,16 @@ class VodsModify extends React.Component {
                 {
                   required: true,
                   message: 'Please insert your Promo-url!',
+                },
+              ],
+            })(<Input />)}
+          </FormItem> */}
+          <FormItem {...formItemLayout} label="Promo-vdo-media-id:">
+            {getFieldDecorator('videoUrl', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please insert your Media-id!',
                 },
               ],
             })(<Input />)}
@@ -449,7 +452,7 @@ class VodsModify extends React.Component {
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="logo:">
+          <FormItem {...formItemLayout} label="Logo:">
             {getFieldDecorator('logoUrl', {
               rules: [
                 {
@@ -472,25 +475,7 @@ class VodsModify extends React.Component {
                     .indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="Max Muay Thai">Max Muay Thai</Option>
-                <Option value="Muay Thai Battle">Muay Thai Battle</Option>
-                <Option value="Muaythai Fighter">Muaythai Fighter</Option>
-                <Option value="The Champion Muay Thai">
-                  The Champion Muay Thai
-                </Option>
-                <Option value="Global Fight Wednesday">
-                  Global Fight Wednesday
-                </Option>
-                <Option value="Global Fight Thursday">
-                  Global Fight Thursday
-                </Option>
-                <Option value="MUAY THAI FIGHTER Monday">
-                  MUAY THAI FIGHTER Monday
-                </Option>
-                <Option value="Octa Fight Tuesday">Octa Fight Tuesday</Option>
-                <Option value="Max Sunday Afternoon">
-                  Max Sunday Afternoon
-                </Option>
+                {programNameEn}
               </Select>
             )}
           </FormItem>
@@ -514,7 +499,7 @@ class VodsModify extends React.Component {
               ],
             })(<Input />)}
           </FormItem>
-          {/* <FormItem {...formItemLayout} label="Feature:">
+          <FormItem {...formItemLayout} label="Feature:">
             {getFieldDecorator('feature', {
               rules: [
                 {
@@ -522,8 +507,13 @@ class VodsModify extends React.Component {
                   message: 'Please select your Feature!',
                 },
               ],
-            })(<Input />)}
-          </FormItem> */}
+            })(
+              <RadioGroup>
+                <Radio value={'active'}>ON</Radio>
+                <Radio value={'unactive'}>OFF</Radio>
+              </RadioGroup>
+            )}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             <div>
               <Button
@@ -560,6 +550,7 @@ class VodsModify extends React.Component {
     )
   }
 }
-
-const Info = Form.create()(VodsModify)
-export default Info
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+export default Form.create()(connect(mapStateToProps, null)(VodsModify))

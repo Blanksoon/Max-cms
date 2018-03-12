@@ -7,6 +7,7 @@ const LOAD_ALL_COOKIES = 'ittp-frontend/cookie/LOAD_ALL_COOKIES'
 
 // actions
 export const setCookie = ({ key, value }) => {
+  console.log('1: ', key)
   return {
     type: SET_COOKIE,
     payload: {
@@ -50,6 +51,7 @@ const cookieReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COOKIE_SUCCESS: {
       const { key, value } = action.payload
+      console.log(action.payload)
       return {
         ...state,
         [key]: value,

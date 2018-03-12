@@ -18,7 +18,6 @@ class LoginForm extends Component {
       if (!err) {
         const { email, password } = values
         this.props.login({ email, password })
-
         //console.log(this.props.login({ email, password }))
       }
     })

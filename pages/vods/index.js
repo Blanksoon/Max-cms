@@ -6,6 +6,7 @@ import Main from '../../layouts/Main'
 import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import VodsData from '../../components/vods/VodsData'
+import { requireAuth } from '../../hocs/requireAuth'
 
 class Index extends Component {
   constructor(props) {
@@ -25,4 +26,6 @@ class Index extends Component {
   }
 }
 
-export default compose(withReduxSaga, connectI18n(['common']))(Index)
+export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(
+  Index
+)

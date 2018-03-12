@@ -17,13 +17,16 @@ class VodsData extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchVodsDucks()
+    this.props.fetchVodsDucks(this.props.auth.token)
   }
 
   async deleteData(data) {
-    const result = await api.post(`${api.SERVER}/cms/delete-vods`, data)
-    console.log('1')
-    this.props.fetchVodsDucks()
+    const value = {
+      data,
+      token: this.props.auth.token,
+    }
+    const result = await api.post(`${api.SERVER}/cms/delete-vods`, value)
+    this.props.fetchVodsDucks(this.props.auth.token)
   }
 
   async redirectToModify(data) {
@@ -110,6 +113,7 @@ class VodsData extends Component {
 
 const mapStateToProps = state => ({
   vodsData: state.vods,
+  auth: state.auth,
 })
 
 export default connect(mapStateToProps, { fetchVodsDucks })(VodsData)

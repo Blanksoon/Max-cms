@@ -1,9 +1,10 @@
 export const FETCH_LIVES = 'FETCH_LIVES'
 export const FETCH_LIVES_SUCCESS = 'FETCH_LIVES_SUCCESS'
 
-export const fetchLivesDucks = () => {
+export const fetchLivesDucks = token => {
   return {
     type: FETCH_LIVES,
+    token: token,
   }
 }
 

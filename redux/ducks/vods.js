@@ -1,10 +1,10 @@
 export const FETCH_VODS = 'FETCH_VODS'
 export const FETCH_VODS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS'
 
-export const fetchVodsDucks = () => {
-  console.log('fetchVodsDucks')
+export const fetchVodsDucks = token => {
   return {
     type: FETCH_VODS,
+    token: token,
   }
 }
 

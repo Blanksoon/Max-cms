@@ -17,13 +17,16 @@ class LivesData extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchLivesDucks()
+    this.props.fetchLivesDucks(this.props.auth.token)
   }
 
   async deleteData(data) {
-    const result = await api.post(`${api.SERVER}/cms/delete-lives`, data)
-    console.log('1')
-    this.props.fetchLivesDucks()
+    const value = {
+      data,
+      token: this.props.auth.token,
+    }
+    const result = await api.post(`${api.SERVER}/cms/delete-lives`, value)
+    this.props.fetchLivesDucks(this.props.auth.token)
   }
 
   async redirectToModify(data) {
@@ -100,6 +103,7 @@ class LivesData extends Component {
 
 const mapStateToProps = state => ({
   livesData: state.lives,
+  auth: state.auth,
 })
 
 export default connect(mapStateToProps, { fetchLivesDucks })(LivesData)

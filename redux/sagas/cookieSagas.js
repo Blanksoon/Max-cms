@@ -10,15 +10,17 @@ import {
 export function* setCookieSaga(action) {
   const { key, value } = action.payload
   const cookies = new Cookies()
-  cookies.set(key, value, { httpOnly: process.env.USE_HTTP_ONLY === 'true' })
+  cookies.set(key, value)
   yield put(setCookieSuccess({ key, value }))
 }
+
 export function* removeCookieSaga(action) {
   const { key } = action.payload
   const cookies = new Cookies()
   cookies.remove(key)
   yield put(removeCookieSuccess({ key }))
 }
+
 export function* cookieSagas() {
   yield all([
     takeLatest(SET_COOKIE, setCookieSaga),

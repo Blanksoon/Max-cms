@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import { rootReducer, defaultState } from './ducks/ducks'
 import { rootSaga } from './sagas/rootSaga'
+import { loadAllCookies } from '../tools/utils'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -17,7 +18,16 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
-export function configureStore(initialState = defaultState) {
+export function configureStore(initialState = defaultState, options) {
+  const cookies = loadAllCookies(options)
+  const { token, email } = cookies
+  initialState.cookie = cookies
+  initialState.auth = {
+    token,
+    email,
+    loading: false,
+    error: {},
+  }
   const store = createStore(
     rootReducer,
     initialState,

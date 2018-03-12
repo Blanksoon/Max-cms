@@ -6,6 +6,7 @@ import LivesInsert from '../../components/lives/LivesInsert'
 import Main from '../../layouts/Main'
 import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
+import { requireAuth } from '../../hocs/requireAuth'
 
 class New extends Component {
   render() {
@@ -19,4 +20,4 @@ class New extends Component {
   }
 }
 
-export default compose(withReduxSaga, connectI18n(['common']))(New)
+export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(New)

@@ -4,6 +4,7 @@ import { searchSagas } from './searchSagas'
 import { newsSagas } from './newsSagas'
 import { vodsSagas } from './vodsSagas'
 import { livesSagas } from './livesSagas'
+import { cookieSagas } from './cookieSagas'
 
 export function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export function* rootSaga() {
     newsSagas(),
     vodsSagas(),
     livesSagas(),
+    cookieSagas(),
   ])
 }

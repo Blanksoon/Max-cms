@@ -1,6 +1,7 @@
 export const LOGIN = 'ittp-frontend/auth/LOGIN'
 const LOGIN_SUCCESS = 'ittp-frontend/auth/LOGIN_SUCCESS'
 const LOGIN_FAILURE = 'ittp-frontend/auth/LOGIN_FAILURE'
+export const LOGOUT = 'ittp-frontend/auth/LOGOUT'
 
 export const login = ({ email, password }) => ({
   type: LOGIN,
@@ -13,6 +14,9 @@ export const loginSuccess = ({ token, email }) => ({
 export const loginFailure = ({ code, message }) => ({
   type: LOGIN_FAILURE,
   payload: { code, message },
+})
+export const logout = () => ({
+  type: LOGOUT,
 })
 
 const initialState = {
@@ -42,6 +46,12 @@ const reducer = (state = initialState, action = {}) => {
           code: action.payload.code,
           message: action.payload.message,
         },
+      }
+    }
+    case LOGOUT: {
+      return {
+        loading: false,
+        error: {},
       }
     }
     default:
