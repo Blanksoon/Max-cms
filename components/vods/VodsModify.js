@@ -225,7 +225,7 @@ class VodsModify extends React.Component {
     } else {
       programNameEn = this.state.prognameEn
     }
-    console.log('111111111111', programNameEn)
+    //console.log('111111111111', programNameEn)
     let titleEn = []
     if (this.state.titleEn === []) {
       titleEn = null
