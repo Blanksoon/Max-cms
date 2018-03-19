@@ -1,10 +1,12 @@
 export const FETCH_MAXNEWS = 'FETCH_MAXNEWS'
 export const FETCH_MAXNEWS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS'
 
-export const fetchMaxnewsDucks = token => {
+export const fetchMaxnewsDucks = (token, offset, pageSize) => {
   return {
     type: FETCH_MAXNEWS,
     token: token,
+    offset: offset,
+    limit: pageSize,
   }
 }
 

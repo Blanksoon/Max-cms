@@ -90,7 +90,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b1a6a6df6b86507d2b02"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2ddcefe8e5d6a9b6c2c0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -755,7 +755,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","2":"commons","6":"bundles/pages/live.js","9":"bundles/pages/live/modify.js"}[chunkId]||chunkId) + "-" + {"0":"c6a469b6b95b2a985202","1":"947300d43f3fd9b60597","2":"112a70b41bfbcd7c6dde","6":"5331e3741846644afe35","9":"c09c80299a59ec78239e"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","2":"commons","4":"bundles/pages/maxnews.js","6":"bundles/pages/orders.js"}[chunkId]||chunkId) + "-" + {"0":"c6a469b6b95b2a985202","1":"947300d43f3fd9b60597","2":"112a70b41bfbcd7c6dde","4":"c343a8b6d46ec880b11c","6":"9baf5713fd409b28ca6a"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

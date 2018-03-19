@@ -35,11 +35,6 @@ class Main extends React.Component {
             defaultSelectedKeys={[keyNavbar]}
             style={{ lineHeight: '64px' }}
           >
-            {/* <Menu.Item key="Home">
-              <Link href="/login">
-                <a>Home</a>
-              </Link>
-            </Menu.Item> */}
             <Menu.Item key="Maxnews">
               <Link href="/maxnews">
                 <a>Maxnews</a>
@@ -50,9 +45,19 @@ class Main extends React.Component {
                 <a>Vods</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="Live">
-              <Link href="/live">
-                <a>Live</a>
+            <Menu.Item key="Lives">
+              <Link href="/lives">
+                <a>Lives</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="Users">
+              <Link href="/users">
+                <a>Users</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="Orders">
+              <Link href="/orders">
+                <a>Orders</a>
               </Link>
             </Menu.Item>
           </Menu>

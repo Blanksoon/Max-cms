@@ -8,7 +8,9 @@ export function* fetchLives(action) {
     // console.log('1')
     const data = yield call(
       getJSON,
-      `${API_SERVER}/cms/lives?token=${action.token}`
+      `${API_SERVER}/cms/lives?token=${action.token}&offset=${
+        action.offset
+      }&limit=${action.limit}`
     )
     //console.log('3', data.dataLength)
     yield put(fetchLivesSuccessDucks(data.data, data.dataLength))

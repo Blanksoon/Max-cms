@@ -72,11 +72,15 @@ class VodsInsert extends React.Component {
     let prognameEn = []
     let titleEn = []
     let titleTh = []
-    titleEn = result.map(item => (
-      <Option value={item.title_en}>{item.title_en}</Option>
+    titleEn = result.map((item, index) => (
+      <Option key={index} value={item.title_en}>
+        {item.title_en}
+      </Option>
     ))
-    titleTh = result.map(item => (
-      <Option value={item.title_th}>{item.title_th}</Option>
+    titleTh = result.map((item, index) => (
+      <Option key={index} value={item.title_th}>
+        {item.title_th}
+      </Option>
     ))
     while (i < result.length) {
       if (result[i].programName === 'Muay Thai Battle') {

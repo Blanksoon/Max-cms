@@ -51,7 +51,7 @@ class MaxNewsInsertForm extends React.Component {
   }
 
   async addNews(value) {
-    console.log('token: ', this.props.auth.token)
+    //console.log('token: ', this.props.auth.token)
     const data = {
       token: this.props.auth.token,
       data: value,
@@ -63,7 +63,7 @@ class MaxNewsInsertForm extends React.Component {
 
   async fetchProgName() {
     const result = await api.get(`${api.SERVER}/cms/lives/get-progname`)
-    console.log(result)
+    // console.log(result)
     let prognameEn = []
     prognameEn = result.map(item => (
       <Option value={item.programName}>{item.programName}</Option>
@@ -108,7 +108,7 @@ class MaxNewsInsertForm extends React.Component {
     const { getFieldDecorator } = this.props.form
     //console.log('111111111111', this.props.form)
     const { autoCompleteResult } = this.state
-    console.log('this.props: ', this.props)
+    //console.log('this.props: ', this.props)
     let programNameEn = []
     if (this.state.prognameEn === []) {
       programNameEn = null

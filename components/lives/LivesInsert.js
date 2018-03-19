@@ -86,7 +86,7 @@ class LivesInsert extends React.Component {
         loading: true,
       })
       if (!err) {
-        console.log(values)
+        //console.log(values)
         await this.addLives(values)
         //console.log('3', values)
         this.info()

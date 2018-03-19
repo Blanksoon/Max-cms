@@ -122,7 +122,8 @@ class LivesModify extends React.Component {
   }
 
   setFieldsDataInForm() {
-    //console.log('1', this.state.data)
+    ///console.log('1', this.state.data.startTime)
+    //console.log('2', this.state.data.endTime)
     this.props.form.setFieldsValue({
       title_en: this.state.data.title_en,
     })
@@ -204,7 +205,7 @@ class LivesModify extends React.Component {
         loading: true,
       })
       if (!err) {
-        //console.log(values)
+        //console.log('values: ', values)
         await this.updateLive(values)
         //console.log('3', values)
         this.info()
@@ -231,7 +232,7 @@ class LivesModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    console.log('111111111111', this.state.data.fightcardUrl)
+    //console.log('111111111111', this.state.data.fightcardUrl)
     const { autoCompleteResult } = this.state
     //this.setFieldsDataInForm()
     const formItemLayout = {

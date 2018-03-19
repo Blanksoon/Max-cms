@@ -11,7 +11,7 @@ const handleError = async response => {
   let json
   try {
     json = await response.json()
-    console.log('json: ', response.ok)
+    // console.log('json: ', response.ok)
     errorMessage = json.message
   } catch (error) {
     // api does not return error object use default statusText

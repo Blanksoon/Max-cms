@@ -1,15 +1,16 @@
 export const FETCH_VODS = 'FETCH_VODS'
 export const FETCH_VODS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS'
 
-export const fetchVodsDucks = token => {
+export const fetchVodsDucks = (token, offset, pageSize) => {
   return {
     type: FETCH_VODS,
     token: token,
+    offset: offset,
+    limit: pageSize,
   }
 }
 
 export const fetchVodsSuccessDucks = (data, dataLength) => {
-  console.log(dataLength)
   return {
     type: FETCH_VODS_SUCCESS,
     payload: { data, dataLength },

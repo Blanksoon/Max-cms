@@ -17,7 +17,7 @@ class VodsData extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchVodsDucks(this.props.auth.token)
+    this.props.fetchVodsDucks(this.props.auth.token, 0, 10)
   }
 
   async deleteData(data) {
@@ -86,6 +86,8 @@ class VodsData extends Component {
           </Row>
         </div>
         <VodsTable
+          fetchVods={this.props.fetchVodsDucks}
+          token={this.props.auth.token}
           vodsData={this.props.vodsData.data}
           lengtOfvods={this.props.vodsData.lengthOfData}
           deleteData={this.deleteData}

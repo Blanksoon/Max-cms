@@ -7,7 +7,7 @@ import Main from '../../layouts/Main'
 import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import { fetchMaxnewsDucks } from '../../redux/ducks/news'
-import LivesData from '../../components/lives/LivesData'
+import UsersData from '../../components/users/UsersData'
 import { requireAuth } from '../../hocs/requireAuth'
 import {
   Row,
@@ -33,8 +33,8 @@ class Index extends Component {
   render() {
     return (
       <FullPageLayout>
-        <Main keyNavbar="Live">
-          <LivesData />
+        <Main keyNavbar="Users">
+          <UsersData />
         </Main>
       </FullPageLayout>
     )

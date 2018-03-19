@@ -17,7 +17,7 @@ class LivesData extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchLivesDucks(this.props.auth.token)
+    this.props.fetchLivesDucks(this.props.auth.token, 0, 10)
   }
 
   async deleteData(data) {
@@ -30,7 +30,7 @@ class LivesData extends Component {
   }
 
   async redirectToModify(data) {
-    Router.push(`/live/modify?id=${data.id}`)
+    Router.push(`/lives/modify?id=${data.id}`)
   }
 
   render() {
@@ -46,7 +46,7 @@ class LivesData extends Component {
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item style={{ color: `${vars.white}` }}>
-            Live
+            Lives
           </Breadcrumb.Item>
         </Breadcrumb>
         <div>
@@ -76,6 +76,8 @@ class LivesData extends Component {
           </Row>
         </div>
         <LivesTable
+          fetchLives={this.props.fetchLivesDucks}
+          token={this.props.auth.token}
           livesData={this.props.livesData.data}
           lengtOflives={this.props.livesData.lengthOfData}
           deleteData={this.deleteData}

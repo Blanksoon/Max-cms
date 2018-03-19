@@ -1,18 +1,18 @@
-export const FETCH_LIVES = 'FETCH_LIVES'
-export const FETCH_LIVES_SUCCESS = 'FETCH_LIVES_SUCCESS'
+export const FETCH_ORDERS = 'FETCH_ORDERS'
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS'
 
-export const fetchLivesDucks = (token, offset, pageSize) => {
+export const fetchOrdersDucks = (token, offset, pageSize) => {
   return {
-    type: FETCH_LIVES,
+    type: FETCH_ORDERS,
     token: token,
     offset: offset,
     limit: pageSize,
   }
 }
 
-export const fetchLivesSuccessDucks = (data, dataLength) => {
+export const fetchOrdersSuccessDucks = (data, dataLength) => {
   return {
-    type: FETCH_LIVES_SUCCESS,
+    type: FETCH_ORDERS_SUCCESS,
     payload: { data, dataLength },
   }
 }
@@ -24,14 +24,14 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case FETCH_LIVES: {
+    case FETCH_ORDERS: {
       return {
         error: {},
         loading: false,
         data: action.payload,
       }
     }
-    case FETCH_LIVES_SUCCESS: {
+    case FETCH_ORDERS_SUCCESS: {
       return {
         error: {},
         loading: false,
