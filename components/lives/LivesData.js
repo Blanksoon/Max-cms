@@ -56,7 +56,7 @@ class LivesData extends Component {
             </Col>
             <Col span={12}>
               <div className="title">
-                <Link href="/live/new">
+                <Link href="/lives/new">
                   <Button
                     style={{
                       width: '5rem',
