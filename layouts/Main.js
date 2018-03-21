@@ -60,6 +60,11 @@ class Main extends React.Component {
                 <a>Orders</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="Poster">
+              <Link href="/poster">
+                <a>Poster</a>
+              </Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: '0 30px', marginTop: 24 }}>

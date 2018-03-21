@@ -225,7 +225,7 @@ class LivesModify extends React.Component {
         </div>
       ),
       onOk() {
-        Router.push(`/live`)
+        Router.push(`/lives`)
       },
     })
   }

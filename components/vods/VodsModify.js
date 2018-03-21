@@ -299,7 +299,7 @@ class VodsModify extends React.Component {
               </Select>
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="Title:">
+          {/* <FormItem {...formItemLayout} label="Title:">
             {getFieldDecorator('title_en', {
               rules: [
                 {
@@ -325,7 +325,7 @@ class VodsModify extends React.Component {
                 {titleEn}
               </Select>
             )}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label="Desc:">
             {getFieldDecorator('desc_en', {
               rules: [
@@ -340,7 +340,7 @@ class VodsModify extends React.Component {
           <div className={'setting-row'}>
             <h2>TH</h2>
           </div>
-          <FormItem {...formItemLayout} label="Program-name:">
+          {/* <FormItem {...formItemLayout} label="Program-name:">
             {getFieldDecorator('programName_th', {
               rules: [
                 {
@@ -393,7 +393,7 @@ class VodsModify extends React.Component {
                 {titleTh}
               </Select>
             )}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label="Desc:">
             {getFieldDecorator('desc_th', {
               rules: [
@@ -452,7 +452,7 @@ class VodsModify extends React.Component {
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="Logo:">
+          {/* <FormItem {...formItemLayout} label="Logo:">
             {getFieldDecorator('logoUrl', {
               rules: [
                 {
@@ -478,7 +478,7 @@ class VodsModify extends React.Component {
                 {programNameEn}
               </Select>
             )}
-          </FormItem>
+          </FormItem> */}
           <FormItem {...formItemLayout} label="OnAirDate:">
             {getFieldDecorator('onAirDate', {
               rules: [
