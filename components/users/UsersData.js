@@ -7,13 +7,19 @@ import { Row, Col, Breadcrumb, Button } from 'antd'
 import Link from 'next/link'
 import * as api from '../../api'
 import Router from 'next/router'
+import fetch from 'isomorphic-fetch'
+import saveAs from 'file-saver'
 
 import vars from '../../components/commons/vars'
 
 class UsersData extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loading: false,
+    }
     this.deleteData = this.deleteData.bind(this)
+    this.exportExcel = this.exportExcel.bind(this)
   }
 
   componentDidMount() {
@@ -33,7 +39,21 @@ class UsersData extends Component {
     Router.push(`/live/modify?id=${data.id}`)
   }
 
+  async exportExcel() {
+    this.setState({
+      loading: true,
+    })
+    window.open(
+      `${api.SERVER}/cms/export/user?token=${this.props.auth.token}`,
+      '_self'
+    )
+    this.setState({
+      loading: false,
+    })
+  }
+
   render() {
+    console.log('this.state: ', this.state.loading)
     //console.log('this.props', this.props)
     return (
       <div>
@@ -55,23 +75,23 @@ class UsersData extends Component {
               <div className="title">Users</div>
             </Col>
             <Col span={12}>
-              {/* <div className="title">
-                <Link href="/live/new">
-                  <Button
-                    style={{
-                      width: '5rem',
-                      height: '2rem',
-                      backgroundColor: '#4caf4f',
-                      color: 'white',
-                      fontSize: '1rem',
-                      float: 'right',
-                      marginRight: '0.5rem',
-                    }}
-                  >
-                    New
-                  </Button>
-                </Link>
-              </div> */}
+              <div className="title">
+                <Button
+                  style={{
+                    width: '8rem',
+                    height: '2rem',
+                    backgroundColor: '#4caf4f',
+                    color: 'white',
+                    fontSize: '1rem',
+                    float: 'right',
+                    marginRight: '0.5rem',
+                  }}
+                  loading={this.state.loading}
+                  onClick={this.exportExcel}
+                >
+                  Export
+                </Button>
+              </div>
             </Col>
           </Row>
         </div>

@@ -13,7 +13,11 @@ import vars from '../../components/commons/vars'
 class OrdersData extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loading: false,
+    }
     this.deleteData = this.deleteData.bind(this)
+    this.exportExcel = this.exportExcel.bind(this)
   }
 
   componentDidMount() {
@@ -31,6 +35,19 @@ class OrdersData extends Component {
 
   async redirectToModify(data) {
     Router.push(`/live/modify?id=${data.id}`)
+  }
+
+  async exportExcel() {
+    this.setState({
+      loading: true,
+    })
+    window.open(
+      `${api.SERVER}/cms/export/order?token=${this.props.auth.token}`,
+      '_self'
+    )
+    this.setState({
+      loading: false,
+    })
   }
 
   render() {
@@ -55,23 +72,23 @@ class OrdersData extends Component {
               <div className="title">Orders</div>
             </Col>
             <Col span={12}>
-              {/* <div className="title">
-                <Link href="/live/new">
-                  <Button
-                    style={{
-                      width: '5rem',
-                      height: '2rem',
-                      backgroundColor: '#4caf4f',
-                      color: 'white',
-                      fontSize: '1rem',
-                      float: 'right',
-                      marginRight: '0.5rem',
-                    }}
-                  >
-                    New
-                  </Button>
-                </Link>
-              </div> */}
+              <div className="title">
+                <Button
+                  style={{
+                    width: '5rem',
+                    height: '2rem',
+                    backgroundColor: '#4caf4f',
+                    color: 'white',
+                    fontSize: '1rem',
+                    float: 'right',
+                    marginRight: '0.5rem',
+                  }}
+                  loading={this.state.loading}
+                  onClick={this.exportExcel}
+                >
+                  Export
+                </Button>
+              </div>
             </Col>
           </Row>
         </div>

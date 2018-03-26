@@ -1,64 +1,39 @@
-import { Upload, Icon, Modal } from 'antd'
-import FullPageLayout from '../layouts/FullPageLayout'
+import React from 'react'
+import { default as ExcelFile, ExcelSheet } from 'react-data-export'
 
-class PicturesWall extends React.Component {
-  state = {
-    previewVisible: false,
-    previewImage: '',
-    fileList: [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url:
-          'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
+const multiDataSet = [
+  {
+    columns: ['Name', 'Salary', 'Sex'],
+    data: [
+      ['Johnson', 30000, 'Male'],
+      ['Monika', 355000, 'Female'],
+      ['Konstantina', 20000, 'Female'],
+      ['John', 250000, 'Male'],
+      ['Josef', 450500, 'Male'],
     ],
-  }
+  },
+  {
+    xSteps: 1, // Will start putting cell with 1 empty cell on left most
+    ySteps: 5, //will put space of 5 rows,
+    columns: ['Name', 'Department'],
+    data: [
+      ['Johnson', 'Finance'],
+      ['Monika', 'IT'],
+      ['Konstantina', 'IT Billing'],
+      ['John', 'HR'],
+      ['Josef', 'Testing'],
+    ],
+  },
+]
 
-  handleCancel = () => this.setState({ previewVisible: false })
-
-  handlePreview = file => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    })
-  }
-
-  handleChange = ({ fileList }) => this.setState({ fileList })
-
+class Test extends React.Component {
   render() {
-    const { previewVisible, previewImage, fileList } = this.state
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    )
-    console.log('this.state: ', this.state)
     return (
-      <FullPageLayout>
-        <div className="clearfix">
-          <Upload
-            action="//jsonplaceholder.typicode.com/posts/"
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={this.handlePreview}
-            onChange={this.handleChange}
-          >
-            {fileList.length >= 1 ? null : uploadButton}
-          </Upload>
-          <Modal
-            visible={previewVisible}
-            footer={null}
-            onCancel={this.handleCancel}
-          >
-            <img alt="example" style={{ width: '100%' }} src={previewImage} />
-          </Modal>
-        </div>
-      </FullPageLayout>
+      <ExcelFile>
+        <ExcelSheet dataSet={multiDataSet} name="Organization" />
+      </ExcelFile>
     )
   }
 }
 
-export default PicturesWall
+export default Test
