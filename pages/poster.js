@@ -13,7 +13,7 @@ class Poster extends Component {
   render() {
     return (
       <FullPageLayout>
-        <Main keyNavbar="poster">{<PosterModify />}</Main>
+        <Main keyNavbar="Poster">{<PosterModify />}</Main>
       </FullPageLayout>
     )
   }
