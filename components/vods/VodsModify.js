@@ -42,6 +42,7 @@ class VodsModify extends React.Component {
     this.info = this.info.bind(this)
     this.setFieldsDataInForm = this.setFieldsDataInForm.bind(this)
     this.checkLogoUrl = this.checkLogoUrl.bind(this)
+    this.onChangeDate = this.onChangeDate.bind(this)
   }
 
   async componentDidMount() {
@@ -88,8 +89,9 @@ class VodsModify extends React.Component {
     this.props.form.setFieldsValue({
       programName_th: this.state.data.programName_th,
     })
+    let onAirDate = moment(this.state.data.onAirDate).locale('th')
     this.props.form.setFieldsValue({
-      onAirDate: moment(this.state.data.onAirDate, 'YYYY-MM-DD'),
+      onAirDate: moment(onAirDate, 'YYYY-MM-DD'),
     })
     this.props.form.setFieldsValue({
       duration: this.state.data.duration,
@@ -171,6 +173,12 @@ class VodsModify extends React.Component {
       })
     }
     return 'success'
+  }
+
+  async onChangeDate(value) {
+    this.props.form.setFieldsValue({
+      onAirDate: moment(value),
+    })
   }
 
   async updateVods(value) {
@@ -487,7 +495,7 @@ class VodsModify extends React.Component {
                   message: 'Please enter OnAirDate!',
                 },
               ],
-            })(<DatePicker />)}
+            })(<DatePicker onChange={this.onChangeDate} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Duration:">
             {getFieldDecorator('duration', {

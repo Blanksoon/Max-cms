@@ -39,6 +39,7 @@ class MaxNewsModify extends React.Component {
     this.setFieldsDataInForm = this.setFieldsDataInForm.bind(this)
     this.info = this.info.bind(this)
     this.updateNews = this.updateNews.bind(this)
+    this.onChangeDate = this.onChangeDate.bind(this)
   }
 
   async componentDidMount() {
@@ -103,8 +104,9 @@ class MaxNewsModify extends React.Component {
     this.props.form.setFieldsValue({
       programName: this.state.data.programName,
     })
+    let createDate = moment(this.state.data.createDate).locale('th')
     this.props.form.setFieldsValue({
-      createDate: moment(this.state.data.createDate, 'YYYY-MM-DD'),
+      createDate: moment(createDate, 'YYYY-MM-DD'),
     })
     this.props.form.setFieldsValue({
       imageUrl: this.state.data.imageUrl,
@@ -140,6 +142,12 @@ class MaxNewsModify extends React.Component {
       onOk() {
         Router.push(`/maxnews`)
       },
+    })
+  }
+
+  async onChangeDate(value) {
+    this.props.form.setFieldsValue({
+      createDate: moment(value),
     })
   }
 
@@ -267,7 +275,7 @@ class MaxNewsModify extends React.Component {
                   message: 'Please enter Date!',
                 },
               ],
-            })(<DatePicker />)}
+            })(<DatePicker onChange={this.onChangeDate} />)}
           </FormItem>
           <FormItem {...formItemLayout} label="Image:">
             {getFieldDecorator('imageUrl', {
