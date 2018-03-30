@@ -1,4 +1,4 @@
-import { Upload, Icon, Modal } from 'antd'
+import { Upload, Icon, Modal, message } from 'antd'
 import * as api from '../../api'
 
 class UploadPosterEn extends React.Component {
@@ -41,12 +41,13 @@ class UploadPosterEn extends React.Component {
   }
 
   handleChange = ({ fileList }) => {
-    //console.log(fileList[0])
+    console.log(fileList)
     if (fileList[0] === undefined) {
       this.props.deletePosterEn()
       this.setState({ fileList })
     } else {
       if (fileList[0].status === 'uploading') {
+        this.setState({ fileList })
       }
       if (fileList[0].status === 'done') {
         // Get this url from response in real world.
@@ -57,8 +58,8 @@ class UploadPosterEn extends React.Component {
             loading: false,
           })
         })
+        this.setState({ fileList })
       }
-      this.setState({ fileList })
     }
   }
 
@@ -81,6 +82,7 @@ class UploadPosterEn extends React.Component {
           action={api.SERVER + '/maxnews/upload/image'}
           listType="picture-card"
           fileList={fileList}
+          //beforeUpload={beforeUpload}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
         >
@@ -106,6 +108,21 @@ function getBase64(img, callback) {
   const reader = new FileReader()
   reader.addEventListener('load', () => callback(reader.result))
   reader.readAsDataURL(img)
+}
+
+function beforeUpload(file) {
+  // const isJPG = file.type === 'image/jpeg'
+  // if (!isJPG) {
+  //   message.error('You can only upload JPG file!')
+  // }
+  const isLt2M = file.size / 1048576 <= 3
+  console.log(file.size)
+  console.log('isLt2M: ', isLt2M)
+  if (!isLt2M) {
+    message.error('Image must smaller than 3MB!')
+  }
+  //return isJPG && isLt2M
+  return isLt2M
 }
 
 export default UploadPosterEn

@@ -57,7 +57,6 @@ class PosterModify extends React.Component {
   }
 
   async finishUpload() {
-    console.log('2')
     const data = await api.get(
       `${api.SERVER}/cms/posters?token=${this.props.auth.token}`
     )
