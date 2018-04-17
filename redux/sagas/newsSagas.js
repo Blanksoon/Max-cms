@@ -2,6 +2,7 @@ import { takeLatest, all, call, put } from 'redux-saga/effects'
 import {
   FETCH_MAXNEWS,
   FETCH_MAXNEWS_SUCCESS,
+  FETCH_ONE_NEWS,
   fetchMaxnewsSuccessDucks,
 } from '../ducks/news'
 import { API_SERVER, postJSON, getJSON } from '../../tools/api'
@@ -21,6 +22,20 @@ export function* fetchMaxnews(action) {
   }
 }
 
+export function* fetchOneNews(action) {
+  console.log('1')
+  console.log('action: ', action)
+  // try {
+  //   const data = yield call(
+  //     getJSON,
+  //     `${API_SERVER}/cms/maxnews/${action.id}?token=${action.token}`
+  //   )
+  // } catch (error) {
+  //   console.log('error: ', error)
+  // }
+}
+
 export function* newsSagas() {
   yield all([takeLatest(FETCH_MAXNEWS, fetchMaxnews)])
+  yield all([takeLatest(FETCH_ONE_NEWS, fetchOneNews)])
 }

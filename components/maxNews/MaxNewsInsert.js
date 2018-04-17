@@ -18,6 +18,8 @@ import UploadImage from '../utils/UploadImage'
 import * as api from '../../api'
 import Spinner from '../commons/Spinner'
 import Router from 'next/router'
+import CkEditor from '../commons/CkEditor'
+import { Editor, EditorState } from 'draft-js'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -35,10 +37,29 @@ class MaxNewsInsertForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fetchProgName = this.fetchProgName.bind(this)
     this.info = this.info.bind(this)
+    this.handleOnchangeArticleEn = this.handleOnchangeArticleEn.bind(this)
+    this.handleOnchangeArticleTh = this.handleOnchangeArticleTh.bind(this)
   }
 
   componentDidMount() {
     this.fetchProgName()
+    this.setState({
+      editor: true,
+    })
+  }
+
+  handleOnchangeArticleEn(evt) {
+    var newContent = evt.editor.getData()
+    this.props.form.setFieldsValue({
+      article_en: newContent,
+    })
+  }
+
+  handleOnchangeArticleTh(evt) {
+    var newContent = evt.editor.getData()
+    this.props.form.setFieldsValue({
+      article_th: newContent,
+    })
   }
 
   handleOnchangeImage(imgUrl) {
@@ -167,7 +188,12 @@ class MaxNewsInsertForm extends React.Component {
                   message: 'Please input your Article!',
                 },
               ],
-            })(<TextArea rows={10} />)}
+            })(
+              <CkEditor
+                handleOnchangeEditor={this.handleOnchangeArticleEn}
+                data=""
+              />
+            )}
           </FormItem>
           <hr className={`hr-tag`} />
           <div className={'setting-row'}>
@@ -191,7 +217,12 @@ class MaxNewsInsertForm extends React.Component {
                   message: 'Please confirm your Article!',
                 },
               ],
-            })(<TextArea rows={10} />)}
+            })(
+              <CkEditor
+                handleOnchangeEditor={this.handleOnchangeArticleTh}
+                data=""
+              />
+            )}
           </FormItem>
           <hr className={`hr-tag`} />
           <FormItem {...formItemLayout} label="Program:">

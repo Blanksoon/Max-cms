@@ -1,5 +1,6 @@
 export const FETCH_VODS = 'FETCH_VODS'
 export const FETCH_VODS_SUCCESS = 'FETCH_MAXNEWS_SUCCESS'
+export const FETCH_ONE_VODS = 'FETCH_ONE_VODS'
 
 export const fetchVodsDucks = (token, offset, pageSize) => {
   return {
@@ -17,6 +18,14 @@ export const fetchVodsSuccessDucks = (data, dataLength) => {
   }
 }
 
+export const fetchOneVodsDucks = (token, id) => {
+  return {
+    type: FETCH_ONE_VODS,
+    token: token,
+    payload: { id },
+  }
+}
+
 const initialState = {
   loading: false,
   error: {},
@@ -29,6 +38,12 @@ const reducer = (state = initialState, action = {}) => {
         error: {},
         loading: false,
         data: action.payload,
+      }
+    }
+    case FETCH_ONE_VODS: {
+      return {
+        error: {},
+        loading: false,
       }
     }
     case FETCH_VODS_SUCCESS: {

@@ -19,6 +19,7 @@ import * as api from '../../api'
 import Spinner from '../commons/Spinner'
 import Router from 'next/router'
 import moment from 'moment'
+import CkEditor from '../commons/CkEditor'
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -32,6 +33,7 @@ class MaxNewsModify extends React.Component {
       loading: false,
       data: {},
       prognameEn: [],
+      articelEn: '',
     }
     this.handleOnchangeImage = this.handleOnchangeImage.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,6 +42,22 @@ class MaxNewsModify extends React.Component {
     this.info = this.info.bind(this)
     this.updateNews = this.updateNews.bind(this)
     this.onChangeDate = this.onChangeDate.bind(this)
+    this.handleOnchangeArticleEn = this.handleOnchangeArticleEn.bind(this)
+    this.handleOnchangeArticleTh = this.handleOnchangeArticleTh.bind(this)
+  }
+
+  handleOnchangeArticleEn(evt) {
+    var newContent = evt.editor.getData()
+    this.props.form.setFieldsValue({
+      article_en: newContent,
+    })
+  }
+
+  handleOnchangeArticleTh(evt) {
+    var newContent = evt.editor.getData()
+    this.props.form.setFieldsValue({
+      article_th: newContent,
+    })
   }
 
   async componentDidMount() {
@@ -48,7 +66,6 @@ class MaxNewsModify extends React.Component {
         this.props.auth.token
       }`
     )
-    //console.log('data: ', data)
     this.setState({
       data: data.data,
     })
@@ -66,19 +83,16 @@ class MaxNewsModify extends React.Component {
   }
 
   async updateNews(value) {
-    //console.log('1', value)
     value._id = this.state.data._id
     const data = {
       token: this.props.auth.token,
       data: value,
     }
     const result = await api.post(`${api.SERVER}/cms/maxnews/update`, data)
-    //console.log('2', result)
   }
 
   async fetchProgName() {
     const result = await api.get(`${api.SERVER}/cms/lives/get-progname`)
-    //console.log(result)
     let prognameEn = []
     prognameEn = result.map(item => (
       <Option value={item.programName}>{item.programName}</Option>
@@ -111,7 +125,7 @@ class MaxNewsModify extends React.Component {
     this.props.form.setFieldsValue({
       imageUrl: this.state.data.imageUrl,
     })
-    return 'success'
+    return 'hi'
   }
 
   handleSubmit = e => {
@@ -122,7 +136,6 @@ class MaxNewsModify extends React.Component {
       })
       if (!err) {
         await this.updateNews(values)
-        //console.log('3', values)
         this.info()
       }
       this.setState({
@@ -153,9 +166,7 @@ class MaxNewsModify extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    //console.log('111111111111', this.props.form)
     const { autoCompleteResult } = this.state
-
     let programNameEn = []
     if (this.state.prognameEn === []) {
       programNameEn = null
@@ -213,7 +224,12 @@ class MaxNewsModify extends React.Component {
                   message: 'Please input your Article!',
                 },
               ],
-            })(<TextArea rows={10} />)}
+            })(
+              <CkEditor
+                handleOnchangeEditor={this.handleOnchangeArticleEn}
+                data={this.state.data.article_en}
+              />
+            )}
           </FormItem>
           <hr className={`hr-tag`} />
           <div className={'setting-row'}>
@@ -237,7 +253,12 @@ class MaxNewsModify extends React.Component {
                   message: 'Please confirm your Article!',
                 },
               ],
-            })(<TextArea rows={10} />)}
+            })(
+              <CkEditor
+                handleOnchangeEditor={this.handleOnchangeArticleTh}
+                data={this.state.data.article_th}
+              />
+            )}
           </FormItem>
           <hr className={`hr-tag`} />
           <FormItem {...formItemLayout} label="Program:">
@@ -333,4 +354,5 @@ class MaxNewsModify extends React.Component {
 const mapStateToProps = state => ({
   auth: state.auth,
 })
+
 export default Form.create()(connect(mapStateToProps, null)(MaxNewsModify))

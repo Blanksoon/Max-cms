@@ -19,6 +19,18 @@ export function* fetchVods(action) {
   }
 }
 
+export function* fetchOneVods(action) {
+  console.log('action: ', action)
+  try {
+    const data = yield call(
+      getJSON,
+      `${API_SERVER}/cms/maxnews/${action.id}?token=${action.token}`
+    )
+  } catch (error) {
+    console.log('error: ', error)
+  }
+}
+
 export function* vodsSagas() {
   yield all([takeLatest(FETCH_VODS, fetchVods)])
 }
