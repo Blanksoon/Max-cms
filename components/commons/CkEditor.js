@@ -39,11 +39,16 @@ class CkEditor extends Component {
         <CKEditor
           activeClass="p10"
           content={this.props.data}
+          config={{
+            extraPlugins: 'uploadimage',
+            imageUploadUrl: 'http://localhost:3002/upload/image',
+          }}
           events={{
             blur: this.onBlur,
             afterPaste: this.afterPaste,
             change: this.props.handleOnchangeEditor,
           }}
+          scriptUrl="http://localhost:8081/static/ckeditor/ckeditor.js"
         />
       )
     }
