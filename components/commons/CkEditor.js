@@ -48,7 +48,7 @@ class CkEditor extends Component {
             afterPaste: this.afterPaste,
             change: this.props.handleOnchangeEditor,
           }}
-          scriptUrl="http://localhost:8081/static/ckeditor/ckeditor.js"
+          scriptUrl="https://admin.maxmuaythai.com//static/ckeditor/ckeditor.js"
         />
       )
     }
