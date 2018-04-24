@@ -41,14 +41,14 @@ class CkEditor extends Component {
           content={this.props.data}
           config={{
             extraPlugins: 'uploadimage',
-            imageUploadUrl: 'http://localhost:3002/upload/image',
+            imageUploadUrl: 'https://api.maxmuaythai.com/upload/image',
           }}
           events={{
             blur: this.onBlur,
             afterPaste: this.afterPaste,
             change: this.props.handleOnchangeEditor,
           }}
-          scriptUrl="http://localhost:8081/static/ckeditor/ckeditor.js"
+          scriptUrl="https://www.maxmuaythai.com/static/ckeditor/ckeditor.js"
         />
       )
     }
