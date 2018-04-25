@@ -1,5 +1,6 @@
 import CKEditor from 'react-ckeditor-component'
 import { Component } from 'react'
+import { API_SERVER } from '../../tools/api'
 
 class CkEditor extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class CkEditor extends Component {
           content={this.props.data}
           config={{
             extraPlugins: 'uploadimage',
-            imageUploadUrl: 'https://api.maxmuaythai.com/upload/image',
+            imageUploadUrl: `${API_SERVER}/upload/image`,
           }}
           events={{
             blur: this.onBlur,
