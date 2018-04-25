@@ -82,7 +82,7 @@ class UploadPosterEn extends React.Component {
           action={api.SERVER + '/maxnews/upload/image'}
           listType="picture-card"
           fileList={fileList}
-          //beforeUpload={beforeUpload}
+          beforeUpload={beforeUpload}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
         >
