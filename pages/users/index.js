@@ -22,6 +22,7 @@ import {
 } from 'antd'
 
 import vars from '../../components/commons/vars'
+import { redirect } from '../../tools/utils'
 
 class Index extends Component {
   constructor(props) {
@@ -38,6 +39,17 @@ class Index extends Component {
         </Main>
       </FullPageLayout>
     )
+  }
+}
+
+Index.getInitialProps = ({ res, isServer, store }) => {
+  let state = store.getState()
+  let email = state.auth.email
+  if (email === 'maxnews@email.com') {
+    redirect('/maxnews', { res, isServer })
+  } else if (email === undefined) {
+    redirect('/login', { res, isServer })
+  } else {
   }
 }
 

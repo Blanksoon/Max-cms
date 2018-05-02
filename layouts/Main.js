@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Component from 'react'
 import Logout from '../components/commons/Logout'
+import { connect } from 'react-redux'
 
 const { Header, Content, Footer } = Layout
 class Main extends React.Component {
@@ -20,8 +21,62 @@ class Main extends React.Component {
   }
 
   render() {
-    const { children, keyNavbar } = this.props
-    //console.log('key: ', keyNavbar)
+    const { children, keyNavbar, email } = this.props
+    console.log('this.props: ', this.porps)
+    const navBarMaxnews = (
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={[keyNavbar]}
+        style={{ lineHeight: '64px' }}
+      >
+        <Menu.Item key="Maxnews">
+          <Link href="/maxnews">
+            <a>Maxnews</a>
+          </Link>
+        </Menu.Item>
+      </Menu>
+    )
+    const navBarAdmin = (
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={[keyNavbar]}
+        style={{ lineHeight: '64px' }}
+      >
+        <Menu.Item key="Maxnews">
+          <Link href="/maxnews">
+            <a>Maxnews</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="Vods">
+          <Link href="/vods">
+            <a>Vods</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="Lives">
+          <Link href="/lives">
+            <a>Lives</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="Users">
+          <Link href="/users">
+            <a>Users</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="Orders">
+          <Link href="/orders">
+            <a>Orders</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="Poster">
+          <Link href="/poster">
+            <a>Poster</a>
+          </Link>
+        </Menu.Item>
+      </Menu>
+    )
+
     return (
       <Layout style={{ backgroundColor: '#032447' }}>
         <Header style={{ width: '100%' }}>
@@ -29,43 +84,7 @@ class Main extends React.Component {
           <div style={{ float: 'right' }}>
             <Logout />
           </div>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={[keyNavbar]}
-            style={{ lineHeight: '64px' }}
-          >
-            <Menu.Item key="Maxnews">
-              <Link href="/maxnews">
-                <a>Maxnews</a>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="Vods">
-              <Link href="/vods">
-                <a>Vods</a>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="Lives">
-              <Link href="/lives">
-                <a>Lives</a>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="Users">
-              <Link href="/users">
-                <a>Users</a>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="Orders">
-              <Link href="/orders">
-                <a>Orders</a>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="Poster">
-              <Link href="/poster">
-                <a>Poster</a>
-              </Link>
-            </Menu.Item>
-          </Menu>
+          {email === 'maxnews@email.com' ? navBarMaxnews : navBarAdmin}
         </Header>
         <Content style={{ padding: '0 30px', marginTop: 24 }}>
           <div style={{ background: '#fff', padding: 0, minHeight: 450 }}>
@@ -80,11 +99,8 @@ class Main extends React.Component {
   }
 }
 
-// Main.propTypes = {
-//   children: PropTypes.node,
-// }
-// Main.defaultProps = {
-//   children: null, // render nothing
-// }
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
 
-export default Main
+export default connect(mapStateToProps, null)(Main)

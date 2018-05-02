@@ -1,4 +1,5 @@
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { connectI18n } from '../../hocs/connectI18n'
 import FullPageLayout from '../../layouts/FullPageLayout'
@@ -12,9 +13,10 @@ import { requireAuth } from '../../hocs/requireAuth'
 
 class New extends Component {
   render() {
+    const { auth } = this.props
     return (
       <FullPageLayout>
-        <Main keyNavbar="Maxnews">
+        <Main keyNavbar="Maxnews" email={auth.email}>
           <MaxNewsInsertForm />
         </Main>
       </FullPageLayout>
@@ -22,4 +24,13 @@ class New extends Component {
   }
 }
 
-export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(New)
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+
+export default compose(
+  withReduxSaga,
+  requireAuth,
+  connectI18n(['common']),
+  connect(mapStateToProps, null)
+)(New)

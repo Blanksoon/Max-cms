@@ -7,6 +7,7 @@ import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import VodsData from '../../components/vods/VodsData'
 import { requireAuth } from '../../hocs/requireAuth'
+import { redirect } from '../../tools/utils'
 
 class Index extends Component {
   constructor(props) {
@@ -23,6 +24,17 @@ class Index extends Component {
         </Main>
       </FullPageLayout>
     )
+  }
+}
+
+Index.getInitialProps = ({ res, isServer, store }) => {
+  let state = store.getState()
+  let email = state.auth.email
+  if (email === 'maxnews@email.com') {
+    redirect('/maxnews', { res, isServer })
+  } else if (email === undefined) {
+    redirect('/login', { res, isServer })
+  } else {
   }
 }
 

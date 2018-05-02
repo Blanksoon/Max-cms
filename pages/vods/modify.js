@@ -9,6 +9,7 @@ import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import { Row, Col, Input, DatePicker, Upload, Icon, message } from 'antd'
 import { requireAuth } from '../../hocs/requireAuth'
+import { redirect } from '../../tools/utils'
 
 class Modify extends Component {
   render() {
@@ -19,6 +20,17 @@ class Modify extends Component {
         </Main>
       </FullPageLayout>
     )
+  }
+}
+
+Modify.getInitialProps = ({ res, isServer, store }) => {
+  let state = store.getState()
+  let email = state.auth.email
+  if (email === 'maxnews@email.com') {
+    redirect('/maxnews', { res, isServer })
+  } else if (email === undefined) {
+    redirect('/login', { res, isServer })
+  } else {
   }
 }
 

@@ -7,6 +7,7 @@ import Main from '../../layouts/Main'
 import { withReduxSaga } from '../../redux/store'
 import { Component } from 'react'
 import { requireAuth } from '../../hocs/requireAuth'
+import { redirect } from '../../tools/utils'
 
 class New extends Component {
   render() {
@@ -20,4 +21,14 @@ class New extends Component {
   }
 }
 
+New.getInitialProps = ({ res, isServer, store }) => {
+  let state = store.getState()
+  let email = state.auth.email
+  if (email === 'maxnews@email.com') {
+    redirect('/maxnews', { res, isServer })
+  } else if (email === undefined) {
+    redirect('/login', { res, isServer })
+  } else {
+  }
+}
 export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(New)

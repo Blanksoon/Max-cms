@@ -1,4 +1,5 @@
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { connectI18n } from '../../hocs/connectI18n'
 import { requireAuth } from '../../hocs/requireAuth'
@@ -23,16 +24,12 @@ import {
 import vars from '../../components/commons/vars'
 
 class Index extends Component {
-  constructor(props) {
-    super(props)
-    this.createNews = this.createNews.bind(this)
-  }
-
-  createNews() {}
   render() {
+    //console.log('this.props: ', this.props)
+    const { auth } = this.props
     return (
       <FullPageLayout>
-        <Main keyNavbar="Maxnews">
+        <Main keyNavbar="Maxnews" email={auth.email}>
           <MaxNewsData />
         </Main>
       </FullPageLayout>
@@ -40,6 +37,13 @@ class Index extends Component {
   }
 }
 
-export default compose(withReduxSaga, requireAuth, connectI18n(['common']))(
-  Index
-)
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+
+export default compose(
+  withReduxSaga,
+  requireAuth,
+  connectI18n(['common']),
+  connect(mapStateToProps, null)
+)(Index)
