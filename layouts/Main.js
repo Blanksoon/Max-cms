@@ -22,7 +22,6 @@ class Main extends React.Component {
 
   render() {
     const { children, keyNavbar, email } = this.props
-    console.log('this.props: ', this.porps)
     const navBarMaxnews = (
       <Menu
         theme="dark"

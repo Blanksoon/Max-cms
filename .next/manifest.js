@@ -90,7 +90,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7e239644466879b2f810"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4ce832a96eaa971d6a74"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -755,7 +755,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","2":"commons","4":"bundles/pages/orders.js","5":"bundles/pages/lives.js","6":"bundles/pages/maxnews.js","7":"bundles/pages/maxnews/modify.js","8":"bundles/pages/lives/modify.js","9":"bundles/pages/lives/new.js","10":"bundles/pages/users.js","11":"bundles/pages/vods.js","12":"bundles/pages/maxnews/new.js","13":"bundles/pages/vods/new.js","14":"bundles/pages/vods/modify.js","15":"bundles/pages/login.js"}[chunkId]||chunkId) + "-" + {"0":"c6a469b6b95b2a985202","1":"947300d43f3fd9b60597","2":"112a70b41bfbcd7c6dde","4":"0873f3e43d693602ac93","5":"0ff487550c0e81a400b0","6":"1463412b0f778eae1627","7":"54721f397b7d05dfef0d","8":"e6319170fa47f8b959bd","9":"041fa3e9075a64c51e85","10":"6b6e7e57dc378626d498","11":"f100eac9db9bc0457539","12":"e3a5663108fbc04d8866","13":"172f330cc9cfa025aab8","14":"29915925b9c650196b22","15":"a9e80669532d49e31763"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","2":"commons","4":"bundles/pages/login.js","5":"bundles/pages/index.js","6":"bundles/pages/maxnews.js","7":"bundles/pages/poster.js"}[chunkId]||chunkId) + "-" + {"0":"c6a469b6b95b2a985202","1":"947300d43f3fd9b60597","2":"112a70b41bfbcd7c6dde","4":"d741eb34775e687ecf80","5":"a785b732a2d599569580","6":"c56541ee8b31256ae860","7":"702e0367a11cad21636c"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

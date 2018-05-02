@@ -8,6 +8,7 @@ import { Component } from 'react'
 import { Row, Col, Input, DatePicker, Upload, Icon, message } from 'antd'
 import { requireAuth } from '../hocs/requireAuth'
 import PosterModify from '../components/poster/PosterModify'
+import { redirect } from '../tools/utils'
 
 class Poster extends Component {
   render() {
@@ -16,6 +17,17 @@ class Poster extends Component {
         <Main keyNavbar="Poster">{<PosterModify />}</Main>
       </FullPageLayout>
     )
+  }
+}
+
+Poster.getInitialProps = ({ res, isServer, store }) => {
+  let state = store.getState()
+  let email = state.auth.email
+  if (email === 'maxnews@email.com') {
+    redirect('/maxnews', { res, isServer })
+  } else if (email === undefined) {
+    redirect('/login', { res, isServer })
+  } else {
   }
 }
 
