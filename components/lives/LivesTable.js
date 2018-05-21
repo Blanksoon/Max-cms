@@ -1,4 +1,4 @@
-import { Table, Icon, Divider, Button, Spin } from 'antd'
+import { Table, Icon, Divider, Button, Spin, Popconfirm } from 'antd'
 import vars from '../commons/vars'
 
 const { Column, ColumnGroup } = Table
@@ -101,15 +101,20 @@ class LivesTable extends React.Component {
                     />
                   </Button>
                   <Divider type="vertical" />
-                  <Button
-                    shape="circle"
-                    onClick={() => this.props.deleteData({ id: record._id })}
+                  <Popconfirm
+                    title="Are you sure？"
+                    okText="Yes"
+                    cancelText="No"
+                    onConfirm={e => this.props.deleteData({ id: record._id })}
+                    onClick={e => e.stopPropagation()}
                   >
-                    <Icon
-                      type="delete"
-                      style={{ color: `red`, fontSize: `1.5rem` }}
-                    />
-                  </Button>
+                    <Button shape="circle">
+                      <Icon
+                        type="delete"
+                        style={{ color: `red`, fontSize: `1.5rem` }}
+                      />
+                    </Button>
+                  </Popconfirm>
                 </span>
               )}
             />
